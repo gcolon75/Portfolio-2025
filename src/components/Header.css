@@ -5,15 +5,15 @@
   right: 0;
   z-index: 1000;
   padding: 1rem 0;
-  background: rgba(26, 11, 46, 0.5);
+  background: rgba(13, 27, 42, 0.5);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(74, 158, 255, 0.1);
+  border-bottom: 1px solid rgba(74, 158, 255, 0.2);
   transition: all var(--transition-normal);
 }
 
 .header.scrolled {
-  background: rgba(26, 11, 46, 0.95);
-  box-shadow: 0 4px 30px rgba(74, 158, 255, 0.1);
+  background: rgba(13, 27, 42, 0.95);
+  box-shadow: 0 4px 30px rgba(74, 158, 255, 0.2), 0 2px 15px rgba(255, 71, 87, 0.1);
 }
 
 .nav-container {
