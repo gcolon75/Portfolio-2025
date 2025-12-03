@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { articles } from '../data/writing';
 import './Writing.css';
 
@@ -60,27 +61,34 @@ const Writing = () => {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {articles.map((article, index) => (
-                <motion.div
-                  key={article.id}
-                  className="article-item"
-                  variants={itemVariants}
-                  whileHover={{ x: 10, backgroundColor: 'rgba(0, 255, 136, 0.05)' }}
-                >
-                  <div className="article-header">
-                    <span className="article-index">[{String(index + 1).padStart(2, '0')}]</span>
-                    <span className="article-title">{article.title}</span>
-                  </div>
-                  <div className="article-meta">
-                    <span className="article-category">{article.category}</span>
-                    <span className="article-divider">|</span>
-                    <span className="article-date">{article.date}</span>
-                    <span className="article-divider">|</span>
-                    <span className="article-read-time">{article.readTime}</span>
-                  </div>
-                  <p className="article-description">{article.description}</p>
-                </motion.div>
-              ))}
+              {articles.map((article, index) => {
+                const ArticleWrapper = article.route ? Link : 'div';
+                const wrapperProps = article.route ? { to: article.route } : {};
+                
+                return (
+                  <ArticleWrapper key={article.id} {...wrapperProps} style={{ textDecoration: 'none' }}>
+                    <motion.div
+                      className={`article-item ${article.route ? 'clickable' : ''}`}
+                      variants={itemVariants}
+                      whileHover={{ x: 10, backgroundColor: 'rgba(0, 255, 136, 0.05)' }}
+                    >
+                      <div className="article-header">
+                        <span className="article-index">[{String(index + 1).padStart(2, '0')}]</span>
+                        <span className="article-title">{article.title}</span>
+                        {article.route && <span className="article-arrow">→</span>}
+                      </div>
+                      <div className="article-meta">
+                        <span className="article-category">{article.category}</span>
+                        <span className="article-divider">|</span>
+                        <span className="article-date">{article.date}</span>
+                        <span className="article-divider">|</span>
+                        <span className="article-read-time">{article.readTime}</span>
+                      </div>
+                      <p className="article-description">{article.description}</p>
+                    </motion.div>
+                  </ArticleWrapper>
+                );
+              })}
             </motion.div>
 
             <div className="terminal-cursor">

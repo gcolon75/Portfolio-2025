@@ -5,7 +5,8 @@ export const articles = [
     description: 'An analysis of how Generation Z interacts with and shapes AI technology',
     date: '2024',
     readTime: '8 min read',
-    category: 'AI Analysis'
+    category: 'AI Analysis',
+    route: '/writing/ai-and-gen-z'
   },
   {
     id: 2,

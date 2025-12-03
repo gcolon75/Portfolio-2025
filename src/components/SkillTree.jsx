@@ -3,6 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { skillTree } from '../data/skills';
 import './SkillTree.css';
 
+// Layout constants for radial skill tree
+const CLASS_NODE_RADIUS = 280; // Distance from center for class nodes
+const SKILL_BASE_DISTANCE = 180; // Distance from class node for skills
+const SKILL_SPREAD_ANGLE = Math.PI / 4; // 45 degrees spread for skills
+
 const SkillTree = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
 
@@ -23,23 +28,53 @@ const SkillTree = () => {
     ));
   };
 
+  // Calculate positions for radial layout
+  const getClassPosition = (index, total) => {
+    const angle = (index * 2 * Math.PI) / total - Math.PI / 2; // Start from top
+    const x = Math.cos(angle) * CLASS_NODE_RADIUS;
+    const y = Math.sin(angle) * CLASS_NODE_RADIUS;
+    return { x, y, angle };
+  };
+
+  const getSkillPosition = (skillIndex, totalSkills, classAngle) => {
+    const angleOffset = ((skillIndex - (totalSkills - 1) / 2) * SKILL_SPREAD_ANGLE) / Math.max(totalSkills - 1, 1);
+    const angle = classAngle + angleOffset;
+    const x = Math.cos(angle) * SKILL_BASE_DISTANCE;
+    const y = Math.sin(angle) * SKILL_BASE_DISTANCE;
+    return { x, y };
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15
+        staggerChildren: 0.1
       }
     }
   };
 
   const classVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, scale: 0 },
     visible: { 
       opacity: 1, 
-      y: 0,
+      scale: 1,
       transition: {
-        duration: 0.6
+        duration: 0.6,
+        type: 'spring',
+        stiffness: 100
+      }
+    }
+  };
+
+  const skillVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        type: 'spring'
       }
     }
   };
@@ -57,82 +92,150 @@ const SkillTree = () => {
         </motion.h2>
 
         <motion.div
-          className="skill-tree-grid"
+          className="skill-tree-radial"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {skillTree.map((skillClass, classIndex) => (
-            <motion.div
-              key={skillClass.id}
-              className="skill-class"
-              variants={classVariants}
-              style={{ '--class-color': skillClass.color }}
-            >
-              <div className="class-header">
-                <span className="class-icon">{skillClass.icon}</span>
-                <h3 className="class-name">{skillClass.class}</h3>
-              </div>
+          {/* Connection lines between classes */}
+          <svg className="connection-lines" viewBox="-400 -400 800 800">
+            <defs>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            {skillTree.map((_, index) => {
+              const nextIndex = (index + 1) % skillTree.length;
+              const pos1 = getClassPosition(index, skillTree.length);
+              const pos2 = getClassPosition(nextIndex, skillTree.length);
+              return (
+                <line
+                  key={`connection-${index}`}
+                  x1={pos1.x}
+                  y1={pos1.y}
+                  x2={pos2.x}
+                  y2={pos2.y}
+                  stroke="var(--plasma-green)"
+                  strokeWidth="2"
+                  strokeDasharray="5,5"
+                  opacity="0.3"
+                  filter="url(#glow)"
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    from="0"
+                    to="10"
+                    dur="2s"
+                    repeatCount="indefinite"
+                  />
+                </line>
+              );
+            })}
+          </svg>
 
-              <div className="skills-container">
-                {skillClass.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={`${skillClass.id}-${skillIndex}`}
-                    className="skill-item"
-                    onClick={() => setSelectedSkill(skill)}
-                    whileHover={{ scale: 1.05, x: 10 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <div className="skill-name-container">
-                      <span className="skill-name">{skill.name}</span>
-                      <div className="skill-stars">
-                        {renderStars(skill.level)}
-                      </div>
-                    </div>
-                    
-                    {skillIndex < skillClass.skills.length - 1 && (
-                      <svg className="skill-connector" width="2" height="30">
-                        <line 
-                          x1="1" 
-                          y1="0" 
-                          x2="1" 
-                          y2="30" 
-                          stroke={skillClass.color} 
+          {/* Center circle */}
+          <div className="center-circle">
+            <div className="center-content">
+              <span className="center-icon">⚡</span>
+              <span className="center-text">Skills</span>
+            </div>
+          </div>
+
+          {/* Class nodes and their skills */}
+          {skillTree.map((skillClass, classIndex) => {
+            const classPos = getClassPosition(classIndex, skillTree.length);
+            
+            return (
+              <div key={skillClass.id} className="class-node-wrapper">
+                {/* Class node */}
+                <motion.div
+                  className="class-node"
+                  variants={classVariants}
+                  style={{
+                    '--class-color': skillClass.color,
+                    left: '50%',
+                    top: '50%',
+                    transform: `translate(calc(-50% + ${classPos.x}px), calc(-50% + ${classPos.y}px))`
+                  }}
+                >
+                  <div className="class-node-content">
+                    <span className="class-icon">{skillClass.icon}</span>
+                    <h3 className="class-name">{skillClass.class}</h3>
+                  </div>
+                </motion.div>
+
+                {/* Skills radiating from class */}
+                {skillClass.skills.map((skill, skillIndex) => {
+                  const skillPos = getSkillPosition(skillIndex, skillClass.skills.length, classPos.angle);
+                  const totalX = classPos.x + skillPos.x;
+                  const totalY = classPos.y + skillPos.y;
+
+                  return (
+                    <React.Fragment key={`${skillClass.id}-skill-${skillIndex}`}>
+                      {/* Connection line from class to skill */}
+                      <svg 
+                        className="skill-connection-line" 
+                        style={{
+                          position: 'absolute',
+                          left: '50%',
+                          top: '50%',
+                          pointerEvents: 'none',
+                          overflow: 'visible',
+                          width: '1px',
+                          height: '1px'
+                        }}
+                      >
+                        <line
+                          x1={classPos.x}
+                          y1={classPos.y}
+                          x2={totalX}
+                          y2={totalY}
+                          stroke={skillClass.color}
                           strokeWidth="2"
-                          strokeDasharray="4,4"
+                          strokeDasharray="3,3"
+                          opacity="0.4"
+                          filter="url(#glow)"
                         >
                           <animate
                             attributeName="stroke-dashoffset"
                             from="0"
-                            to="8"
-                            dur="1s"
+                            to="6"
+                            dur="1.5s"
                             repeatCount="indefinite"
                           />
                         </line>
                       </svg>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
 
-              {/* Connecting lines between classes */}
-              {classIndex < skillTree.length - 1 && (
-                <svg className="class-connector" width="100%" height="50">
-                  <line 
-                    x1="50%" 
-                    y1="0" 
-                    x2="50%" 
-                    y2="50" 
-                    stroke="var(--plasma-green)" 
-                    strokeWidth="2"
-                    strokeDasharray="4,4"
-                    opacity="0.3"
-                  />
-                </svg>
-              )}
-            </motion.div>
-          ))}
+                      {/* Skill node */}
+                      <motion.div
+                        className="skill-node"
+                        variants={skillVariants}
+                        onClick={() => setSelectedSkill(skill)}
+                        whileHover={{ scale: 1.15 }}
+                        whileTap={{ scale: 0.95 }}
+                        style={{
+                          '--skill-color': skillClass.color,
+                          left: '50%',
+                          top: '50%',
+                          transform: `translate(calc(-50% + ${totalX}px), calc(-50% + ${totalY}px))`
+                        }}
+                      >
+                        <div className="skill-node-name">{skill.name}</div>
+                        <div className="skill-node-stars">
+                          {renderStars(skill.level)}
+                        </div>
+                      </motion.div>
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+            );
+          })}
         </motion.div>
 
         {/* Skill Detail Modal */}
