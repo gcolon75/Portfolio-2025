@@ -5,16 +5,19 @@
 }
 
 :root {
-  /* Color Palette */
-  --deep-space-blue: #0a0e27;
-  --nebula-purple: #6b5b95;
-  --plasma-green: #00ff88;
-  --starlight-gold: #ffd700;
-  --rocket-red: #ff4757;
-  --light-gray: #e4e4e4;
-  --dark-bg: #05070f;
-  --card-bg: rgba(10, 14, 39, 0.8);
-  --glass-bg: rgba(107, 91, 149, 0.1);
+  /* Mass Effect + Blackhole Space Sci-Fi Color Palette */
+  --deep-space-blue: #0a0a0f; /* Deep Space Black */
+  --nebula-purple: #8b5cf6; /* Blackhole Purple */
+  --plasma-green: #4a9eff; /* Paragon Blue */
+  --starlight-gold: #c084fc; /* Event Horizon Glow */
+  --rocket-red: #ff4757; /* Renegade Red */
+  --light-gray: #f1f5f9; /* Text Primary */
+  --dark-bg: #0a0a0f; /* Deep Space Black */
+  --secondary-bg: #1a0b2e; /* Dark Purple */
+  --card-bg: rgba(26, 11, 46, 0.8);
+  --glass-bg: rgba(139, 92, 246, 0.1);
+  --accretion-pink: #ec4899; /* Accretion Pink */
+  --neutral-ui: #94a3b8; /* Neutral/UI */
   
   /* Fonts */
   --font-heading: 'Orbitron', sans-serif;
@@ -51,8 +54,8 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(ellipse at top, rgba(107, 91, 149, 0.15), transparent),
-    radial-gradient(ellipse at bottom, rgba(0, 255, 136, 0.05), transparent);
+    radial-gradient(ellipse at top, rgba(139, 92, 246, 0.15), transparent),
+    radial-gradient(ellipse at bottom, rgba(74, 158, 255, 0.05), transparent);
   pointer-events: none;
   z-index: 0;
 }
@@ -113,7 +116,7 @@ section {
 
 /* Utility Classes */
 .glow {
-  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 
 .glow-border {
@@ -161,7 +164,7 @@ section {
 /* Footer */
 .footer {
   background: var(--dark-bg);
-  border-top: 1px solid rgba(0, 255, 136, 0.2);
+  border-top: 1px solid rgba(74, 158, 255, 0.2);
   padding: 2rem 0;
   text-align: center;
 }

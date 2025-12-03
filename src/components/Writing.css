@@ -1,16 +1,16 @@
 .writing {
-  background: linear-gradient(180deg, var(--deep-space-blue) 0%, var(--dark-bg) 100%);
+  background: linear-gradient(180deg, var(--secondary-bg) 0%, var(--dark-bg) 100%);
   position: relative;
 }
 
 .terminal-window {
   max-width: 900px;
   margin: 3rem auto 0;
-  background: rgba(5, 7, 15, 0.95);
+  background: rgba(10, 10, 15, 0.95);
   border: 2px solid var(--plasma-green);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 20px 60px rgba(74, 158, 255, 0.2);
 }
 
 .terminal-header {

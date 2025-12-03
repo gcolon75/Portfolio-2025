@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(180deg, var(--deep-space-blue) 0%, var(--dark-bg) 100%);
+  background: linear-gradient(180deg, var(--secondary-bg) 0%, var(--dark-bg) 100%);
   overflow: hidden;
 }
 
@@ -44,6 +44,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: none;
 }
 
 .hero-role-container {
@@ -120,7 +121,7 @@
 .cta-button.primary:hover {
   background: var(--starlight-gold);
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 10px 30px rgba(74, 158, 255, 0.3);
 }
 
 .cta-button.secondary {
@@ -133,20 +134,20 @@
   background: var(--plasma-green);
   color: var(--dark-bg);
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 10px 30px rgba(74, 158, 255, 0.2);
 }
 
 .cta-button.tertiary {
   background: transparent;
-  color: var(--starlight-gold);
-  border: 2px solid var(--starlight-gold);
+  color: var(--rocket-red);
+  border: 2px solid var(--rocket-red);
 }
 
 .cta-button.tertiary:hover {
-  background: var(--starlight-gold);
+  background: var(--rocket-red);
   color: var(--dark-bg);
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3);
 }
 
 .scroll-indicator {

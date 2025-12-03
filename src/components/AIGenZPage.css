@@ -1,7 +1,8 @@
 .writing-detail {
-  background: linear-gradient(180deg, var(--dark-bg) 0%, var(--deep-space-blue) 50%, var(--dark-bg) 100%);
+  background: linear-gradient(180deg, var(--dark-bg) 0%, var(--secondary-bg) 50%, var(--dark-bg) 100%);
   min-height: 100vh;
   padding: 2rem 0;
+  padding-top: 5rem;
   position: relative;
 }
 
@@ -10,7 +11,7 @@
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(107, 91, 149, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
   top: 20%;
   right: -10%;
   border-radius: 50%;
@@ -44,7 +45,7 @@
 .back-button:hover {
   background: var(--plasma-green);
   color: var(--dark-bg);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+  box-shadow: 0 0 20px rgba(74, 158, 255, 0.5);
 }
 
 /* Header Section */
@@ -150,7 +151,7 @@
 }
 
 .theme-tag {
-  background: rgba(107, 91, 149, 0.3);
+  background: rgba(139, 92, 246, 0.3);
   border: 1px solid var(--nebula-purple);
   color: var(--nebula-purple);
   padding: 0.5rem 1rem;
@@ -189,8 +190,8 @@
 }
 
 .skill-badge:hover {
-  background: rgba(0, 255, 136, 0.1);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  background: rgba(74, 158, 255, 0.1);
+  box-shadow: 0 0 20px rgba(74, 158, 255, 0.3);
 }
 
 /* Workflow Section */
@@ -221,7 +222,7 @@
 
 .workflow-step:hover {
   border-color: var(--plasma-green);
-  box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 30px rgba(74, 158, 255, 0.2);
   transform: translateX(10px);
 }
 
@@ -262,7 +263,7 @@
 }
 
 .pdf-note {
-  background: rgba(255, 215, 0, 0.1);
+  background: rgba(192, 132, 252, 0.1);
   border: 1px solid var(--starlight-gold);
   border-radius: 10px;
   padding: 1rem;
@@ -302,7 +303,7 @@
 }
 
 .quote-card:hover {
-  box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 10px 40px rgba(74, 158, 255, 0.3);
 }
 
 .quote-mark {
@@ -357,13 +358,13 @@
 .nav-button:hover {
   background: var(--plasma-green);
   color: var(--dark-bg);
-  box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+  box-shadow: 0 0 30px rgba(74, 158, 255, 0.5);
   transform: translateY(-3px);
 }
 
 .nav-button.primary {
-  background: var(--nebula-purple);
-  border-color: var(--nebula-purple);
+  background: var(--rocket-red);
+  border-color: var(--rocket-red);
   color: var(--light-gray);
 }
 
@@ -371,7 +372,7 @@
   background: var(--starlight-gold);
   border-color: var(--starlight-gold);
   color: var(--dark-bg);
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 30px rgba(192, 132, 252, 0.5);
 }
 
 /* Responsive Design */
