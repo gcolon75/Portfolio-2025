@@ -6,6 +6,11 @@ import './SkillTree.css';
 const SkillTree = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
 
+  // Layout constants
+  const CLASS_NODE_RADIUS = 280; // Distance from center for class nodes
+  const SKILL_BASE_DISTANCE = 180; // Distance from class node for skills
+  const SKILL_SPREAD_ANGLE = Math.PI / 4; // 45 degrees spread for skills
+
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape' && selectedSkill) {
@@ -25,20 +30,17 @@ const SkillTree = () => {
 
   // Calculate positions for radial layout
   const getClassPosition = (index, total) => {
-    const radius = 280; // Distance from center
     const angle = (index * 2 * Math.PI) / total - Math.PI / 2; // Start from top
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
+    const x = Math.cos(angle) * CLASS_NODE_RADIUS;
+    const y = Math.sin(angle) * CLASS_NODE_RADIUS;
     return { x, y, angle };
   };
 
   const getSkillPosition = (skillIndex, totalSkills, classAngle) => {
-    const baseDistance = 180; // Distance from class node
-    const spreadAngle = Math.PI / 4; // 45 degrees spread for skills
-    const angleOffset = ((skillIndex - (totalSkills - 1) / 2) * spreadAngle) / Math.max(totalSkills - 1, 1);
+    const angleOffset = ((skillIndex - (totalSkills - 1) / 2) * SKILL_SPREAD_ANGLE) / Math.max(totalSkills - 1, 1);
     const angle = classAngle + angleOffset;
-    const x = Math.cos(angle) * baseDistance;
-    const y = Math.sin(angle) * baseDistance;
+    const x = Math.cos(angle) * SKILL_BASE_DISTANCE;
+    const y = Math.sin(angle) * SKILL_BASE_DISTANCE;
     return { x, y };
   };
 

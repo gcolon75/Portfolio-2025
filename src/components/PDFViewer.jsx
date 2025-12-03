@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import './PDFViewer.css';
 
-// Set up the worker for react-pdf
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+// Set up the worker for react-pdf using HTTPS explicitly
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const PDFViewer = ({ pdfUrl, fileName = 'document.pdf' }) => {
   const [numPages, setNumPages] = useState(null);
