@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { skillTree } from '../data/skills';
 import './SkillTree.css';
 
 const SkillTree = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && selectedSkill) {
+        setSelectedSkill(null);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [selectedSkill]);
 
   const renderStars = (level) => {
     return Array.from({ length: 5 }, (_, i) => (

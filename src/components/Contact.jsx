@@ -18,9 +18,11 @@ const Contact = () => {
     });
   };
 
+  const SUCCESS_MESSAGE = 'Message sent successfully! (Demo mode - not actually sent)';
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus('Message sent successfully! (Demo mode - not actually sent)');
+    setStatus(SUCCESS_MESSAGE);
     setTimeout(() => {
       setStatus('');
       setFormData({ name: '', email: '', message: '' });
@@ -182,7 +184,13 @@ const Contact = () => {
 
               <motion.button
                 className="resume-download"
-                onClick={() => window.open('/resume.pdf', '_blank')}
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = '/resume.pdf';
+                  link.target = '_blank';
+                  link.rel = 'noopener noreferrer';
+                  link.click();
+                }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

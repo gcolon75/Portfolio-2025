@@ -105,7 +105,13 @@ const Hero = () => {
           </button>
           <button 
             className="cta-button secondary"
-            onClick={() => window.open('/resume.pdf', '_blank')}
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = '/resume.pdf';
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+              link.click();
+            }}
             aria-label="Download Resume"
           >
             Download Resume
