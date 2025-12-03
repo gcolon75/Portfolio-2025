@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { skillTree } from '../data/skills';
 import './SkillTree.css';
 
+// Layout constants for radial skill tree
+const CLASS_NODE_RADIUS = 280; // Distance from center for class nodes
+const SKILL_BASE_DISTANCE = 180; // Distance from class node for skills
+const SKILL_SPREAD_ANGLE = Math.PI / 4; // 45 degrees spread for skills
+
 const SkillTree = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
-
-  // Layout constants
-  const CLASS_NODE_RADIUS = 280; // Distance from center for class nodes
-  const SKILL_BASE_DISTANCE = 180; // Distance from class node for skills
-  const SKILL_SPREAD_ANGLE = Math.PI / 4; // 45 degrees spread for skills
 
   useEffect(() => {
     const handleEscape = (e) => {
