@@ -41,7 +41,7 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, var(--plasma-green), var(--nebula-purple), var(--starlight-gold));
+  background: linear-gradient(45deg, var(--plasma-green), var(--rocket-red), var(--starlight-gold));
   border-radius: 15px;
   opacity: 0;
   z-index: -1;
@@ -54,7 +54,7 @@
 
 .about-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(74, 158, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(74, 158, 255, 0.3), 0 10px 20px rgba(255, 71, 87, 0.2);
 }
 
 .about-card h3 {

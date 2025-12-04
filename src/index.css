@@ -5,18 +5,18 @@
 }
 
 :root {
-  /* Mass Effect + Blackhole Space Sci-Fi Color Palette */
+  /* Mass Effect N7 Color Palette */
   --deep-space-blue: #0a0a0f; /* Deep Space Black */
-  --nebula-purple: #8b5cf6; /* Blackhole Purple */
+  --nebula-purple: #4a9eff; /* Paragon Blue - was purple */
   --plasma-green: #4a9eff; /* Paragon Blue */
-  --starlight-gold: #c084fc; /* Event Horizon Glow */
+  --starlight-gold: #00d9ff; /* Cyan Accent - was purple glow */
   --rocket-red: #ff4757; /* Renegade Red */
   --light-gray: #f1f5f9; /* Text Primary */
   --dark-bg: #0a0a0f; /* Deep Space Black */
-  --secondary-bg: #1a0b2e; /* Dark Purple */
-  --card-bg: rgba(26, 11, 46, 0.8);
-  --glass-bg: rgba(139, 92, 246, 0.1);
-  --accretion-pink: #ec4899; /* Accretion Pink */
+  --secondary-bg: #0d1b2a; /* Dark Navy - was purple */
+  --card-bg: rgba(13, 27, 42, 0.8); /* Dark Navy - was purple */
+  --glass-bg: rgba(74, 158, 255, 0.1); /* Paragon Blue - was purple */
+  --accretion-pink: #ff4757; /* Renegade Red - was pink */
   --neutral-ui: #94a3b8; /* Neutral/UI */
   
   /* Fonts */
@@ -131,7 +131,7 @@ section {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, var(--plasma-green), var(--nebula-purple), var(--starlight-gold));
+  background: linear-gradient(45deg, var(--plasma-green), var(--rocket-red), var(--starlight-gold));
   border-radius: inherit;
   z-index: -1;
   opacity: 0;
@@ -152,12 +152,12 @@ section {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--nebula-purple);
+  background: var(--plasma-green);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--plasma-green);
+  background: var(--starlight-gold);
 }
 
 /* Responsive */
