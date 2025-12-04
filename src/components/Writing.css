@@ -115,7 +115,7 @@
 
 .article-title {
   color: var(--plasma-green);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   flex: 1;
 }
@@ -157,6 +157,7 @@
   line-height: 1.6;
   font-size: 0.9rem;
   margin-left: 2.5rem;
+  text-align: center;
 }
 
 .terminal-cursor {
