@@ -11,6 +11,14 @@ import AIGenZPage from './components/AIGenZPage';
 import ChatGPTPromptPage from './components/ChatGPTPromptPage';
 import HumanityInMediaPage from './components/HumanityInMediaPage';
 import WhovaAnalysisPage from './components/WhovaAnalysisPage';
+import TowerOfGreedPage from './components/TowerOfGreedPage';
+import ValinePage from './components/ValinePage';
+import AmadeusPage from './components/AmadeusPage';
+import ThreeKingdomsPage from './components/ThreeKingdomsPage';
+import AxlePage from './components/AxlePage';
+import GoaleePage from './components/GoaleePage';
+import TritonGoPlusPage from './components/TritonGoPlusPage';
+import VolleyballPage from './components/VolleyballPage';
 import './index.css';
 
 function HomePage() {
@@ -34,10 +42,20 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            {/* Writing Routes */}
             <Route path="/writing/ai-and-gen-z" element={<AIGenZPage />} />
             <Route path="/writing/chatgpt-prompt-case-study" element={<ChatGPTPromptPage />} />
             <Route path="/writing/humanity-in-media" element={<HumanityInMediaPage />} />
             <Route path="/writing/whova-competitive-analysis" element={<WhovaAnalysisPage />} />
+            {/* Project Routes */}
+            <Route path="/projects/tower-of-greed" element={<TowerOfGreedPage />} />
+            <Route path="/projects/valine" element={<ValinePage />} />
+            <Route path="/projects/amadeus" element={<AmadeusPage />} />
+            <Route path="/projects/3kingdoms" element={<ThreeKingdomsPage />} />
+            <Route path="/projects/axle" element={<AxlePage />} />
+            <Route path="/projects/goalee" element={<GoaleePage />} />
+            <Route path="/projects/tritongoplus" element={<TritonGoPlusPage />} />
+            <Route path="/projects/volleyball" element={<VolleyballPage />} />
           </Routes>
         </main>
         <footer className="footer">
