@@ -8,6 +8,9 @@ import Writing from './components/Writing';
 import SkillTree from './components/SkillTree';
 import Contact from './components/Contact';
 import AIGenZPage from './components/AIGenZPage';
+import ChatGPTPromptPage from './components/ChatGPTPromptPage';
+import HumanityInMediaPage from './components/HumanityInMediaPage';
+import WhovaAnalysisPage from './components/WhovaAnalysisPage';
 import './index.css';
 
 function HomePage() {
@@ -32,6 +35,9 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/writing/ai-and-gen-z" element={<AIGenZPage />} />
+            <Route path="/writing/chatgpt-prompt-case-study" element={<ChatGPTPromptPage />} />
+            <Route path="/writing/humanity-in-media" element={<HumanityInMediaPage />} />
+            <Route path="/writing/whova-competitive-analysis" element={<WhovaAnalysisPage />} />
           </Routes>
         </main>
         <footer className="footer">
