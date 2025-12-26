@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 import './Projects.css';
 
@@ -46,44 +47,50 @@ const Projects = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              className="project-card"
-              variants={cardVariants}
-              whileHover={{ 
-                scale: 1.05, 
-                rotateZ: 2,
-                transition: { duration: 0.3 }
-              }}
-            >
-              <div className="project-orbit" style={{ animationDelay: `${index * 0.5}s` }}></div>
-              
-              <div className="project-content">
-                <div className="project-header">
-                  <h3>{project.name}</h3>
-                  <span className={`project-status ${project.status.toLowerCase().replace(' ', '-')}`}>
-                    {project.status}
-                  </span>
-                </div>
+          {projects.map((project, index) => {
+            const ProjectWrapper = project.route ? Link : 'div';
+            const wrapperProps = project.route ? { to: project.route } : {};
+            
+            return (
+              <ProjectWrapper key={project.id} {...wrapperProps} style={{ textDecoration: 'none', display: 'block' }}>
+                <motion.div
+                  className={`project-card ${project.route ? 'clickable' : ''}`}
+                  variants={cardVariants}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    rotateZ: 2,
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <div className="project-orbit" style={{ animationDelay: `${index * 0.5}s` }}></div>
+                  
+                  <div className="project-content">
+                    <div className="project-header">
+                      <h3>{project.name}</h3>
+                      <span className={`project-status ${project.status.toLowerCase().replace(' ', '-')}`}>
+                        {project.status}
+                      </span>
+                    </div>
 
-                <p className="project-description">{project.description}</p>
+                    <p className="project-description">{project.description}</p>
 
-                <div className="project-tech">
-                  {project.tech.map((tech, idx) => (
-                    <span key={idx} className="tech-tag">{tech}</span>
-                  ))}
-                </div>
+                    <div className="project-tech">
+                      {project.tech.slice(0, 3).map((tech, idx) => (
+                        <span key={idx} className="tech-tag">{tech}</span>
+                      ))}
+                    </div>
 
-                <div className="project-footer">
-                  <span className="project-category">{project.category}</span>
-                  <span className="project-date">{project.date}</span>
-                </div>
-              </div>
+                    <div className="project-footer">
+                      <span className="project-category">{project.category}</span>
+                      <span className="project-date">{project.date}</span>
+                    </div>
+                  </div>
 
-              <div className="project-glow"></div>
-            </motion.div>
-          ))}
+                  <div className="project-glow"></div>
+                </motion.div>
+              </ProjectWrapper>
+            );
+          })}
         </motion.div>
       </div>
     </section>
