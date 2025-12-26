@@ -63,6 +63,17 @@
   display: block;
 }
 
+.pdf-error {
+  padding: 2rem;
+  text-align: center;
+  color: var(--light-gray);
+}
+
+.pdf-error p {
+  font-size: 1rem;
+  color: var(--rocket-red);
+}
+
 @media (max-width: 768px) {
   .pdf-controls {
     gap: 0.5rem;
