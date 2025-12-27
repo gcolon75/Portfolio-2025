@@ -57,9 +57,13 @@ const PDFViewer = ({ pdfUrl, fileName = 'document.pdf' }) => {
             <p className="fallback-message">
               Your browser doesn't support embedded PDF viewing.
             </p>
-            <button onClick={downloadPDF} className="pdf-control-btn primary">
+            <a
+              href={pdfUrl}
+              download={fileName}
+              className="pdf-control-btn primary"
+            >
               📄 Download PDF
-            </button>
+            </a>
             <a 
               href={pdfUrl} 
               target="_blank" 
