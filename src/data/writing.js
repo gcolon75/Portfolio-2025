@@ -24,8 +24,8 @@ export const articles = [
       'Ethical Concerns',
       'Generational Impact'
     ],
-    thumbnail: '/src/assets/writing/ai-gen-z/AI-GenZ-Cover.png',
-    pdfPath: '/src/assets/writing/ai-gen-z/AI and Gen Z Final Draft.pdf'
+    thumbnail: `${process.env.PUBLIC_URL}/assets/writing/ai-gen-z/AI-GenZ-Cover.png`,
+    pdfPath: `${process.env.PUBLIC_URL}/assets/writing/ai-gen-z/AI and Gen Z Final Draft.pdf`
   },
   {
     id: 'chatgpt-prompt',
@@ -50,8 +50,8 @@ export const articles = [
       'Best Practices',
       'Use Case Analysis'
     ],
-    thumbnail: '/src/assets/writing/chatgpt research/openAILogo.jpg',
-    pdfPath: '/src/assets/writing/chatgpt research/Prompt Engineering.docx'
+    thumbnail: `${process.env.PUBLIC_URL}/assets/writing/chatgpt research/openAILogo.jpg`,
+    pdfPath: `${process.env.PUBLIC_URL}/assets/writing/chatgpt research/Prompt Engineering.pdf`
   },
   {
     id: 'humanity-media',
@@ -76,8 +76,8 @@ export const articles = [
       'Media Evolution',
       'Social Impact'
     ],
-    thumbnail: '/src/assets/writing/Humanity in Media/HumanityArticleTitle.webp',
-    pdfPath: '/src/assets/writing/Humanity in Media/Humanity in Media.docx'
+    thumbnail: `${process.env.PUBLIC_URL}/assets/writing/Humanity in Media/HumanityArticleTitle.webp`,
+    pdfPath: `${process.env.PUBLIC_URL}/assets/writing/Humanity in Media/Humanity in Media.pdf`
   },
   {
     id: 'whova-analysis',
@@ -102,7 +102,7 @@ export const articles = [
       'Market Positioning',
       'Innovation Opportunities'
     ],
-    thumbnail: '/src/assets/writing/Whova Competitive Analysis/whova.jpg',
-    pdfPath: '/src/assets/writing/Whova Competitive Analysis/Whova Competetive Analysis.pdf'
+    thumbnail: `${process.env.PUBLIC_URL}/assets/writing/Whova Competitive Analysis/whova.jpg`,
+    pdfPath: `${process.env.PUBLIC_URL}/assets/writing/Whova Competitive Analysis/Whova Competetive Analysis.pdf`
   }
 ];

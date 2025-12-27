@@ -43,13 +43,23 @@ const ProjectDetailTemplate = ({ project }) => {
 
         {/* Hero Section */}
         <motion.header className="project-hero" variants={itemVariants}>
-          {project.assets?.images?.[0] && (
+          {project.assets?.images?.[0] ? (
             <div className="hero-image-wrapper">
               <img 
                 src={project.assets.images[0]} 
                 alt={project.title}
                 className="hero-image"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  console.warn(`Failed to load image: ${project.assets.images[0]}`);
+                }}
               />
+            </div>
+          ) : (
+            <div className="hero-image-wrapper">
+              <div className="hero-placeholder">
+                <span className="placeholder-icon">🚀</span>
+              </div>
             </div>
           )}
           <div className="hero-content">

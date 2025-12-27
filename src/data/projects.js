@@ -29,7 +29,7 @@ export const projects = [
     category: 'Game Design',
     route: '/projects/tower-of-greed',
     assets: {
-      images: ['/src/assets/projects/Tower of Greed/TowerOfGreedThumb.png'],
+      images: [`${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`],
       pdfs: [],
       videos: [],
       documents: [],
@@ -148,8 +148,8 @@ export const projects = [
     route: '/projects/3kingdoms',
     assets: {
       images: [
-        '/src/assets/projects/3 Kingdoms/3KingdomsTitleScreen.png',
-        '/src/assets/projects/3 Kingdoms/3KingdomsMap.JPG'
+        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsTitleScreen.png`,
+        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsMap.JPG`
       ],
       pdfs: [],
       videos: [],
@@ -190,12 +190,12 @@ export const projects = [
     route: '/projects/axle',
     assets: {
       images: [
-        '/src/assets/projects/Axle/axleImage.JPG',
-        '/src/assets/projects/Axle/axle-homepage.JPG',
-        '/src/assets/projects/Axle/axle-about.JPG',
-        '/src/assets/projects/Axle/axle-becomeMechanic.JPG'
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axleImage.JPG`,
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-homepage.JPG`,
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-about.JPG`,
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-becomeMechanic.JPG`
       ],
-      pdfs: ['/src/assets/projects/Axle/axle-slides.pdf'],
+      pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Axle/axle-slides.pdf`],
       videos: [],
       documents: [],
       links: []
@@ -233,11 +233,11 @@ export const projects = [
     route: '/projects/goalee',
     assets: {
       images: [
-        '/src/assets/projects/Goalee/GoaleeHomescreen.JPG',
-        '/src/assets/projects/Goalee/GoaleePoster.jpg',
-        '/src/assets/projects/Goalee/GoaleeTitle.JPG'
+        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeHomescreen.JPG`,
+        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleePoster.jpg`,
+        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeTitle.JPG`
       ],
-      pdfs: ['/src/assets/projects/Goalee/GoaleeFigma.pdf'],
+      pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeFigma.pdf`],
       videos: [],
       documents: [],
       links: [
@@ -285,7 +285,7 @@ export const projects = [
     category: 'UX/Product Design',
     route: '/projects/tritongoplus',
     assets: {
-      images: ['/src/assets/projects/Triton Go/TritonGoTitle.JPG'],
+      images: [`${process.env.PUBLIC_URL}/assets/projects/Triton Go/TritonGoTitle.JPG`],
       pdfs: [],
       videos: [],
       documents: [],
@@ -329,8 +329,8 @@ export const projects = [
     category: 'UX/Product Design',
     route: '/projects/volleyball',
     assets: {
-      images: ['/src/assets/projects/Volleyball Mobile/VolleyballMobileTitle.JPG'],
-      pdfs: ['/src/assets/projects/Volleyball Mobile/Volleyball Mobile.pdf'],
+      images: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballMobileTitle.JPG`],
+      pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/Volleyball Mobile.pdf`],
       videos: [],
       documents: [],
       links: []

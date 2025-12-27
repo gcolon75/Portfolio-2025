@@ -49,12 +49,16 @@ const WritingDetailTemplate = ({ article }) => {
                 src={article.thumbnail} 
                 alt={article.title}
                 className="cover-image"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                  console.warn(`Failed to load thumbnail: ${article.thumbnail}`);
+                }}
               />
-            ) : (
-              <div className="cover-placeholder">
-                <span className="cover-icon">📝</span>
-              </div>
-            )}
+            ) : null}
+            <div className="cover-placeholder" style={{ display: article.thumbnail ? 'none' : 'flex' }}>
+              <span className="cover-icon">📝</span>
+            </div>
           </div>
           <div className="hero-content">
             <h1 className="article-title">{article.title}</h1>
