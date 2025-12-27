@@ -3,7 +3,7 @@ export const articles = [
     id: 'ai-gen-z',
     title: 'AI & Gen Z: A Generation Growing Up With an Algorithm',
     description: 'An in-depth analysis exploring how Generation Z interacts with and shapes AI technology',
-    fullSummary: 'This groundbreaking analysis explores how Generation Z is navigating unprecedented territory as the first generation to grow up with AI as an integral part of their emotional, educational, and social development. Through autoethnographic reflection and data-driven research, this article examines the profound implications of AI integration on mental health, learning methodologies, and ethical considerations for the future. It investigates how this generation's relationship with artificial intelligence is fundamentally reshaping human-technology interaction patterns and societal norms.',
+    fullSummary: 'This groundbreaking analysis explores how Generation Z is navigating unprecedented territory as the first generation to grow up with AI as an integral part of their emotional, educational, and social development. Through autoethnographic reflection and data-driven research, this article examines the profound implications of AI integration on mental health, learning methodologies, and ethical considerations for the future. It investigates how this generation\'s relationship with artificial intelligence is fundamentally reshaping human-technology interaction patterns and societal norms.',
     date: 'Aug 6, 2025',
     readTime: '15 min',
     author: 'Gabriel Colón',
