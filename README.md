@@ -43,22 +43,22 @@ A modern, interactive portfolio website combining space exploration and RPG vide
 #### Installation
 
 1. Clone the repository:
-```bash
+```powershell
 git clone https://github.com/gcolon75/Portfolio-2025.git
 cd Portfolio-2025
 ```
 
 2. Install dependencies:
-```bash
+```powershell
 npm install
 ```
 
 3. Start the development server:
-```bash
+```powershell
 npm start
 ```
 
-The app will open at `http://localhost:3000`
+The app will open at `http://localhost:3000/Portfolio-2025`
 
 #### Available Scripts
 
@@ -180,7 +180,7 @@ src/
 
 Deploy to GitHub Pages:
 
-```bash
+```powershell
 npm run deploy
 ```
 

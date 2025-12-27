@@ -72,14 +72,14 @@
   border: 1px solid var(--plasma-green);
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 0 15px rgba(74, 158, 255, 0.1);
+  box-shadow: 0 0 20px rgba(74, 158, 255, 0.15);
 }
 
 .hero-cover {
   flex-shrink: 0;
-  width: 200px;
-  height: 200px;
-  min-height: 200px;
+  width: 220px;
+  height: 220px;
+  min-height: 220px;
 }
 
 .cover-image {
@@ -88,23 +88,24 @@
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
-  border: 1px solid var(--plasma-green);
+  border: 2px solid var(--plasma-green);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
 }
 
 .cover-placeholder {
   background: var(--glass-bg);
-  border: 1px dashed var(--plasma-green);
+  border: 2px dashed var(--plasma-green);
   border-radius: 10px;
   width: 100%;
   height: 100%;
-  min-height: 200px;
+  min-height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .cover-icon {
-  font-size: 3rem;
+  font-size: 3.5rem;
   filter: drop-shadow(0 0 15px var(--plasma-green));
 }
 
@@ -154,14 +155,14 @@
   border: 1px solid var(--plasma-green);
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 0 15px rgba(74, 158, 255, 0.1);
+  box-shadow: 0 0 20px rgba(74, 158, 255, 0.15);
   height: 100%;
 }
 
 .summary-section h3 {
   color: var(--plasma-green);
   margin-bottom: 1rem;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 }
 
 .summary-section p {
@@ -173,7 +174,7 @@
 
 .theme-tags {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
@@ -181,9 +182,9 @@
   background: rgba(74, 158, 255, 0.15);
   border: 1px solid var(--plasma-green);
   color: var(--plasma-green);
-  padding: 0.3rem 0.6rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 12px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
@@ -193,14 +194,14 @@
   border: 1px solid var(--starlight-gold);
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
   height: 100%;
 }
 
 .skills-section h3 {
   color: var(--starlight-gold);
   margin-bottom: 1rem;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 }
 
 .skills-list {
@@ -213,32 +214,34 @@
   background: var(--glass-bg);
   border: 1px solid var(--plasma-green);
   color: var(--plasma-green);
-  padding: 0.5rem;
+  padding: 0.6rem 0.8rem;
   border-radius: 8px;
   text-align: center;
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   transition: all var(--transition-fast);
 }
 
 .skill-badge:hover {
-  background: rgba(74, 158, 255, 0.15);
+  background: rgba(74, 158, 255, 0.2);
   box-shadow: 0 0 15px rgba(74, 158, 255, 0.3);
   border-color: var(--starlight-gold);
+  transform: translateY(-1px);
 }
 
 /* PDF Section */
 .pdf-section {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .pdf-section-title {
   color: var(--plasma-green);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
   text-align: center;
   font-family: var(--font-heading);
+  font-weight: 700;
 }
 
 /* Footer Section - Compact */
@@ -306,27 +309,32 @@
   .article-hero {
     flex-direction: column;
     text-align: center;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .hero-cover {
-    width: 180px;
-    height: 180px;
-    min-height: 180px;
+    width: 200px;
+    height: 200px;
+    min-height: 200px;
   }
 
   .cover-icon {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   .content-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .summary-section,
   .skills-section {
-    padding: 0.75rem;
+    padding: 1.5rem;
+  }
+
+  .summary-section h3,
+  .skills-section h3 {
+    font-size: 1.2rem;
   }
 
   .article-footer {
@@ -336,7 +344,11 @@
 
   .pdf-button,
   .nav-button {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.85rem;
+    padding: 0.7rem 1.3rem;
+    font-size: 0.9rem;
+  }
+
+  .pdf-section-title {
+    font-size: 1.3rem;
   }
 }

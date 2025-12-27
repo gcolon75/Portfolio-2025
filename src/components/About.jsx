@@ -48,10 +48,11 @@ const About = () => {
           >
             <h3>About Me</h3>
             <p className="bio-text">
-              I'm a creative technologist with a passion for crafting exceptional digital experiences. 
-              With a background in Cognitive Science from UCSD, I blend UX design principles with 
-              technical expertise to build innovative solutions. My work spans from designing intuitive 
-              interfaces to developing robust web applications and exploring the frontiers of AI automation.
+              I'm a UX designer and creative technologist passionate about building intuitive digital experiences 
+              that blend user-centered design with cutting-edge technology. With a B.S. in Cognitive Science from 
+              UC San Diego, I bring a unique perspective combining psychology, design thinking, and technical 
+              implementation to every project. My work spans UX/UI design, frontend development, game design, 
+              and AI integration—always focused on creating solutions that are both innovative and accessible.
             </p>
             
             <div className="info-grid">
