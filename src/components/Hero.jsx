@@ -107,7 +107,7 @@ const Hero = () => {
             className="cta-button secondary"
             onClick={() => {
               const link = document.createElement('a');
-              link.href = '/resume.pdf';
+              link.href = `${process.env.PUBLIC_URL}/resume.pdf`;
               link.target = '_blank';
               link.rel = 'noopener noreferrer';
               link.click();

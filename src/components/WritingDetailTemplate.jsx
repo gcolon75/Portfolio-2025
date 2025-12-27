@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import PDFViewer from './PDFViewer';
@@ -6,6 +6,7 @@ import './WritingDetailTemplate.css';
 
 const WritingDetailTemplate = ({ article }) => {
   const navigate = useNavigate();
+  const [imageError, setImageError] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -44,11 +45,15 @@ const WritingDetailTemplate = ({ article }) => {
         {/* Hero Section - Horizontal Layout */}
         <motion.header className="article-hero" variants={itemVariants}>
           <div className="hero-cover">
-            {article.thumbnail ? (
+            {article.thumbnail && !imageError ? (
               <img 
                 src={article.thumbnail} 
                 alt={article.title}
                 className="cover-image"
+                onError={() => {
+                  setImageError(true);
+                  console.warn(`Failed to load thumbnail: ${article.thumbnail}`);
+                }}
               />
             ) : (
               <div className="cover-placeholder">
