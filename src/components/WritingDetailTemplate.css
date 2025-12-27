@@ -33,9 +33,10 @@
 }
 
 .writing-detail-container {
-  max-width: 1200px;
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
 }
 
 /* Back Button - Compact */
@@ -64,26 +65,28 @@
 /* Hero Section - Horizontal Compact Layout */
 .article-hero {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   background: var(--card-bg);
   border: 1px solid var(--plasma-green);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem;
   box-shadow: 0 0 15px rgba(74, 158, 255, 0.1);
 }
 
 .hero-cover {
   flex-shrink: 0;
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
+  min-height: 200px;
 }
 
 .cover-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   border-radius: 10px;
   border: 1px solid var(--plasma-green);
 }
@@ -94,6 +97,7 @@
   border-radius: 10px;
   width: 100%;
   height: 100%;
+  min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,31 +142,33 @@
 /* Content Grid - Two Columns */
 .content-grid {
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  align-items: start;
 }
 
-/* Summary Section - Left 60% */
+/* Summary Section - Left 50% */
 .summary-section {
   background: var(--card-bg);
   border: 1px solid var(--plasma-green);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem;
   box-shadow: 0 0 15px rgba(74, 158, 255, 0.1);
+  height: 100%;
 }
 
 .summary-section h3 {
   color: var(--plasma-green);
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
 }
 
 .summary-section p {
   color: var(--light-gray);
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
 }
 
 .theme-tags {
@@ -181,19 +187,20 @@
   font-weight: 500;
 }
 
-/* Skills Section - Right 40% */
+/* Skills Section - Right 50% */
 .skills-section {
   background: var(--card-bg);
   border: 1px solid var(--starlight-gold);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem;
   box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+  height: 100%;
 }
 
 .skills-section h3 {
   color: var(--starlight-gold);
-  margin-bottom: 0.75rem;
-  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
 }
 
 .skills-list {
@@ -280,13 +287,20 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .writing-detail {
     padding-top: 4rem;
   }
 
   .writing-detail-container {
-    padding: 0 1rem;
+    padding: 0 1.25rem;
   }
 
   .article-hero {
@@ -296,8 +310,9 @@
   }
 
   .hero-cover {
-    width: 100px;
-    height: 100px;
+    width: 180px;
+    height: 180px;
+    min-height: 180px;
   }
 
   .cover-icon {

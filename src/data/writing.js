@@ -2,8 +2,8 @@ export const articles = [
   {
     id: 'ai-gen-z',
     title: 'AI & Gen Z: A Generation Growing Up With an Algorithm',
-    description: 'An analysis of how Generation Z interacts with and shapes AI technology',
-    fullSummary: 'This groundbreaking analysis explores how Generation Z is navigating unprecedented territory as the first generation to grow up with AI as an integral part of their emotional, educational, and social development. Through autoethnographic reflection and data-driven research, the article examines the profound implications of AI integration on mental health, learning methodologies, and ethical considerations for the future.',
+    description: 'An in-depth analysis exploring how Generation Z interacts with and shapes AI technology',
+    fullSummary: 'This groundbreaking analysis explores how Generation Z is navigating unprecedented territory as the first generation to grow up with AI as an integral part of their emotional, educational, and social development. Through autoethnographic reflection and data-driven research, this article examines the profound implications of AI integration on mental health, learning methodologies, and ethical considerations for the future. It investigates how this generation's relationship with artificial intelligence is fundamentally reshaping human-technology interaction patterns and societal norms.',
     date: 'Aug 6, 2025',
     readTime: '15 min',
     author: 'Gabriel Colón',
@@ -30,8 +30,8 @@ export const articles = [
   {
     id: 'chatgpt-prompt',
     title: 'ChatGPT Prompt Engineering: A Case Study',
-    description: 'Deep dive into effective prompt engineering techniques and best practices',
-    fullSummary: 'An in-depth exploration of prompt engineering methodologies for ChatGPT and large language models. This case study examines practical techniques for crafting effective prompts, understanding model behavior, and optimizing AI interactions for various use cases from creative writing to technical problem-solving.',
+    description: 'Comprehensive exploration of effective prompt engineering techniques and best practices',
+    fullSummary: 'An in-depth exploration of prompt engineering methodologies for ChatGPT and large language models. This comprehensive case study examines practical techniques for crafting effective prompts, understanding model behavior patterns, and optimizing AI interactions for various use cases ranging from creative writing to technical problem-solving. The analysis provides actionable insights into prompt structure, context management, and iterative refinement strategies that significantly improve output quality and relevance.',
     date: '2024',
     readTime: '6 min',
     author: 'Gabriel Colón',
@@ -56,8 +56,8 @@ export const articles = [
   {
     id: 'humanity-media',
     title: 'Humanity in Media: The Digital Connection',
-    description: 'Exploring how digital media maintains human connection in a virtual world',
-    fullSummary: 'A thoughtful examination of how digital media platforms and technologies preserve, enhance, or diminish human connection in an increasingly virtual world. The article explores the balance between technological advancement and maintaining authentic human relationships in digital spaces.',
+    description: 'Critical analysis exploring how digital media maintains human connection in a virtual world',
+    fullSummary: 'A thoughtful examination of how digital media platforms and technologies preserve, enhance, or diminish human connection in an increasingly virtual world. This article explores the delicate balance between technological advancement and maintaining authentic human relationships in digital spaces. Through critical analysis of contemporary media ecosystems, it investigates whether digital platforms serve as bridges or barriers to genuine human interaction, examining both the opportunities and challenges presented by our mediated communication landscape.',
     date: '2023',
     readTime: '7 min',
     author: 'Gabriel Colón',
@@ -82,8 +82,8 @@ export const articles = [
   {
     id: 'whova-analysis',
     title: 'Whova Competitive Analysis',
-    description: 'Comparative study of event management platform UX design approaches',
-    fullSummary: 'A comprehensive competitive analysis of the Whova event management platform, examining UX design methodologies, feature sets, user flows, and market positioning. This study provides insights into best practices for event technology platforms and opportunities for innovation in the space.',
+    description: 'Comprehensive comparative study of event management platform UX design approaches',
+    fullSummary: 'A comprehensive competitive analysis of the Whova event management platform, examining UX design methodologies, feature sets, user flows, and market positioning strategies. This study provides actionable insights into best practices for event technology platforms and identifies opportunities for innovation in the space. Through systematic comparison with competing platforms, the analysis evaluates information architecture, interaction patterns, and value propositions that differentiate successful event management solutions in a competitive marketplace.',
     date: '2023',
     readTime: '10 min',
     author: 'Gabriel Colón',
