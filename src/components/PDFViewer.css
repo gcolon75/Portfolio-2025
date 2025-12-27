@@ -9,23 +9,34 @@
 
 .pdf-controls {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--plasma-green);
   flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(0, 255, 136, 0.05);
+  border-radius: 8px;
+  border: 1px solid var(--plasma-green);
 }
 
 .pdf-info {
   color: var(--light-gray);
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 1rem;
   text-align: center;
   line-height: 1.6;
-  max-width: 600px;
+  max-width: 700px;
+}
+
+.pdf-info strong {
+  color: var(--plasma-green);
+}
+
+.pdf-button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .pdf-control-btn {
@@ -47,69 +58,59 @@
 }
 
 .pdf-control-btn.primary {
-  background: var(--rocket-red);
-  border-color: var(--rocket-red);
-  color: white;
+  background: var(--plasma-green);
+  border-color: var(--plasma-green);
+  color: var(--dark-bg);
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 }
 
 .pdf-control-btn.primary:hover {
   background: var(--starlight-gold);
   border-color: var(--starlight-gold);
   color: var(--dark-bg);
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
   transform: translateY(-2px);
 }
 
 .pdf-control-btn.secondary {
   background: var(--glass-bg);
-  border: 1px solid var(--plasma-green);
-  color: var(--plasma-green);
+  border: 1px solid var(--starlight-gold);
+  color: var(--starlight-gold);
 }
 
 .pdf-control-btn.secondary:hover {
-  background: var(--plasma-green);
+  background: var(--starlight-gold);
   color: var(--dark-bg);
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
   transform: translateY(-2px);
 }
 
-.pdf-iframe-wrapper {
-  width: 100%;
-  min-height: 800px;
-  background: rgba(0, 0, 0, 0.3);
+.pdf-notice {
+  padding: 1rem 1.5rem;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid var(--starlight-gold);
   border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--plasma-green);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.pdf-iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 800px;
-  border: none;
-  display: block;
-}
-
-.pdf-fallback {
-  padding: 3rem 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.fallback-message {
+.notice-text {
   color: var(--light-gray);
-  font-size: 1.1rem;
   font-family: var(--font-body);
-  max-width: 500px;
+  font-size: 0.95rem;
   line-height: 1.6;
+  text-align: center;
+  margin: 0;
+}
+
+.notice-text strong {
+  color: var(--starlight-gold);
+}
+
+.pdf-iframe-wrapper,
+.pdf-iframe,
+.pdf-fallback {
+  display: none;
 }
 
 .pdf-error {
@@ -125,22 +126,27 @@
 
 @media (max-width: 768px) {
   .pdf-controls {
-    gap: 0.5rem;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .pdf-button-group {
     flex-direction: column;
+    width: 100%;
     align-items: stretch;
   }
 
   .pdf-control-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    width: 100%;
   }
 
   .pdf-info {
-    font-size: 0.85rem;
-    text-align: center;
+    font-size: 0.9rem;
   }
 
-  .pdf-iframe-wrapper {
-    height: 600px;
+  .notice-text {
+    font-size: 0.85rem;
   }
 }

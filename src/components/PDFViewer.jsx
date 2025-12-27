@@ -31,49 +31,27 @@ const PDFViewer = ({ pdfUrl, fileName = 'document.pdf' }) => {
     <div className="pdf-viewer-container">
       <div className="pdf-controls">
         <p className="pdf-info">
-          This document is best viewed by downloading. Click the button below to download the PDF.
+          📄 <strong>View this document:</strong> For the best experience, open the PDF in a new tab or download it directly.
         </p>
-        <button onClick={downloadPDF} className="pdf-control-btn primary" aria-label="Download PDF">
-          📄 Download PDF
-        </button>
-        <a 
-          href={pdfUrl} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="pdf-control-btn secondary"
-        >
-          🔗 Open in New Tab
-        </a>
+        <div className="pdf-button-group">
+          <a 
+            href={pdfUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="pdf-control-btn primary"
+          >
+            🔗 Open PDF in New Tab
+          </a>
+          <button onClick={downloadPDF} className="pdf-control-btn secondary" aria-label="Download PDF">
+            📥 Download PDF
+          </button>
+        </div>
       </div>
 
-      <div className="pdf-iframe-wrapper">
-        <object 
-          data={`${pdfUrl}#toolbar=1&navpanes=1&scrollbar=1`}
-          type="application/pdf"
-          className="pdf-iframe"
-          aria-label="PDF Document Viewer"
-        >
-          <div className="pdf-fallback">
-            <p className="fallback-message">
-              Your browser doesn't support embedded PDF viewing.
-            </p>
-            <a
-              href={pdfUrl}
-              download={fileName}
-              className="pdf-control-btn primary"
-            >
-              📄 Download PDF
-            </a>
-            <a 
-              href={pdfUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="pdf-control-btn secondary"
-            >
-              🔗 Open in New Tab
-            </a>
-          </div>
-        </object>
+      <div className="pdf-notice">
+        <p className="notice-text">
+          ℹ️ <strong>Note:</strong> Some browsers may block embedded PDFs. Use the buttons above to view the document.
+        </p>
       </div>
     </div>
   );
