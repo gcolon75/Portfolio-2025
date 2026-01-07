@@ -7,14 +7,17 @@ import './SkillTree.css';
 const CLASS_NODE_RADIUS_RATIO = 0.35; // Distance from center for class nodes (35% of canvas half-size)
 const SKILL_BASE_DISTANCE_RATIO = 0.225; // Distance from class node for skills (22.5% of canvas half-size)
 const SKILL_SPREAD_ANGLE = Math.PI / 4; // 45 degrees spread for skills
+const DEFAULT_CANVAS_SIZE = 800; // Default canvas size before measurement
 
 const SkillTree = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
-  const [canvasSize, setCanvasSize] = useState(800);
+  const [canvasSize, setCanvasSize] = useState(DEFAULT_CANVAS_SIZE);
   const containerRef = useRef(null);
 
   // Measure container size and update canvas size
   useEffect(() => {
+    let resizeTimeout;
+    
     const updateSize = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
@@ -22,9 +25,17 @@ const SkillTree = () => {
       }
     };
 
+    const debouncedUpdateSize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateSize, 100);
+    };
+
     updateSize();
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
+    window.addEventListener('resize', debouncedUpdateSize);
+    return () => {
+      window.removeEventListener('resize', debouncedUpdateSize);
+      clearTimeout(resizeTimeout);
+    };
   }, []);
 
   useEffect(() => {
