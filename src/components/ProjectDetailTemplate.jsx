@@ -8,7 +8,9 @@ const ProjectDetailTemplate = ({ project }) => {
   const navigate = useNavigate();
   const [imageError, setImageError] = useState(false);
 
-  // Compute hero image with fallback to coverImage
+  // Compute hero image with fallback priority:
+  // 1. First image from project.assets.images array (if exists)
+  // 2. Fallback to project.coverImage (for projects without images array)
   const heroImage = project.assets?.images?.[0] || project.coverImage;
 
   const containerVariants = {
