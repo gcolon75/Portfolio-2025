@@ -74,8 +74,7 @@
 
 .hero-image-wrapper {
   width: 100%;
-  height: 450px;
-  min-height: 450px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 10px;
   margin-bottom: 1.5rem;
@@ -89,7 +88,7 @@
 .hero-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -457,12 +456,7 @@
   }
 
   .hero-image-wrapper {
-    height: 300px;
-    min-height: 300px;
-  }
-
-  .hero-image {
-    height: 300px;
+    aspect-ratio: 16 / 9;
   }
 
   .placeholder-icon {
