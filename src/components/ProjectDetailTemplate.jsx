@@ -7,6 +7,9 @@ import './ProjectDetailTemplate.css';
 const ProjectDetailTemplate = ({ project }) => {
   const navigate = useNavigate();
 
+  // Compute hero image with fallback to coverImage
+  const heroImage = project.assets?.images?.[0] || project.coverImage;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -43,15 +46,15 @@ const ProjectDetailTemplate = ({ project }) => {
 
         {/* Hero Section */}
         <motion.header className="project-hero" variants={itemVariants}>
-          {project.assets?.images?.[0] ? (
+          {heroImage ? (
             <div className="hero-image-wrapper">
               <img 
-                src={project.assets.images[0]} 
+                src={encodeURI(heroImage)} 
                 alt={project.title}
                 className="hero-image"
                 onError={(e) => {
                   e.target.style.display = 'none';
-                  console.warn(`Failed to load image: ${project.assets.images[0]}`);
+                  console.warn(`Failed to load image: ${heroImage}`);
                 }}
               />
             </div>
