@@ -33,9 +33,9 @@
 /* Radial Layout */
 .skill-tree-radial {
   position: relative;
-  width: 100%;
-  height: 1000px;
-  margin-top: 3rem;
+  width: min(92vw, 900px);
+  aspect-ratio: 1 / 1;
+  margin: 3rem auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -288,8 +288,7 @@
 
 @media (max-width: 768px) {
   .skill-tree-radial {
-    height: 800px;
-    transform: scale(0.7);
+    width: min(95vw, 600px);
   }
   
   .center-circle {
@@ -338,11 +337,50 @@
 
 @media (max-width: 480px) {
   .skill-tree-radial {
-    height: 600px;
-    transform: scale(0.5);
+    width: min(98vw, 400px);
   }
   
   .skill-tree {
-    min-height: 600px;
+    min-height: auto;
+    padding: 3rem 0;
+  }
+  
+  .center-circle {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .center-icon {
+    font-size: 1.5rem;
+  }
+  
+  .center-text {
+    font-size: 0.7rem;
+  }
+  
+  .class-node {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .class-icon {
+    font-size: 1.5rem;
+  }
+  
+  .class-name {
+    font-size: 0.65rem;
+  }
+  
+  .skill-node {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .skill-node-name {
+    font-size: 0.6rem;
+  }
+  
+  .skill-node-stars .star {
+    font-size: 0.55rem;
   }
 }

@@ -1,15 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { skillTree } from '../data/skills';
 import './SkillTree.css';
 
-// Layout constants for radial skill tree
-const CLASS_NODE_RADIUS = 280; // Distance from center for class nodes
-const SKILL_BASE_DISTANCE = 180; // Distance from class node for skills
+// Layout constants for radial skill tree (as ratios of canvas size)
+const CLASS_NODE_RADIUS_RATIO = 0.35; // Distance from center for class nodes (35% of canvas half-size)
+const SKILL_BASE_DISTANCE_RATIO = 0.225; // Distance from class node for skills (22.5% of canvas half-size)
 const SKILL_SPREAD_ANGLE = Math.PI / 4; // 45 degrees spread for skills
+const DEFAULT_CANVAS_SIZE = 800; // Default canvas size before measurement
 
 const SkillTree = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
+  const [canvasSize, setCanvasSize] = useState(DEFAULT_CANVAS_SIZE);
+  const containerRef = useRef(null);
+
+  // Measure container size and update canvas size
+  useEffect(() => {
+    let resizeTimeout;
+    
+    const updateSize = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setCanvasSize(rect.width);
+      }
+    };
+
+    const debouncedUpdateSize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateSize, 100);
+    };
+
+    updateSize();
+    window.addEventListener('resize', debouncedUpdateSize);
+    return () => {
+      window.removeEventListener('resize', debouncedUpdateSize);
+      clearTimeout(resizeTimeout);
+    };
+  }, []);
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -28,7 +55,11 @@ const SkillTree = () => {
     ));
   };
 
-  // Calculate positions for radial layout
+  // Calculate positions for radial layout based on canvas size
+  const halfSize = canvasSize / 2;
+  const CLASS_NODE_RADIUS = halfSize * CLASS_NODE_RADIUS_RATIO;
+  const SKILL_BASE_DISTANCE = halfSize * SKILL_BASE_DISTANCE_RATIO;
+
   const getClassPosition = (index, total) => {
     const angle = (index * 2 * Math.PI) / total - Math.PI / 2; // Start from top
     const x = Math.cos(angle) * CLASS_NODE_RADIUS;
@@ -92,6 +123,7 @@ const SkillTree = () => {
         </motion.h2>
 
         <motion.div
+          ref={containerRef}
           className="skill-tree-radial"
           variants={containerVariants}
           initial="hidden"
@@ -99,7 +131,7 @@ const SkillTree = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           {/* Connection lines between classes */}
-          <svg className="connection-lines" viewBox="-400 -400 800 800">
+          <svg className="connection-lines" viewBox={`${-halfSize} ${-halfSize} ${canvasSize} ${canvasSize}`}>
             <defs>
               <filter id="glow">
                 <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
