@@ -65,6 +65,7 @@ export const projects = [
     date: 'Sept 2025 - Present',
     category: 'Web Development',
     route: '/projects/valine',
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Valine/valine-cover.jpg`,
     assets: {
       images: [],
       pdfs: [],

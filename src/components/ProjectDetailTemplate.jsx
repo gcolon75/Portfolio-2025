@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import PDFViewer from './PDFViewer';
@@ -6,6 +6,12 @@ import './ProjectDetailTemplate.css';
 
 const ProjectDetailTemplate = ({ project }) => {
   const navigate = useNavigate();
+  const [imageError, setImageError] = useState(false);
+
+  // Compute hero image with fallback priority:
+  // 1. First image from project.assets.images array (if exists)
+  // 2. Fallback to project.coverImage (for projects without images array)
+  const heroImage = project.assets?.images?.[0] || project.coverImage;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,15 +49,15 @@ const ProjectDetailTemplate = ({ project }) => {
 
         {/* Hero Section */}
         <motion.header className="project-hero" variants={itemVariants}>
-          {project.assets?.images?.[0] ? (
+          {heroImage && !imageError ? (
             <div className="hero-image-wrapper">
               <img 
-                src={project.assets.images[0]} 
+                src={encodeURI(heroImage)} 
                 alt={project.title}
                 className="hero-image"
                 onError={(e) => {
-                  e.target.style.display = 'none';
-                  console.warn(`Failed to load image: ${project.assets.images[0]}`);
+                  setImageError(true);
+                  console.warn(`Failed to load image: ${heroImage}`);
                 }}
               />
             </div>

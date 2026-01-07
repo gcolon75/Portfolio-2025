@@ -47,7 +47,7 @@ const WritingDetailTemplate = ({ article }) => {
           <div className="hero-cover">
             {article.thumbnail && !imageError ? (
               <img 
-                src={article.thumbnail} 
+                src={encodeURI(article.thumbnail)} 
                 alt={article.title}
                 className="cover-image"
                 onError={() => {
