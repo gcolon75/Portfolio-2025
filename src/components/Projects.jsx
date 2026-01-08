@@ -28,6 +28,19 @@ const Projects = () => {
     }
   };
 
+  // Pin your best/primary project to the top
+  const featuredId = 'project-valine';
+  const sortedProjects = [...projects].sort((a, b) => {
+    const aFeatured = a.id === featuredId;
+    const bFeatured = b.id === featuredId;
+    if (aFeatured !== bFeatured) return aFeatured ? -1 : 1;
+
+    const ay = Number(a.year || 0);
+    const by = Number(b.year || 0);
+    if (by !== ay) return by - ay;
+    return String(a.name).localeCompare(String(b.name));
+  });
+
   return (
     <section id="projects" className="projects">
       <div className="container">
@@ -47,14 +60,21 @@ const Projects = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {projects.map((project, index) => {
+          {sortedProjects.map((project, index) => {
             const ProjectWrapper = project.route ? Link : 'div';
             const wrapperProps = project.route ? { to: project.route } : {};
+
+            const thumbnail =
+              project.cardImage ||
+              project.coverImage ||
+              (project.assets?.images?.length ? project.assets.images[0] : null);
+
+            const isFeatured = project.id === featuredId;
             
             return (
               <ProjectWrapper key={project.id} {...wrapperProps} style={{ textDecoration: 'none', display: 'block' }}>
                 <motion.div
-                  className={`project-card ${project.route ? 'clickable' : ''}`}
+                  className={`project-card ${project.route ? 'clickable' : ''} ${isFeatured ? 'featured' : ''}`}
                   variants={cardVariants}
                   whileHover={{ 
                     scale: 1.05, 
@@ -66,7 +86,19 @@ const Projects = () => {
                   
                   <div className="project-content">
                     <div className="project-header">
-                      <h3>{project.name}</h3>
+                      <div className="project-title-wrap">
+                        <div className="project-card-thumb" aria-hidden="true">
+                          {thumbnail ? (
+                            <img src={encodeURI(thumbnail)} alt="" />
+                          ) : (
+                            <div className="project-card-thumb-placeholder">🪐</div>
+                          )}
+                        </div>
+                        <h3>
+                          {project.name}
+                          {isFeatured && <span className="project-featured-star">★</span>}
+                        </h3>
+                      </div>
                       <span className={`project-status ${project.status.toLowerCase().replace(' ', '-')}`}>
                         {project.status}
                       </span>

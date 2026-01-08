@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import PDFViewer from './PDFViewer';
@@ -7,6 +7,11 @@ import './ProjectDetailTemplate.css';
 const ProjectDetailTemplate = ({ project }) => {
   const navigate = useNavigate();
   const [imageError, setImageError] = useState(false);
+
+  // Scroll to top on mount to ensure project pages start at the top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Compute hero image with fallback priority:
   // 1. First image from project.assets.images array (if exists)
@@ -121,13 +126,10 @@ const ProjectDetailTemplate = ({ project }) => {
                 <p className="impact-how"><strong>How:</strong> {project.impact.how}</p>
               </div>
             )}
-          </div>
 
-          {/* Right Column - Sidebar */}
-          <div className="content-sidebar">
-            {/* Tech Stack */}
+            {/* Tech Stack moved into main content */}
             {project.tech && project.tech.length > 0 && (
-              <div className="sidebar-section">
+              <div className="content-section sidebar-section">
                 <h4 className="sidebar-title">Tech Stack</h4>
                 <div className="tag-grid">
                   {project.tech.map((tech, index) => (
@@ -137,9 +139,9 @@ const ProjectDetailTemplate = ({ project }) => {
               </div>
             )}
 
-            {/* Skills */}
+            {/* Skills moved into main content */}
             {project.skills && project.skills.length > 0 && (
-              <div className="sidebar-section">
+              <div className="content-section sidebar-section">
                 <h4 className="sidebar-title">Skills Demonstrated</h4>
                 <div className="skill-list">
                   {project.skills.map((skill, index) => (
@@ -149,9 +151,9 @@ const ProjectDetailTemplate = ({ project }) => {
               </div>
             )}
 
-            {/* Concepts */}
+            {/* Key Concepts moved into main content */}
             {project.concepts && project.concepts.length > 0 && (
-              <div className="sidebar-section">
+              <div className="content-section sidebar-section">
                 <h4 className="sidebar-title">Key Concepts</h4>
                 <div className="concept-list">
                   {project.concepts.map((concept, index) => (
@@ -161,6 +163,8 @@ const ProjectDetailTemplate = ({ project }) => {
               </div>
             )}
           </div>
+
+          {/* Right Column removed and contents moved into main content */}
         </motion.div>
 
         {/* Assets Section */}
@@ -214,21 +218,23 @@ const ProjectDetailTemplate = ({ project }) => {
               </div>
             )}
 
-            {/* Google Embeds for GoaLee */}
-            {project.id === 'goalee' && project.assets.links?.length > 0 && (
+            {/* Google Slides or Spreadsheets Embeds */}
+            {project.assets.links?.some(link => link.type === 'slides' || link.type === 'spreadsheet') && (
               <div className="google-embeds">
-                {project.assets.links.map((link, index) => (
-                  <div key={index} className="embed-wrapper">
-                    <h4 className="embed-title">{link.title}</h4>
-                    <iframe
-                      src={link.url}
-                      className="google-embed"
-                      title={link.title}
-                      frameBorder="0"
-                      allowFullScreen
-                    />
-                  </div>
-                ))}
+                {project.assets.links
+                  .filter(link => link.type === 'slides' || link.type === 'spreadsheet')
+                  .map((link, index) => (
+                    <div key={index} className="embed-wrapper">
+                      <h4 className="embed-title">{link.title}</h4>
+                      <iframe
+                        src={link.url}
+                        className="google-embed"
+                        title={link.title}
+                        frameBorder="0"
+                        allowFullScreen
+                      />
+                    </div>
+                  ))}
               </div>
             )}
           </motion.div>
