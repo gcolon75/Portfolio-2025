@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import DocumentViewer from './DocumentViewer';
@@ -17,6 +17,10 @@ const WritingDetailTemplate = ({ article }) => {
   const navigate = useNavigate();
   const [imageError, setImageError] = useState(false);
 
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -27,20 +31,15 @@ const WritingDetailTemplate = ({ article }) => {
     visible: { opacity: 1, y: 0 }
   };
 
-  // ---- Backward compatible: supports BOTH new fields (fileUrl/fileType) and old (pdfPath)
   const doc = useMemo(() => {
     const fileUrl = article?.fileUrl || article?.pdfPath || null;
-    const fileType = (article?.fileType || inferFileType(fileUrl) || null);
+    const inferred = inferFileType(fileUrl);
+    const fileType = (inferred || article?.fileType || null);
     const fileName = fileType ? `${article?.id || 'document'}.${fileType}` : (article?.id || 'document');
     return { fileUrl, fileType, fileName };
   }, [article]);
 
   const hasDocument = Boolean(doc.fileUrl && doc.fileType);
-
-  const downloadLabel =
-    doc.fileType?.toLowerCase() === 'docx' || doc.fileType?.toLowerCase() === 'doc'
-      ? '📄 Download Article (DOCX)'
-      : '📄 Download Article (PDF)';
 
   return (
     <section className="writing-detail">
@@ -50,10 +49,9 @@ const WritingDetailTemplate = ({ article }) => {
         initial="hidden"
         animate="visible"
       >
-        {/* Back Button */}
         <motion.button
           className="back-button"
-          onClick={() => navigate('/')}
+          onClick={() => navigate(-1)}
           variants={itemVariants}
           whileHover={{ scale: 1.05, x: -5 }}
           whileTap={{ scale: 0.95 }}
@@ -61,7 +59,6 @@ const WritingDetailTemplate = ({ article }) => {
           ← Back to Writing
         </motion.button>
 
-        {/* Hero Section */}
         <motion.header className="article-hero" variants={itemVariants}>
           <div className="hero-cover">
             {article.thumbnail && !imageError ? (
@@ -93,7 +90,6 @@ const WritingDetailTemplate = ({ article }) => {
           </div>
         </motion.header>
 
-        {/* Content Grid */}
         <motion.div className="content-grid" variants={itemVariants}>
           <div className="summary-section">
             <h3>Summary</h3>
@@ -122,7 +118,6 @@ const WritingDetailTemplate = ({ article }) => {
           </div>
         </motion.div>
 
-        {/* Full Article Viewer (PDF/DOCX) */}
         <motion.div className="pdf-section" variants={itemVariants}>
           <h3 className="pdf-section-title">Full Article</h3>
 
@@ -141,18 +136,9 @@ const WritingDetailTemplate = ({ article }) => {
           )}
         </motion.div>
 
-        {/* Footer */}
+        {/* ✅ Footer now ONLY has navigation (no download area) */}
         <motion.div className="article-footer" variants={itemVariants}>
-          {hasDocument && (
-            <a
-              href={encodeURI(doc.fileUrl)}
-              download
-              className="pdf-button"
-            >
-              {downloadLabel}
-            </a>
-          )}
-          <button className="nav-button" onClick={() => navigate('/')}>
+          <button className="nav-button" onClick={() => navigate(-1)}>
             ← Back to Writing
           </button>
         </motion.div>

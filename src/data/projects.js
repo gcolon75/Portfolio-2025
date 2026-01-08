@@ -37,86 +37,79 @@ export const projects = [
     }
   },
   {
-    id: 'project-valine',
-    name: 'Project Valine',
-    title: 'Project Valine',
-    year: 2025,
-    description: 'A professional networking platform with innovative discovery features (In Development)',
-    tagline: 'A modern platform connecting creative professionals',
-    fullSummary: 'A professional networking platform with innovative discovery features. In early development with private testing.',
-    problem: 'Traditional networking platforms struggle with authentic connection and meaningful discovery of creative talent.',
-    approach: 'Building a platform that combines social-style presentation with search-driven discovery, focusing on profile systems, advanced filtering, and innovative content matching.',
-    result: 'Currently developing core features with a limited test group to validate the concept and refine user experience.',
-    role: 'Platform Designer, Developer',
-    whatISpecificallyDid: [
-      'Designed profile system with media showcase capabilities',
-      'Developed advanced search and filtering functionality',
-      'Created innovative content matching features',
-      'Coordinating private testing with early users'
-    ],
-    impact: {
-      statement: 'Improved discovery UX through structured filtering patterns and profile architecture that highlights creative work over traditional résumé formats.',
-      how: 'Implemented component-based profile system with reusable search filters, reducing cognitive load through progressive disclosure and prioritizing visual portfolio presentation.'
-    },
-    tech: ['React', 'Web Development', 'Platform Design', 'UX Design'],
-    skills: ['Web Development', 'Platform Architecture', 'UX Design', 'User Research', 'Feature Design'],
-    concepts: ['Discovery Systems', 'Profile Architecture', 'Social Features', 'Search & Filtering'],
-    status: 'In Progress',
-    date: 'Sept 2025 - Present',
-    category: 'Web Development',
-    route: '/projects/valine',
-    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Valine/valine-cover.jpg`,
-    assets: {
-      images: [],
-      pdfs: [],
-      videos: [],
-      documents: [],
-      links: []
-    }
+  id: 'project-valine',
+  name: 'Joint Theatrical Ventures',
+  title: 'Joint Theatrical Ventures',
+  year: 2025,
+  description: 'A private, AI-assisted platform for creative professionals (confidential beta)',
+  tagline: 'My flagship full-stack product build — private beta, high stakes, high polish',
+  fullSummary:
+    'Joint Theatrical Ventures is a confidential, in-development platform I co-founded. It’s my most ambitious end-to-end build so far — spanning full-stack implementation, AI-assisted product workflows, user research, and stakeholder alignment. Due to privacy and ongoing agreements, only high-level details and limited visuals are shown here.',
+  problem:
+    'Creative professionals often juggle fragmented tools for discovery, collaboration, and workflow management — which creates friction, weak visibility, and lost momentum across the production pipeline.',
+  approach:
+    'I led the product build with a privacy-first mindset: designing the platform architecture, building core systems end-to-end, and iterating through user feedback loops. I focused on scalable foundations (auth, profiles, media handling, search/discovery patterns) while layering AI-assisted workflow features where they add real value instead of gimmicks.',
+  result:
+    'The platform is currently in confidential beta with active iteration. This is the strongest demonstration of my full-stack product ability because it combines engineering execution with product judgment, research, and stakeholder communication. Note: for privacy/NDA reasons, additional screenshots, internal metrics, and implementation specifics are not publicly shareable.',
+  role: 'Co-Founder, Full-Stack & AI Product Lead',
+  whatISpecificallyDid: [
+    'Co-founded the product direction and scope (vision → roadmap → execution)',
+    'Built core full-stack systems (frontend + backend) with production-minded architecture',
+    'Designed and implemented key UX flows for profiles, discovery, and sharing',
+    'Integrated AI-assisted product workflows (human-in-the-loop, safety-minded)',
+    'Conducted user research and synthesized feedback into iterations',
+    'Met with stakeholders and translated requirements into shipped features'
+  ],
+  impact: {
+    statement:
+      'Delivered a private-beta product with a strong architectural foundation and a UX designed for real-world creative workflows — while balancing confidentiality constraints.',
+    how:
+      'Combined full-stack implementation with research and stakeholder feedback to iterate quickly, prioritize high-leverage features, and maintain a consistent product quality bar.'
   },
-  {
-    id: 'amadeus',
-    name: 'Amadeus',
-    title: 'Amadeus — AI Agent for Discord',
-    year: 2024,
-    description: 'AI-powered Discord bot for automated stock tracking and game deal monitoring',
-    tagline: 'Always-on desktop agent for market tracking and deal alerts',
-    fullSummary: 'Always-on desktop agent that watches stocks and game deals, configures a schedule, computes indicators, and posts briefs + alerts to Discord.',
-    problem: 'Tracking market movements and gaming deals requires constant manual checking across multiple platforms, creating alert fatigue and missed opportunities.',
-    approach: 'Developed an always-on Windows desktop agent that polls watchlists, computes technical indicators (SMA20/50, RSI14), tracks options, and monitors game deals with intelligent alert hygiene (cooldowns, quiet hours, deduplication).',
-    result: 'Created a reliable automation system that reduces alert noise while capturing important moves, with scheduled briefs at 7:30 AM and 10:00 PM PT delivered to Discord.',
-    role: 'Developer, Systems Designer',
-    whatISpecificallyDid: [
-      'Designed agent architecture and Discord posting flows',
-      'Implemented market pipelines, indicators, and paper-trade hooks',
-      'Wrote daily brief generator and quiet-hours/cooldown logic',
-      'Packaged run-on-logon automation and environment bootstrap'
-    ],
-    impact: {
-      statement: 'Reduced manual monitoring overhead by 90% through intelligent alert aggregation and scheduling.',
-      how: 'Built configurable watchlist system with technical indicators and smart alert filtering that delivers actionable insights without overwhelming users.'
-    },
-    tech: ['Python 3.11', 'Discord API', 'Polygon.io', 'Windows Task Scheduler', 'Automation'],
-    skills: ['Python', 'API Integration', 'Automation', 'Data Engineering', 'Alert Systems'],
-    concepts: ['Market Data', 'Technical Indicators', 'Alert Hygiene', 'Scheduled Tasks'],
-    status: 'Complete',
-    date: '2024',
-    category: 'AI Project',
-    route: '/projects/amadeus',
-    assets: {
-      images: [],
-      pdfs: [],
-      videos: [],
-      documents: [],
-      links: [
-        {
-          url: 'https://github.com/gcolon75/ghawk75-ai-agent',
-          title: 'GitHub Repository',
-          type: 'github'
-        }
-      ]
-    }
-  },
+  tech: [
+    'React',
+    'Node.js',
+    'Serverless / Cloud Functions',
+    'Postgres',
+    'Prisma',
+    'JWT/Auth',
+    'AI-assisted workflows',
+    'Cloud infrastructure'
+  ],
+  skills: [
+    'Full-Stack Development',
+    'Product Strategy',
+    'UX Design',
+    'User Research',
+    'Stakeholder Communication',
+    'Architecture & Systems Thinking'
+  ],
+  concepts: [
+    'Privacy-First Product Design',
+    'Discovery Systems',
+    'Secure Media/Sharing',
+    'AI + Human-in-the-Loop',
+    'Scalable Platform Architecture'
+  ],
+  status: 'In Progress',
+  date: '2025 - Present',
+  category: 'Full-Stack Product',
+  route: '/projects/valine',
+
+  // ✅ Hero thumbnail (you said you'll add this later)
+  // Put it here when ready: public/assets/projects/Joint/JointTitle.png
+  coverImage: `${process.env.PUBLIC_URL}/assets/projects/Joint/JointTitle.png`,
+
+  assets: {
+    // ✅ Only bottom screenshot
+    // Put it here: public/assets/projects/Joint/HomePage.jpg
+    images: [`${process.env.PUBLIC_URL}/assets/projects/Joint/HomePage.jpg`],
+    pdfs: [],
+    videos: [],
+    documents: [],
+    links: [] // ✅ no external links
+  }
+},
   {
     id: '3kingdoms',
     name: '3 Kingdoms',

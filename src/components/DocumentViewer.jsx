@@ -59,29 +59,23 @@ const resolvePublicUrl = (maybeRelativeUrl) => {
   return `${origin}${base}${raw}`;
 };
 
-export default function DocumentViewer({
-  fileUrl,
-  fileType,
-  fileName = 'document',
-  height,
-}) {
+export default function DocumentViewer({ fileUrl, fileType, fileName = 'document', height }) {
   const docxContainerRef = useRef(null);
 
   const [docxStatus, setDocxStatus] = useState('idle'); // idle | loading | ready | error
   const [docxError, setDocxError] = useState(null);
 
+  // ✅ IMPORTANT: trust the URL extension FIRST (prevents PDF->DOCX renderer crash)
   const type = useMemo(() => {
-    return (fileType || inferFileType(fileUrl) || '').toLowerCase();
-  }, [fileType, fileUrl]);
+    const inferred = inferFileType(fileUrl);
+    return (inferred || fileType || '').toLowerCase();
+  }, [fileUrl, fileType]);
 
   const isPdf = type === 'pdf';
   const isDoc = type === 'docx' || type === 'doc';
 
-  const absolutePublicUrl = useMemo(() => {
-    return resolvePublicUrl(fileUrl);
-  }, [fileUrl]);
+  const absolutePublicUrl = useMemo(() => resolvePublicUrl(fileUrl), [fileUrl]);
 
-  // Render DOCX client-side (scrollable) — no Microsoft Office iframe needed
   useEffect(() => {
     let cancelled = false;
 
@@ -101,7 +95,6 @@ export default function DocumentViewer({
         const el = docxContainerRef.current;
         if (!el) throw new Error('DOCX container missing');
 
-        // Clear previous
         el.innerHTML = '';
 
         await renderAsync(buf, el, undefined, {
@@ -125,7 +118,6 @@ export default function DocumentViewer({
     };
 
     run();
-
     return () => {
       cancelled = true;
     };
@@ -137,20 +129,6 @@ export default function DocumentViewer({
       ? absolutePublicUrl
       : `${absolutePublicUrl}#toolbar=1&navpanes=1&scrollbar=1`;
   }, [absolutePublicUrl]);
-
-  const downloadFile = () => {
-    try {
-      const link = document.createElement('a');
-      link.href = absolutePublicUrl;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (e) {
-      console.error('Failed to download file:', e);
-      alert('Failed to download file. Please try again.');
-    }
-  };
 
   if (!fileUrl) {
     return (
@@ -164,34 +142,6 @@ export default function DocumentViewer({
 
   return (
     <div className="pdf-viewer-container document-viewer-container">
-      <div className="pdf-controls">
-        <p className="pdf-info">
-          <span role="img" aria-label="doc">📄</span>{' '}
-          <strong>Embedded document viewer:</strong>{' '}
-          {isDoc ? 'DOCX rendered in-browser (no Office embed).' : 'PDF scrolls in-place.'}
-        </p>
-
-        <div className="pdf-button-group">
-          <a
-            href={absolutePublicUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pdf-control-btn primary"
-          >
-            Open in New Tab
-          </a>
-
-          <button
-            type="button"
-            onClick={downloadFile}
-            className="pdf-control-btn secondary"
-            aria-label="Download file"
-          >
-            Download
-          </button>
-        </div>
-      </div>
-
       <div className="pdf-embed">
         {isPdf && (
           <div className="pdf-iframe-wrapper" style={height ? { height } : undefined}>
@@ -207,29 +157,22 @@ export default function DocumentViewer({
 
         {isDoc && (
           <div className="docx-wrapper" style={height ? { height } : undefined}>
-            {docxStatus === 'loading' && (
-              <div className="docx-loading">
-                Rendering DOCX…
-              </div>
-            )}
+            {docxStatus === 'loading' && <div className="docx-loading">Rendering document…</div>}
 
             {docxStatus === 'error' && (
               <div className="docx-error">
-                <p>Couldn’t render DOCX in-browser.</p>
+                <p>Couldn’t render document.</p>
                 <p className="docx-error-detail">{docxError}</p>
               </div>
             )}
 
-            <div
-              ref={docxContainerRef}
-              className="docx-content"
-            />
+            <div ref={docxContainerRef} className="docx-content" />
           </div>
         )}
 
         {!isPdf && !isDoc && (
           <div className="pdf-fallback">
-            <p>This file type can’t be embedded here. Use the buttons above to open or download it.</p>
+            <p>This file type can’t be embedded here.</p>
           </div>
         )}
       </div>

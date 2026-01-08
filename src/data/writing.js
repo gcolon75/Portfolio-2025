@@ -8,8 +8,8 @@ import whovaThumb from '../assets/writing/Whova Competitive Analysis/whova.jpg';
 
 // ✅ Documents (use EXACT filenames)
 import aiGenZFile from '../assets/writing/ai-gen-z/AI and Gen Z Final Draft.pdf';
-import promptFile from '../assets/writing/chatgpt research/Prompt Engineering.docx';
-import humanityFile from '../assets/writing/Humanity in Media/Humanity in Media.docx';
+import promptFile from '../assets/writing/chatgpt research/Prompt Engineering.pdf';
+import humanityFile from '../assets/writing/Humanity in Media/Humanity in Media.pdf';
 import whovaFile from '../assets/writing/Whova Competitive Analysis/Whova Competetive Analysis.pdf';
 
 export const articles = [
