@@ -40,7 +40,7 @@ export default function SkillTree() {
   const half = canvasSize / 2;
 
   // ✅ Larger center + larger subskills (per your request)
-  const CENTER_SIZE = clamp(Math.round(canvasSize * 0.215), 175, 255);
+  const CENTER_SIZE = clamp(Math.round(canvasSize * 0.3), 175, 255);
   const CLASS_SIZE = clamp(Math.round(canvasSize * 0.20), 155, 195);
   const SKILL_SIZE = clamp(Math.round(canvasSize * 0.152), 106, 140);
 
@@ -55,10 +55,10 @@ export default function SkillTree() {
 
   // minimum center-to-center distance so circles don't touch:
   // parent radius + child radius + padding
-  const PARENT_CLEARANCE = CLASS_HALF + SKILL_HALF + 28;
+  const PARENT_CLEARANCE = CLASS_HALF + SKILL_HALF + 12;
 
   // Base main ring radius
-  const classRadiusBase = clamp(half * 0.50, 220, half * 0.60);
+  const classRadiusBase = clamp(half * 0.5, 220, half * 0.60);
 
   // If we’re cramped, pull the class ring inward so subskills can sit farther out
   const classRadius = clamp(
