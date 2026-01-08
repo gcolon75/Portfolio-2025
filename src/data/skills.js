@@ -1,117 +1,67 @@
 export const skillTree = [
   {
-    id: 'frontend-mage',
-    class: 'Frontend Mage',
-    icon: '🧙‍♂️',
-    color: '#00ff88',
+    id: "project-strategist",
+    class: "Project Strategist",
+    icon: "📋",
+    color: "#4a9eff", // blue
     skills: [
-      { 
-        name: 'React', 
-        level: 5, 
-        description: 'Expert in building modern web applications with React hooks and state management' 
-      },
-      { 
-        name: 'HTML/CSS', 
-        level: 5, 
-        description: 'Advanced knowledge of semantic HTML and modern CSS including Grid, Flexbox, and animations' 
-      },
-      { 
-        name: 'JavaScript', 
-        level: 5, 
-        description: 'Proficient in ES6+ features, async programming, and functional programming concepts' 
-      },
-      { 
-        name: 'Figma', 
-        level: 5, 
-        description: 'Expert in UI/UX design, prototyping, and design systems' 
-      }
-    ]
+      { name: "Roadmaps", level: 5, description: "Turn messy ideas into clear milestones, priorities, and delivery plans. Strong bias toward shipping." },
+      { name: "Stakeholders", level: 5, description: "Align goals with stakeholders, communicate tradeoffs, and keep projects moving without chaos." },
+      { name: "Scheduling", level: 4, description: "Build realistic timelines, coordinate dependencies, and maintain momentum across moving parts." },
+      { name: "Budgeting", level: 4, description: "Track constraints, scope, and resourcing to deliver within time and budget limits." },
+      { name: "Execution", level: 5, description: "High-velocity shipping mindset: plan, build, test, iterate, deliver." },
+    ],
   },
   {
-    id: 'backend-warrior',
-    class: 'Backend Warrior',
-    icon: '⚔️',
-    color: '#ffd700',
+    id: "ux-designer",
+    class: "UX Designer",
+    icon: "🎨",
+    color: "#00ff88", // green
     skills: [
-      { 
-        name: 'Python', 
-        level: 4, 
-        description: 'Strong backend development with Python frameworks and data processing' 
-      },
-      { 
-        name: 'Java', 
-        level: 4, 
-        description: 'Object-oriented programming and enterprise application development' 
-      },
-      { 
-        name: 'GitHub', 
-        level: 5, 
-        description: 'Version control, collaboration, and CI/CD workflows' 
-      }
-    ]
+      { name: "Research", level: 4, description: "Translate user needs into actionable product decisions through interviews, testing, and synthesis." },
+      { name: "Figma", level: 5, description: "Rapid prototyping, UI layouts, components, and iteration loops that lead to build-ready designs." },
+      { name: "IA", level: 4, description: "Structure navigation and content flows so the product feels obvious and fast to use." },
+      { name: "Experiments", level: 4, description: "Design surveys and experiments to validate assumptions and reduce product risk." },
+      { name: "Accessibility", level: 4, description: "Design with inclusive defaults: contrast, hierarchy, clarity, and usable interaction patterns." },
+    ],
   },
   {
-    id: 'data-analyst',
-    class: 'Data Analyst',
-    icon: '📊',
-    color: '#6b5b95',
+    id: "frontend-dev",
+    class: "Frontend Developer",
+    icon: "💻",
+    color: "#ff4757", // red
     skills: [
-      { 
-        name: 'SPSS', 
-        level: 4, 
-        description: 'Statistical analysis and data interpretation' 
-      },
-      { 
-        name: 'Statistics', 
-        level: 4, 
-        description: 'Quantitative analysis and research methodology' 
-      },
-      { 
-        name: 'DataViz', 
-        level: 4, 
-        description: 'Creating compelling data visualizations and dashboards' 
-      }
-    ]
+      { name: "React", level: 5, description: "Build real UIs with state, routing, data loading, and component-driven structure." },
+      { name: "HTML/CSS", level: 5, description: "Strong layout fundamentals, responsive design, and clean styling for production UI." },
+      { name: "JS", level: 4, description: "Modern JavaScript for UI logic, async workflows, and integration with APIs." },
+      { name: "GitHub", level: 4, description: "Repo workflows, PRs, release discipline, and coordination across collaborators." },
+      { name: "AWS", level: 4, description: "Deploy and integrate with serverless stacks: S3, CloudFront, API Gateway, Lambda." },
+    ],
   },
   {
-    id: 'ai-artificer',
-    class: 'AI Artificer',
-    icon: '🤖',
-    color: '#ff4757',
+    id: "ai-builder",
+    class: "AI Builder",
+    icon: "🤖",
+    color: "#7f5af0", // purple
     skills: [
-      { 
-        name: 'LLM', 
-        level: 4, 
-        description: 'Working with large language models and prompt engineering' 
-      },
-      { 
-        name: 'AI Automation', 
-        level: 4, 
-        description: 'Building automated workflows with AI integration' 
-      }
-    ]
+      { name: "Prompting", level: 5, description: "Write precise instructions to get consistent, high-quality outputs from AI systems." },
+      { name: "Copilots", level: 4, description: "Use AI tools to accelerate prototyping, debugging, refactors, and system planning." },
+      { name: "Automation", level: 4, description: "Set up repeatable workflows that reduce manual effort and increase iteration speed." },
+      { name: "Iteration", level: 5, description: "Fast feedback loops: test → learn → refine → ship." },
+      { name: "Product AI", level: 4, description: "Think through how AI fits into products responsibly and usefully, not as a gimmick." },
+    ],
   },
   {
-    id: 'project-strategist',
-    class: 'Project Strategist',
-    icon: '📋',
-    color: '#00d9ff',
+    id: "data-research",
+    class: "Data & Research",
+    icon: "📊",
+    color: "#f7c948", // yellow
     skills: [
-      { 
-        name: 'Project Management', 
-        level: 5, 
-        description: 'Agile methodologies, team coordination, and delivery management' 
-      },
-      { 
-        name: 'Budgeting', 
-        level: 4, 
-        description: 'Resource allocation and financial planning' 
-      },
-      { 
-        name: 'Leadership', 
-        level: 5, 
-        description: 'Team leadership, mentoring, and strategic planning' 
-      }
-    ]
-  }
+      { name: "Stats", level: 4, description: "Use statistical reasoning to interpret results, validate claims, and support decisions." },
+      { name: "SPSS", level: 4, description: "Comfortable with analysis tooling and structured quantitative workflows." },
+      { name: "DataViz", level: 4, description: "Make data readable and persuasive through clean charts and narrative framing." },
+      { name: "Measures", level: 4, description: "Design metrics and measurement approaches that match the real question being asked." },
+      { name: "Synthesis", level: 5, description: "Turn scattered findings into crisp insights and next-step recommendations." },
+    ],
+  },
 ];
