@@ -1,13 +1,22 @@
 {
   "files": {
-    "main.css": "/Portfolio-2025/static/css/main.82caf575.css",
-    "main.js": "/Portfolio-2025/static/js/main.23fb5b06.js",
+    "main.css": "/Portfolio-2025/static/css/main.4fe277e7.css",
+    "main.js": "/Portfolio-2025/static/js/main.1dc19a43.js",
+    "static/media/AI-GenZ-Cover.png": "/Portfolio-2025/static/media/AI-GenZ-Cover.19149e858d7ec5587bb6.png",
+    "static/media/AI and Gen Z Final Draft.pdf": "/Portfolio-2025/static/media/AI and Gen Z Final Draft.7a9df196668a3523286a.pdf",
+    "static/media/HumanityArticleTitle.webp": "/Portfolio-2025/static/media/HumanityArticleTitle.7cadf825a4561dd1858e.webp",
+    "static/media/Whova Competetive Analysis.pdf": "/Portfolio-2025/static/media/Whova Competetive Analysis.80a32f692c1f7772af95.pdf",
+    "static/media/Gabriel Colon 2026 Resume.pdf": "/Portfolio-2025/static/media/Gabriel Colon 2026 Resume.8015ed083f299a72a714.pdf",
+    "static/media/Humanity in Media.pdf": "/Portfolio-2025/static/media/Humanity in Media.7e881024749e5be71051.pdf",
+    "static/media/Prompt Engineering.pdf": "/Portfolio-2025/static/media/Prompt Engineering.cf8864f6ef74884b7091.pdf",
+    "static/media/whova.jpg": "/Portfolio-2025/static/media/whova.0aca90468805b8ed54c8.jpg",
+    "static/media/openAILogo.jpg": "/Portfolio-2025/static/media/openAILogo.2971546fde57f19accef.jpg",
     "index.html": "/Portfolio-2025/index.html",
-    "main.82caf575.css.map": "/Portfolio-2025/static/css/main.82caf575.css.map",
-    "main.23fb5b06.js.map": "/Portfolio-2025/static/js/main.23fb5b06.js.map"
+    "main.4fe277e7.css.map": "/Portfolio-2025/static/css/main.4fe277e7.css.map",
+    "main.1dc19a43.js.map": "/Portfolio-2025/static/js/main.1dc19a43.js.map"
   },
   "entrypoints": [
-    "static/css/main.82caf575.css",
-    "static/js/main.23fb5b06.js"
+    "static/css/main.4fe277e7.css",
+    "static/js/main.1dc19a43.js"
   ]
 }
