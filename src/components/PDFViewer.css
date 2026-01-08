@@ -25,7 +25,7 @@
   font-size: 1rem;
   text-align: center;
   line-height: 1.6;
-  max-width: 700px;
+  max-width: 800px;
 }
 
 .pdf-info strong {
@@ -86,31 +86,42 @@
   transform: translateY(-2px);
 }
 
-.pdf-notice {
-  padding: 1rem 1.5rem;
+/* Embedded PDF area */
+.pdf-embed {
+  width: 100%;
+}
+
+.pdf-iframe-wrapper {
+  width: 100%;
+  height: clamp(560px, 78vh, 980px);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(74, 158, 255, 0.35);
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 30px rgba(74, 158, 255, 0.15);
+}
+
+.pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.pdf-fallback {
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
   background: rgba(255, 215, 0, 0.1);
   border: 1px solid var(--starlight-gold);
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  border-radius: 10px;
 }
 
-.notice-text {
+.pdf-fallback p {
+  margin: 0;
   color: var(--light-gray);
   font-family: var(--font-body);
-  font-size: 0.95rem;
   line-height: 1.6;
   text-align: center;
-  margin: 0;
-}
-
-.notice-text strong {
-  color: var(--starlight-gold);
-}
-
-.pdf-iframe-wrapper,
-.pdf-iframe,
-.pdf-fallback {
-  display: none;
 }
 
 .pdf-error {
@@ -138,15 +149,15 @@
 
   .pdf-control-btn {
     padding: 0.7rem 1.2rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     width: 100%;
   }
 
   .pdf-info {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
   }
 
-  .notice-text {
-    font-size: 0.85rem;
+  .pdf-iframe-wrapper {
+    height: clamp(520px, 70vh, 820px);
   }
 }

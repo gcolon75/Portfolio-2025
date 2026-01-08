@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import PDFViewer from './PDFViewer';
+import DocumentViewer from './DocumentViewer';
 import './WritingDetailTemplate.css';
+
+const inferFileType = (url) => {
+  if (!url) return null;
+  const lower = url.toLowerCase();
+  if (lower.includes('.pdf')) return 'pdf';
+  if (lower.includes('.docx')) return 'docx';
+  if (lower.includes('.doc')) return 'doc';
+  return null;
+};
 
 const WritingDetailTemplate = ({ article }) => {
   const navigate = useNavigate();
@@ -10,18 +19,28 @@ const WritingDetailTemplate = ({ article }) => {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: { opacity: 1, y: 0 }
   };
+
+  // ---- Backward compatible: supports BOTH new fields (fileUrl/fileType) and old (pdfPath)
+  const doc = useMemo(() => {
+    const fileUrl = article?.fileUrl || article?.pdfPath || null;
+    const fileType = (article?.fileType || inferFileType(fileUrl) || null);
+    const fileName = fileType ? `${article?.id || 'document'}.${fileType}` : (article?.id || 'document');
+    return { fileUrl, fileType, fileName };
+  }, [article]);
+
+  const hasDocument = Boolean(doc.fileUrl && doc.fileType);
+
+  const downloadLabel =
+    doc.fileType?.toLowerCase() === 'docx' || doc.fileType?.toLowerCase() === 'doc'
+      ? '📄 Download Article (DOCX)'
+      : '📄 Download Article (PDF)';
 
   return (
     <section className="writing-detail">
@@ -42,12 +61,12 @@ const WritingDetailTemplate = ({ article }) => {
           ← Back to Writing
         </motion.button>
 
-        {/* Hero Section - Horizontal Layout */}
+        {/* Hero Section */}
         <motion.header className="article-hero" variants={itemVariants}>
           <div className="hero-cover">
             {article.thumbnail && !imageError ? (
-              <img 
-                src={encodeURI(article.thumbnail)} 
+              <img
+                src={encodeURI(article.thumbnail)}
                 alt={article.title}
                 className="cover-image"
                 onError={() => {
@@ -61,6 +80,7 @@ const WritingDetailTemplate = ({ article }) => {
               </div>
             )}
           </div>
+
           <div className="hero-content">
             <h1 className="article-title">{article.title}</h1>
             <div className="article-meta">
@@ -73,13 +93,12 @@ const WritingDetailTemplate = ({ article }) => {
           </div>
         </motion.header>
 
-        {/* Content Grid - Summary Left, Skills Right */}
+        {/* Content Grid */}
         <motion.div className="content-grid" variants={itemVariants}>
-          {/* Summary Section - 60% */}
           <div className="summary-section">
             <h3>Summary</h3>
             <p>{article.fullSummary}</p>
-            {/* Key Themes inline */}
+
             {article.themes && article.themes.length > 0 && (
               <div className="theme-tags">
                 {article.themes.map((theme, index) => (
@@ -91,7 +110,6 @@ const WritingDetailTemplate = ({ article }) => {
             )}
           </div>
 
-          {/* Skills Section - 40% */}
           <div className="skills-section">
             <h3>Skills Demonstrated</h3>
             <div className="skills-list">
@@ -104,26 +122,34 @@ const WritingDetailTemplate = ({ article }) => {
           </div>
         </motion.div>
 
-        {/* PDF Viewer Section */}
-        {article.pdfPath && (
-          <motion.div className="pdf-section" variants={itemVariants}>
-            <h3 className="pdf-section-title">Full Article</h3>
-            <PDFViewer 
-              pdfUrl={article.pdfPath} 
-              fileName={`${article.id}.pdf`}
-            />
-          </motion.div>
-        )}
+        {/* Full Article Viewer (PDF/DOCX) */}
+        <motion.div className="pdf-section" variants={itemVariants}>
+          <h3 className="pdf-section-title">Full Article</h3>
 
-        {/* Footer Section - Compact */}
+          {hasDocument ? (
+            <DocumentViewer
+              fileUrl={doc.fileUrl}
+              fileType={doc.fileType}
+              fileName={doc.fileName}
+            />
+          ) : (
+            <div className="pdf-viewer-container">
+              <div className="pdf-error">
+                <p>No document is linked for this article.</p>
+              </div>
+            </div>
+          )}
+        </motion.div>
+
+        {/* Footer */}
         <motion.div className="article-footer" variants={itemVariants}>
-          {article.pdfPath && (
-            <a 
-              href={article.pdfPath} 
+          {hasDocument && (
+            <a
+              href={encodeURI(doc.fileUrl)}
               download
               className="pdf-button"
             >
-              📄 Download Article (PDF)
+              {downloadLabel}
             </a>
           )}
           <button className="nav-button" onClick={() => navigate('/')}>
