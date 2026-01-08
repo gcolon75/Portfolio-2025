@@ -324,4 +324,29 @@
   .info-card {
     padding: 2rem 1.5rem;
   }
+
+  /* make button social links match <a> styling */
+button.social-link {
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* email copy button in details */
+.detail-item button.detail-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--light-gray);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.detail-item button.detail-button:hover {
+  color: var(--plasma-green);
+}
+
 }
