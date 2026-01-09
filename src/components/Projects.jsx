@@ -108,10 +108,6 @@ const Projects = () => {
                           )}
                         </h3>
                       </div>
-
-                      <span className={`project-status ${project.status.toLowerCase().replace(' ', '-')}`}>
-                        {project.status}
-                      </span>
                     </div>
 
                     <p className="project-description">{project.description}</p>
@@ -125,8 +121,13 @@ const Projects = () => {
                     </div>
 
                     <div className="project-footer">
-                      <span className="project-category">{project.category}</span>
-                      <span className="project-date">{project.date}</span>
+                      <div className="project-footer-left">
+                        <span className="project-category">{project.category}</span>
+                        <span className="project-date">{project.date}</span>
+                      </div>
+                      <span className={`project-status ${project.status.toLowerCase().replace(' ', '-')}`}>
+                        {project.status}
+                      </span>
                     </div>
                   </div>
 
