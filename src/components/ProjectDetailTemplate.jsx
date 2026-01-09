@@ -22,6 +22,9 @@ const ProjectDetailTemplate = ({ project }) => {
     return heroCameFromAssets ? imgs.slice(1) : imgs;
   }, [project.assets?.images, project.coverImage, heroImage]);
 
+  // Support both:
+  // - legacy: ["...pdfUrl.pdf", "..."]
+  // - preferred: [{ title, url }, ...]
   const pdfs = project.assets?.pdfs || [];
 
   // Keep embeds, but NO external link buttons
@@ -41,6 +44,22 @@ const ProjectDetailTemplate = ({ project }) => {
     hidden: { opacity: 0, y: 10 },
     visible: { opacity: 1, y: 0 }
   };
+
+  if (!project) {
+    return (
+      <section className="project-detail">
+        <div className="project-detail-container">
+          <button className="back-button" onClick={() => navigate('/')}>
+            ← Back to Projects
+          </button>
+          <div className="content-section">
+            <h3 className="section-title">Project not found</h3>
+            <p className="section-text">This project is missing from your projects data.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="project-detail">
@@ -189,12 +208,22 @@ const ProjectDetailTemplate = ({ project }) => {
               </>
             )}
 
-            {pdfs.map((pdf, index) => (
-              <div key={index} className="pdf-wrapper">
-                <h4 className="pdf-title">Document {index + 1}</h4>
-                <PDFViewer pdfUrl={pdf} fileName={`${project.id}-doc-${index + 1}.pdf`} />
-              </div>
-            ))}
+            {pdfs.map((item, index) => {
+              const url = typeof item === 'string' ? item : item?.url;
+              const title = typeof item === 'string' ? `Document ${index + 1}` : (item?.title || `Document ${index + 1}`);
+              if (!url) return null;
+
+              return (
+                <div key={`${project.id}-pdf-${index}`} className="pdf-wrapper">
+                  <h4 className="pdf-title">{title}</h4>
+                  <PDFViewer
+                    pdfUrl={url}
+                    title={title}
+                    fileName={`${project.id}-doc-${index + 1}.pdf`}
+                  />
+                </div>
+              );
+            })}
 
             {embeds.length > 0 && (
               <>

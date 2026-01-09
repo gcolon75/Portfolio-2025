@@ -514,3 +514,50 @@ details[open] .doc-summary::after {
     height: 80vh;
   }
 }
+
+
+/* PDF embeds */
+.pdf-wrapper {
+  margin-top: 1.5rem;
+}
+
+.pdf-title {
+  color: var(--starlight-gold);
+  font-size: 1.15rem;
+  margin: 1.25rem 0 0.85rem;
+  font-family: var(--font-heading);
+  letter-spacing: 0.3px;
+}
+
+.pdf-embed-shell {
+  border: 1px solid rgba(0, 255, 136, 0.28);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.18);
+}
+
+.pdf-embed {
+  width: 100%;
+  height: min(760px, 80vh);
+  border: 0;
+  display: block;
+}
+
+.pdf-note {
+  padding: 0.75rem 1rem 0;
+  color: rgba(227, 229, 234, 0.75);
+  font-size: 0.9rem;
+}
+
+.pdf-missing {
+  padding: 1rem;
+  color: rgba(227, 229, 234, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.pdf-missing code {
+  color: var(--plasma-green);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9em;
+}
