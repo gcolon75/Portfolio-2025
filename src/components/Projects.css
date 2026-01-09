@@ -101,10 +101,9 @@
 
 .project-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 1rem;
-  gap: 1rem;
 }
 
 .project-title-wrap {
@@ -179,9 +178,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   white-space: nowrap;
-  max-width: 50%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex-shrink: 0;
 }
 
 .project-status.complete {
@@ -226,6 +223,15 @@
   padding-top: 1rem;
   border-top: 1px solid rgba(74, 158, 255, 0.1);
   margin-top: auto;
+  gap: 1rem;
+}
+
+.project-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .project-category {
@@ -261,7 +267,13 @@
     grid-template-columns: 1fr;
   }
 
+  .project-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
   .project-status {
-    max-width: 45%;
+    align-self: flex-start;
   }
 }
