@@ -2,10 +2,10 @@ import React from 'react';
 import ProjectDetailTemplate from './ProjectDetailTemplate';
 import { projects } from '../data/projects';
 
-const ValinePage = () => {
-  const project = projects.find(p => p.id === 'project-valine');
+const JointTheatricalPage = () => {
+  const project = projects.find(p => p.id === 'joint-theatrical-ventures');
 
   return <ProjectDetailTemplate project={project} />;
 };
 
-export default ValinePage;
+export default JointTheatricalPage;
