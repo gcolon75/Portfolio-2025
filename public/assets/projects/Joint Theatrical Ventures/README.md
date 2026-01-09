@@ -4,10 +4,10 @@
 
 Please ensure the following image files are present in this directory:
 
-````
+```
 JointTitle.JPG
 HomePage.JPG
-````
+```
 
 ### Image Specifications
 
