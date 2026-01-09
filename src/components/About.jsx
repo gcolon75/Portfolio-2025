@@ -62,7 +62,7 @@ const About = () => {
               </div>
               <div className="info-item">
                 <FaUniversity className="info-icon" />
-                <span>UCSD B.S. Cognitive Science</span>
+                <span>UCSD B.S. Cognitive Science: Human Computer Interaction</span>
               </div>
               <div className="info-item">
                 <FaEnvelope className="info-icon" />

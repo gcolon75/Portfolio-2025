@@ -98,12 +98,12 @@ export const projects = [
 
   // ✅ Hero thumbnail (you said you'll add this later)
   // Put it here when ready: public/assets/projects/Joint/JointTitle.png
-  coverImage: `${process.env.PUBLIC_URL}/assets/projects/Joint/JointTitle.png`,
+  coverImage: `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/JointTitle.JPG`,
 
   assets: {
     // ✅ Only bottom screenshot
     // Put it here: public/assets/projects/Joint/HomePage.jpg
-    images: [`${process.env.PUBLIC_URL}/assets/projects/Joint/HomePage.jpg`],
+    images: [`${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/HomePage.jpg`],
     pdfs: [],
     videos: [],
     documents: [],
