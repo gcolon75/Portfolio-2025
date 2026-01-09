@@ -12,7 +12,7 @@ import ChatGPTPromptPage from './components/ChatGPTPromptPage';
 import HumanityInMediaPage from './components/HumanityInMediaPage';
 import WhovaAnalysisPage from './components/WhovaAnalysisPage';
 import TowerOfGreedPage from './components/TowerOfGreedPage';
-import ValinePage from './components/ValinePage';
+import JointTheatricalPage from './components/JointTheatricalPage';
 import AmadeusPage from './components/AmadeusPage';
 import ThreeKingdomsPage from './components/ThreeKingdomsPage';
 import AxlePage from './components/AxlePage';
@@ -49,7 +49,7 @@ function App() {
             <Route path="/writing/whova-competitive-analysis" element={<WhovaAnalysisPage />} />
             {/* Project Routes */}
             <Route path="/projects/tower-of-greed" element={<TowerOfGreedPage />} />
-            <Route path="/projects/valine" element={<ValinePage />} />
+            <Route path="/projects/joint-theatrical-ventures" element={<JointTheatricalPage />} />
             <Route path="/projects/amadeus" element={<AmadeusPage />} />
             <Route path="/projects/3kingdoms" element={<ThreeKingdomsPage />} />
             <Route path="/projects/axle" element={<AxlePage />} />

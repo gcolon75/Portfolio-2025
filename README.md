@@ -94,7 +94,7 @@ src/
     
     # Project Detail Pages
     TowerOfGreedPage.jsx         # Tower of Greed game design
-    ValinePage.jsx               # Project Valine platform
+    JointTheatricalPage.jsx      # Joint Theatrical Ventures platform
     AmadeusPage.jsx              # Amadeus AI Discord agent
     ThreeKingdomsPage.jsx        # 3 Kingdoms strategy RPG
     AxlePage.jsx                 # Axle mobile mechanic app
@@ -140,7 +140,7 @@ src/
 
 #### Projects (8 Total)
 1. **Tower of Greed** - Dice-driven roguelike RPG game design
-2. **Project Valine** - Professional networking platform (In Progress)
+2. **Joint Theatrical Ventures** - Professional networking platform (In Progress)
 3. **Amadeus** - AI Discord agent for market tracking
 4. **3 Kingdoms** - Fantasy strategy-RPG concept
 5. **Axle** - Mobile mechanic app UX design
@@ -196,7 +196,7 @@ The site will be available at `https://gcolon75.github.io/Portfolio-2025`
 
 **Project Pages:**
 - `/projects/tower-of-greed`
-- `/projects/valine`
+- `/projects/joint-theatrical-ventures`
 - `/projects/amadeus`
 - `/projects/3kingdoms`
 - `/projects/axle`

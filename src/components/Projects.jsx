@@ -24,7 +24,7 @@ const Projects = () => {
     }
   };
 
-  const featuredId = 'project-valine';
+  const featuredId = 'joint-theatrical-ventures';
 
   const orderedProjects = [...projects].sort((a, b) => {
     if (a.id === featuredId) return -1;
