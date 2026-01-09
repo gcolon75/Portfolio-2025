@@ -197,37 +197,48 @@ const ProjectDetailTemplate = ({ project }) => {
 
             {screenshots.length > 0 && (
               <>
-                <h4 className="pdf-title">Screenshots</h4>
+                <h4 className="assets-subtitle">Screenshots</h4>
                 <div className="image-gallery">
                   {screenshots.map((image, index) => (
                     <div key={index} className="gallery-item">
-                      <img src={encodeURI(image)} alt={`${project.title} screenshot ${index + 1}`} />
+                      <img 
+                        src={encodeURI(image)} 
+                        alt={`${project.title} screenshot ${index + 1}`}
+                        onError={(e) => {
+                          e.currentTarget.parentElement.style.display = 'none';
+                        }}
+                      />
                     </div>
                   ))}
                 </div>
               </>
             )}
 
-            {pdfs.map((item, index) => {
-              const url = typeof item === 'string' ? item : item?.url;
-              const title = typeof item === 'string' ? `Document ${index + 1}` : (item?.title || `Document ${index + 1}`);
-              if (!url) return null;
+            {pdfs.length > 0 && (
+              <>
+                <h4 className="assets-subtitle">Documents & PDFs</h4>
+                {pdfs.map((item, index) => {
+                  const url = typeof item === 'string' ? item : item?.url;
+                  const title = typeof item === 'string' ? `Document ${index + 1}` : (item?.title || `Document ${index + 1}`);
+                  if (!url) return null;
 
-              return (
-                <div key={`${project.id}-pdf-${index}`} className="pdf-wrapper">
-                  <h4 className="pdf-title">{title}</h4>
-                  <PDFViewer
-                    pdfUrl={url}
-                    title={title}
-                    fileName={`${project.id}-doc-${index + 1}.pdf`}
-                  />
-                </div>
-              );
-            })}
+                  return (
+                    <div key={`${project.id}-pdf-${index}`} className="pdf-wrapper">
+                      <h4 className="pdf-title">{title}</h4>
+                      <PDFViewer
+                        pdfUrl={url}
+                        title={title}
+                        fileName={`${project.id}-doc-${index + 1}.pdf`}
+                      />
+                    </div>
+                  );
+                })}
+              </>
+            )}
 
             {embeds.length > 0 && (
               <>
-                <h4 className="pdf-title">Models & Decks</h4>
+                <h4 className="assets-subtitle">Models & Decks</h4>
                 <div className="google-embeds">
                   {embeds.map((link, index) => (
                     <div key={index} className="embed-wrapper">
