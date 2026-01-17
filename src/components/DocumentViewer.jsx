@@ -3,6 +3,8 @@ import { renderAsync } from 'docx-preview';
 import './DocumentViewer.css';
 import './PDFViewer.css';
 
+const DEFAULT_DOCX_HEIGHT = 'clamp(680px, 88vh, 1400px)';
+
 const inferFileType = (url) => {
   if (!url) return null;
   const lower = String(url).toLowerCase();
@@ -65,7 +67,7 @@ export default function DocumentViewer({ fileUrl, fileType, fileName = 'document
   const [docxStatus, setDocxStatus] = useState('idle'); // idle | loading | ready | error
   const [docxError, setDocxError] = useState(null);
 
-  // ✅ IMPORTANT: trust the URL extension FIRST (prevents PDF->DOCX renderer crash)
+  // ✅ trust URL extension first
   const type = useMemo(() => {
     const inferred = inferFileType(fileUrl);
     return (inferred || fileType || '').toLowerCase();
@@ -120,6 +122,7 @@ export default function DocumentViewer({ fileUrl, fileType, fileName = 'document
     run();
     return () => {
       cancelled = true;
+      // leave DOM cleanup to unmount; docx-preview can be fussy mid-render
     };
   }, [isDoc, absolutePublicUrl]);
 
@@ -150,13 +153,13 @@ export default function DocumentViewer({ fileUrl, fileType, fileName = 'document
               src={pdfIframeSrc}
               title={fileName}
               loading="lazy"
-              allow="fullscreen"
+              allowFullScreen
             />
           </div>
         )}
 
         {isDoc && (
-          <div className="docx-wrapper" style={height ? { height } : undefined}>
+          <div className="docx-wrapper" style={{ height: height || DEFAULT_DOCX_HEIGHT }}>
             {docxStatus === 'loading' && <div className="docx-loading">Rendering document…</div>}
 
             {docxStatus === 'error' && (

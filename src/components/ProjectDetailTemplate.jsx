@@ -1,60 +1,86 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PDFViewer from './PDFViewer';
 import './ProjectDetailTemplate.css';
 
+function titleFromPath(url = '') {
+  try {
+    const clean = url.split('?')[0];
+    const last = clean.split('/').pop() || 'Document';
+    return decodeURIComponent(last).replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+  } catch {
+    return 'Document';
+  }
+}
+
+function normalizePdfs(pdfs) {
+  if (!Array.isArray(pdfs)) return [];
+  return pdfs
+    .map(item => {
+      if (!item) return null;
+      if (typeof item === 'string') {
+        return { title: titleFromPath(item), url: item };
+      }
+      if (typeof item === 'object') {
+        const url = item.url || '';
+        return { title: item.title || titleFromPath(url), url };
+      }
+      return null;
+    })
+    .filter(x => x && typeof x.url === 'string' && x.url.trim().length > 0);
+}
+
+function normalizeLinks(links) {
+  if (!Array.isArray(links)) return [];
+  return links
+    .map(item => {
+      if (!item) return null;
+      if (typeof item === 'string') return { title: item, url: item };
+      if (typeof item === 'object') return { title: item.title || item.url, url: item.url };
+      return null;
+    })
+    .filter(x => x && x.url && String(x.url).trim().length > 0);
+}
+
+function normalizeImages(images) {
+  if (!Array.isArray(images)) return [];
+  return images.filter(Boolean);
+}
+
 const ProjectDetailTemplate = ({ project }) => {
   const navigate = useNavigate();
-  const [imageError, setImageError] = useState(false);
+  const [lightboxSrc, setLightboxSrc] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // ✅ Hero should prefer coverImage
-  const heroImage = project.coverImage || project.assets?.images?.[0] || null;
+  const heroImage = useMemo(() => {
+    if (!project) return null;
+    // prefer explicit coverImage if used by other projects
+    if (project.coverImage) return project.coverImage;
 
-  // If hero came from assets (only when coverImage missing), exclude it from screenshots
-  const screenshots = useMemo(() => {
-    const imgs = project.assets?.images || [];
-    const heroCameFromAssets = !project.coverImage && imgs.length > 0 && heroImage === imgs[0];
-    return heroCameFromAssets ? imgs.slice(1) : imgs;
-  }, [project.assets?.images, project.coverImage, heroImage]);
+    const imgs = project.assets?.images;
+    if (Array.isArray(imgs) && imgs.length > 0) return imgs[0];
+    return null;
+  }, [project]);
 
-  // Support both:
-  // - legacy: ["...pdfUrl.pdf", "..."]
-  // - preferred: [{ title, url }, ...]
-  const pdfs = project.assets?.pdfs || [];
+  const images = useMemo(() => normalizeImages(project?.assets?.images), [project]);
+  const pdfs = useMemo(() => normalizePdfs(project?.assets?.pdfs), [project]);
+  const links = useMemo(() => normalizeLinks(project?.assets?.links), [project]);
 
-  // Keep embeds, but NO external link buttons
-  const embeds = useMemo(() => {
-    const links = project.assets?.links || [];
-    return links.filter((l) => l.type === 'slides' || l.type === 'spreadsheet');
-  }, [project.assets?.links]);
-
-  const hasAssets = screenshots.length > 0 || pdfs.length > 0 || embeds.length > 0;
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 }
-  };
+  const hasAssets = (images && images.length > 0) || (pdfs && pdfs.length > 0) || (links && links.length > 0) || !!project?.designProof;
 
   if (!project) {
     return (
       <section className="project-detail">
         <div className="project-detail-container">
-          <button className="back-button" onClick={() => navigate('/')}>
-            ← Back to Projects
+          <button className="back-button" onClick={() => navigate('/projects')}>
+            ← Back
           </button>
           <div className="content-section">
-            <h3 className="section-title">Project not found</h3>
-            <p className="section-text">This project is missing from your projects data.</p>
+            <h2 className="section-title">Project not found</h2>
+            <p className="section-text">This route points to a missing project id in your projects.js.</p>
           </div>
         </div>
       </section>
@@ -63,208 +89,200 @@ const ProjectDetailTemplate = ({ project }) => {
 
   return (
     <section className="project-detail">
-      <motion.div
-        className="project-detail-container"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Back Button */}
-        <motion.button
-          className="back-button"
-          onClick={() => navigate('/')}
-          variants={itemVariants}
-          whileHover={{ scale: 1.05, x: -5 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          ← Back to Projects
-        </motion.button>
+      <div className="project-detail-container">
 
-        {/* Hero Section */}
-        <motion.header className="project-hero" variants={itemVariants}>
-          {heroImage && !imageError ? (
-            <div className="hero-image-wrapper">
-              <img
-                src={encodeURI(heroImage)}
-                alt={project.title}
-                className="hero-image"
-                onError={() => {
-                  setImageError(true);
-                  console.warn(`Failed to load hero image: ${heroImage}`);
-                }}
-              />
-            </div>
-          ) : (
-            <div className="hero-image-wrapper">
+        <button className="back-button" onClick={() => navigate('/projects')}>
+          ← Back
+        </button>
+
+        {/* HERO */}
+        <div className="project-hero">
+          <div className="hero-image-wrapper">
+            {heroImage ? (
+              <img className="hero-image" src={heroImage} alt={project.title} />
+            ) : (
               <div className="hero-placeholder">
-                <span className="placeholder-icon">🚀</span>
+                <div className="placeholder-icon">🧩</div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
           <div className="hero-content">
             <h1 className="project-title">{project.title}</h1>
             {project.tagline && <p className="project-tagline">{project.tagline}</p>}
 
             <div className="project-meta">
-              <span className="meta-badge role">{project.role}</span>
-              <span className="meta-badge date">{project.date}</span>
-              <span className={`meta-badge status ${project.status.toLowerCase().replace(' ', '-')}`}>
-                {project.status}
-              </span>
+              {project.role && <span className="meta-badge">{project.role}</span>}
+              {project.year && <span className="meta-badge">{project.year}</span>}
+              {project.status && (
+                <span className={`meta-badge status ${String(project.status).toLowerCase().replace(' ', '-')}`}>
+                  {project.status}
+                </span>
+              )}
             </div>
           </div>
-        </motion.header>
+        </div>
 
-        {/* Main Content */}
-        <motion.div className="project-content-grid" variants={itemVariants}>
+        {/* MAIN CONTENT */}
+        <div className="project-content-grid">
           <div className="content-main">
-            <div className="content-section">
-              <h3 className="section-title">Problem</h3>
-              <p className="section-text">{project.problem}</p>
-            </div>
 
-            <div className="content-section">
-              <h3 className="section-title">Approach</h3>
-              <p className="section-text">{project.approach}</p>
-            </div>
+            {project.problem && (
+              <div className="content-section">
+                <h3 className="section-title">Problem</h3>
+                <p className="section-text">{project.problem}</p>
+              </div>
+            )}
 
-            <div className="content-section">
-              <h3 className="section-title">Result</h3>
-              <p className="section-text">{project.result}</p>
-            </div>
+            {project.approach && (
+              <div className="content-section">
+                <h3 className="section-title">Approach</h3>
+                <p className="section-text">{project.approach}</p>
+              </div>
+            )}
 
-            {project.whatISpecificallyDid?.length > 0 && (
+            {project.result && (
+              <div className="content-section">
+                <h3 className="section-title">Result</h3>
+                <p className="section-text">{project.result}</p>
+              </div>
+            )}
+
+            {Array.isArray(project.whatISpecificallyDid) && project.whatISpecificallyDid.length > 0 && (
               <div className="content-section">
                 <h3 className="section-title">What I Specifically Did</h3>
                 <ul className="contribution-list">
-                  {project.whatISpecificallyDid.map((item, index) => (
-                    <li key={index}>{item}</li>
+                  {project.whatISpecificallyDid.map((item, i) => (
+                    <li key={i}>{item}</li>
                   ))}
                 </ul>
               </div>
             )}
 
-            {project.impact && (
+            {project.impact?.statement && (
               <div className="content-section impact-section">
                 <h3 className="section-title">Impact</h3>
                 <p className="impact-statement">{project.impact.statement}</p>
-                <p className="impact-how">
-                  <strong>How:</strong> {project.impact.how}
-                </p>
+                {project.impact.how && <p className="impact-how">{project.impact.how}</p>}
               </div>
             )}
 
-            {project.tech?.length > 0 && (
-              <div className="content-section sidebar-section">
-                <h4 className="sidebar-title">Tech Stack</h4>
-                <div className="tag-grid">
-                  {project.tech.map((tech, index) => (
-                    <span key={index} className="tech-tag">{tech}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {project.skills?.length > 0 && (
-              <div className="content-section sidebar-section">
-                <h4 className="sidebar-title">Skills Demonstrated</h4>
-                <div className="skill-list">
-                  {project.skills.map((skill, index) => (
-                    <span key={index} className="skill-badge">{skill}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {project.concepts?.length > 0 && (
-              <div className="content-section sidebar-section">
-                <h4 className="sidebar-title">Key Concepts</h4>
-                <div className="concept-list">
-                  {project.concepts.map((concept, index) => (
-                    <span key={index} className="concept-tag">{concept}</span>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Assets (bottom) */}
+        {/* ASSETS */}
         {hasAssets && (
-          <motion.div className="assets-section" variants={itemVariants}>
+          <section className="assets-section">
             <h3 className="assets-title">Assets</h3>
 
-            {screenshots.length > 0 && (
-              <>
-                <h4 className="assets-subtitle">Screenshots</h4>
+            {/* PROOF OF GAME DESIGN (SAFE: kept inside assets only) */}
+            {project.designProof && (
+              <div className="assets-block">
+                <h4 className="assets-subtitle">Proof of Game Design</h4>
+
+                <div className="proof-grid">
+                  <div className="proof-media">
+                    <div className="proof-image-shell">
+                      <img
+                        src={project.designProof.image}
+                        alt={project.designProof.imageAlt || 'Gameplay system proof'}
+                        className="proof-image"
+                        onClick={() => setLightboxSrc(project.designProof.image)}
+                      />
+                    </div>
+                    <div className="proof-caption">
+                      {project.designProof.caption || 'In-development combat UI. AI-generated concept art. Animation pending.'}
+                    </div>
+                  </div>
+
+                  <div className="proof-text">
+                    {Array.isArray(project.designProof.notes) && project.designProof.notes.length > 0 && (
+                      <ul className="proof-notes">
+                        {project.designProof.notes.map((n, i) => <li key={i}>{n}</li>)}
+                      </ul>
+                    )}
+
+                    {Array.isArray(project.designProof.breakdown) && project.designProof.breakdown.length > 0 && (
+                      <div className="proof-breakdown">
+                        {project.designProof.breakdown.map((row, i) => (
+                          <div key={i} className="proof-row">
+                            <div className="proof-label">{row.label}</div>
+                            <div className="proof-body">{row.text}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Screenshots */}
+            {images.length > 0 && (
+              <div className="assets-block">
+                <h4 className="assets-subtitle">Images</h4>
                 <div className="image-gallery">
-                  {screenshots.map((image, index) => (
-                    <div key={index} className="gallery-item">
-                      <img 
-                        src={encodeURI(image)} 
-                        alt={`${project.title} screenshot ${index + 1}`}
-                        onError={(e) => {
-                          e.currentTarget.parentElement.style.display = 'none';
-                        }}
-                      />
-                    </div>
+                  {images.map((src, i) => (
+                    <button
+                      key={i}
+                      className="gallery-item"
+                      onClick={() => setLightboxSrc(src)}
+                      aria-label="Open image"
+                      type="button"
+                    >
+                      <img src={src} alt={`${project.title} screenshot ${i + 1}`} />
+                    </button>
                   ))}
                 </div>
-              </>
+              </div>
             )}
 
+            {/* PDFs */}
             {pdfs.length > 0 && (
-              <>
+              <div className="assets-block">
                 <h4 className="assets-subtitle">Documents & PDFs</h4>
-                {pdfs.map((item, index) => {
-                  const url = typeof item === 'string' ? item : item?.url;
-                  const title = typeof item === 'string' ? `Document ${index + 1}` : (item?.title || `Document ${index + 1}`);
-                  if (!url) return null;
-
-                  return (
-                    <div key={`${project.id}-pdf-${index}`} className="pdf-wrapper">
-                      <h4 className="pdf-title">{title}</h4>
-                      <PDFViewer
-                        pdfUrl={url}
-                        title={title}
-                        fileName={`${project.id}-doc-${index + 1}.pdf`}
-                      />
-                    </div>
-                  );
-                })}
-              </>
+                {pdfs.map((pdf, i) => (
+                  <div key={i} className="pdf-wrapper">
+                    <h4 className="pdf-title">{pdf.title}</h4>
+                    <PDFViewer pdfUrl={pdf.url} />
+                  </div>
+                ))}
+              </div>
             )}
 
-            {embeds.length > 0 && (
-              <>
-                <h4 className="assets-subtitle">Models & Decks</h4>
-                <div className="google-embeds">
-                  {embeds.map((link, index) => (
-                    <div key={index} className="embed-wrapper">
-                      <h4 className="embed-title">{link.title}</h4>
-                      <iframe
-                        src={link.url}
-                        className="google-embed"
-                        title={link.title}
-                        frameBorder="0"
-                        allowFullScreen
-                      />
-                    </div>
+            {/* Links */}
+            {links.length > 0 && (
+              <div className="assets-block">
+                <h4 className="assets-subtitle">Links</h4>
+                <div className="links-list">
+                  {links.map((l, i) => (
+                    <a key={i} className="asset-link" href={l.url} target="_blank" rel="noreferrer">
+                      {l.title}
+                    </a>
                   ))}
                 </div>
-              </>
+              </div>
             )}
-          </motion.div>
+          </section>
         )}
 
-        {/* Footer */}
-        <motion.div className="project-footer" variants={itemVariants}>
-          <button className="nav-button" onClick={() => navigate('/')}>
+        {/* Lightbox */}
+        {lightboxSrc && (
+          <div className="lightbox" onClick={() => setLightboxSrc(null)} role="button" tabIndex={0}>
+            <button className="lightbox-close" onClick={() => setLightboxSrc(null)} type="button" aria-label="Close">
+              ×
+            </button>
+            <img className="lightbox-image" src={lightboxSrc} alt="Expanded preview" />
+          </div>
+        )}
+
+        <div className="project-footer">
+          <button className="nav-button" onClick={() => navigate('/projects')}>
             ← Back to Projects
           </button>
-        </motion.div>
-      </motion.div>
+        </div>
+
+      </div>
     </section>
   );
 };

@@ -237,16 +237,21 @@
 
 /* PDF Section */
 .pdf-section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.25rem;
 }
 
 .pdf-section-title {
   color: var(--plasma-green);
   font-size: 1.6rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.0rem;
   text-align: center;
   font-family: var(--font-heading);
   font-weight: 700;
+}
+
+/* Reduce extra vertical “air” from PDFViewer.css on the writing detail page */
+.writing-detail .pdf-viewer-container {
+  margin: 0;
 }
 
 /* Footer Section - Compact */

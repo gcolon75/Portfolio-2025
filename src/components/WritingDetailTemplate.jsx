@@ -34,12 +34,21 @@ const WritingDetailTemplate = ({ article }) => {
   const doc = useMemo(() => {
     const fileUrl = article?.fileUrl || article?.pdfPath || null;
     const inferred = inferFileType(fileUrl);
-    const fileType = (inferred || article?.fileType || null);
-    const fileName = fileType ? `${article?.id || 'document'}.${fileType}` : (article?.id || 'document');
+    const fileType = inferred || article?.fileType || null;
+    const fileName = fileType
+      ? `${article?.id || 'document'}.${fileType}`
+      : (article?.id || 'document');
+
     return { fileUrl, fileType, fileName };
   }, [article]);
 
   const hasDocument = Boolean(doc.fileUrl && doc.fileType);
+
+  // ✅ Bigger than before (less subtraction) + uses 100dvh so it behaves better on modern browsers.
+  const viewerHeight = useMemo(
+    () => 'clamp(560px, calc(100dvh - 150px), 1800px)',
+    []
+  );
 
   return (
     <section className="writing-detail">
@@ -126,6 +135,7 @@ const WritingDetailTemplate = ({ article }) => {
               fileUrl={doc.fileUrl}
               fileType={doc.fileType}
               fileName={doc.fileName}
+              height={viewerHeight}
             />
           ) : (
             <div className="pdf-viewer-container">
@@ -136,7 +146,6 @@ const WritingDetailTemplate = ({ article }) => {
           )}
         </motion.div>
 
-        {/* ✅ Footer now ONLY has navigation (no download area) */}
         <motion.div className="article-footer" variants={itemVariants}>
           <button className="nav-button" onClick={() => navigate(-1)}>
             ← Back to Writing

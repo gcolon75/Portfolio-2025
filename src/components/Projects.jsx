@@ -24,8 +24,10 @@ const Projects = () => {
     }
   };
 
+  // ✅ Joint is the featured “starred” project
   const featuredId = 'joint-theatrical-ventures';
 
+  // ✅ Keep Joint first, then sort by year (desc)
   const orderedProjects = [...projects].sort((a, b) => {
     if (a.id === featuredId) return -1;
     if (b.id === featuredId) return 1;
@@ -37,6 +39,12 @@ const Projects = () => {
 
   const getThumbnail = (project) =>
     project.cardImage || project.coverImage || project.assets?.images?.[0] || null;
+
+  const statusClass = (status) =>
+    String(status || '')
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-');
 
   return (
     <section id="projects" className="projects">
@@ -72,7 +80,9 @@ const Projects = () => {
                 style={{ textDecoration: 'none', display: 'block' }}
               >
                 <motion.div
-                  className={`project-card ${project.route ? 'clickable' : ''} ${isFeatured ? 'featured' : ''}`}
+                  className={`project-card ${project.route ? 'clickable' : ''} ${
+                    isFeatured ? 'featured' : ''
+                  }`}
                   variants={cardVariants}
                   whileHover={{
                     scale: 1.05,
@@ -125,7 +135,8 @@ const Projects = () => {
                         <span className="project-category">{project.category}</span>
                         <span className="project-date">{project.date}</span>
                       </div>
-                      <span className={`project-status ${project.status.toLowerCase().replace(' ', '-')}`}>
+
+                      <span className={`project-status ${statusClass(project.status)}`}>
                         {project.status}
                       </span>
                     </div>

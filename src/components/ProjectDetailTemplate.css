@@ -1,7 +1,7 @@
 .project-detail {
   background: linear-gradient(180deg, var(--dark-bg) 0%, var(--secondary-bg) 50%, var(--dark-bg) 100%);
-  min-height: 100vh;
-  padding: 1rem 0;
+  min-height: auto;
+  padding: 1rem 0 3rem;
   padding-top: 5rem;
   position: relative;
 }
@@ -327,7 +327,7 @@
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--plasma-green);
-  background: rgba(0,0,0,0.28);
+  background: rgba(0, 0, 0, 0.28);
   cursor: pointer;
   padding: 0;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -345,50 +345,8 @@
 .gallery-item img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* ✅ this is the big fix */
+  object-fit: contain;
   object-position: center;
-}
-
-/* Documents (collapsible) */
-.docs-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-.doc-item {
-  border: 1px solid rgba(0, 255, 136, 0.25);
-  border-radius: 10px;
-  overflow: hidden;
-  background: rgba(0,0,0,0.18);
-}
-
-.doc-summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 0.85rem 1rem;
-  color: var(--plasma-green);
-  font-family: var(--font-heading);
-  font-weight: 700;
-  user-select: none;
-}
-
-.doc-summary::-webkit-details-marker {
-  display: none;
-}
-
-.doc-summary::after {
-  content: '▾';
-  float: right;
-  color: var(--starlight-gold);
-}
-
-details[open] .doc-summary::after {
-  content: '▴';
-}
-
-.doc-body {
-  padding: 0.85rem 1rem 1rem;
 }
 
 /* Embeds */
@@ -396,10 +354,6 @@ details[open] .doc-summary::after {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
-}
-
-.embed-wrapper {
-  margin: 0;
 }
 
 .embed-title {
@@ -414,52 +368,116 @@ details[open] .doc-summary::after {
   height: 600px;
   border: 1px solid var(--plasma-green);
   border-radius: 10px;
-  background: rgba(0,0,0,0.18);
+  background: rgba(0, 0, 0, 0.18);
 }
 
-/* Lightbox */
-.lightbox-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.25rem;
+/* PDF embeds */
+.pdf-wrapper {
+  margin-top: 1.25rem;
 }
 
-.lightbox-panel {
-  width: min(1100px, 96vw);
-  max-height: 92vh;
-  background: rgba(10, 15, 20, 0.92);
-  border: 1px solid rgba(0, 255, 136, 0.35);
-  border-radius: 14px;
-  box-shadow: 0 0 30px rgba(0, 255, 136, 0.18);
-  position: relative;
+.pdf-title {
+  color: var(--starlight-gold);
+  font-size: 1.15rem;
+  margin: 1.25rem 0 0.85rem;
+  font-family: var(--font-heading);
+  letter-spacing: 0.3px;
+}
+
+.pdf-embed-shell {
+  border: 1px solid rgba(0, 255, 136, 0.28);
+  border-radius: 12px;
   overflow: hidden;
+  background: rgba(0, 0, 0, 0.18);
 }
 
-.lightbox-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  width: 42px;
-  height: 42px;
+.pdf-embed {
+  width: 100%;
+  height: min(760px, 80vh);
+  border: 0;
+  display: block;
+}
+
+.pdf-note {
+  padding: 0.75rem 1rem 0;
+  color: rgba(227, 229, 234, 0.75);
+  font-size: 0.9rem;
+}
+
+.pdf-missing {
+  padding: 1rem;
+  color: rgba(227, 229, 234, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.pdf-missing code {
+  color: var(--plasma-green);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9em;
+}
+
+/* =========================
+   PROOF OF GAME DESIGN
+   (clean + non-giant)
+   ========================= */
+
+/* IMPORTANT: proof is already a .content-section card. Do NOT add "divider section" spacing. */
+.content-section.project-proof {
+  margin-top: 0;
+  padding-top: 2rem;   /* keep same interior padding rhythm */
+  padding-bottom: 2rem;
+  border-top: none;    /* prevents double “section divider” feeling */
+}
+
+.project-proof .proof-subtitle {
+  margin: 0.25rem 0 1.25rem;
+  color: var(--light-gray);
+  opacity: 0.85;
+}
+
+.proof-content {
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.proof-image img {
+  width: 100%;
+  height: auto;
   border-radius: 10px;
   border: 1px solid rgba(0, 255, 136, 0.35);
-  background: rgba(0, 0, 0, 0.35);
-  color: var(--plasma-green);
-  font-size: 28px;
-  cursor: pointer;
+  display: block;
 }
 
-.lightbox-image {
-  width: 100%;
-  height: 92vh;
-  max-height: 92vh;
-  object-fit: contain;
+.proof-caption {
   display: block;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--light-gray);
+  opacity: 0.8;
+}
+
+.proof-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.proof-notes {
+  margin: 0 0 0.25rem;
+  padding-left: 1.25rem;
+}
+
+.proof-row strong {
+  color: var(--plasma-green);
+}
+
+.proof-row p {
+  margin: 0.25rem 0 0;
+  color: var(--light-gray);
+  line-height: 1.6;
 }
 
 /* Footer */
@@ -468,6 +486,7 @@ details[open] .doc-summary::after {
   justify-content: center;
   padding-top: 1rem;
   border-top: 1px solid var(--plasma-green);
+  margin-top: 1.5rem;
 }
 
 .nav-button {
@@ -490,6 +509,12 @@ details[open] .doc-summary::after {
 }
 
 /* Responsive Design */
+@media (max-width: 900px) {
+  .proof-content {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .project-detail {
     padding-top: 4rem;
@@ -518,55 +543,72 @@ details[open] .doc-summary::after {
   .google-embed {
     height: 420px;
   }
+}
+/* =========================
+   Proof of Game Design (inside Assets)
+   Safe: cannot break main page layout
+   ========================= */
 
-  .lightbox-image {
-    height: 80vh;
-  }
+.assets-proof {
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(74, 158, 255, 0.15);
 }
 
-
-/* PDF embeds */
-.pdf-wrapper {
-  margin-top: 1.5rem;
+.assets-proof-subtitle {
+  margin: 0.25rem 0 1.25rem;
+  color: var(--light-gray);
+  opacity: 0.85;
 }
 
-.pdf-title {
-  color: var(--starlight-gold);
-  font-size: 1.15rem;
-  margin: 1.25rem 0 0.85rem;
-  font-family: var(--font-heading);
-  letter-spacing: 0.3px;
+.assets-proof-content {
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) 1fr;
+  gap: 1.5rem;
+  align-items: start;
 }
 
-.pdf-embed-shell {
-  border: 1px solid rgba(0, 255, 136, 0.28);
-  border-radius: 12px;
-  overflow: hidden;
-  background: rgba(0,0,0,0.18);
-}
-
-.pdf-embed {
+.assets-proof-image img {
   width: 100%;
-  height: min(760px, 80vh);
-  border: 0;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 136, 0.35);
   display: block;
 }
 
-.pdf-note {
-  padding: 0.75rem 1rem 0;
-  color: rgba(227, 229, 234, 0.75);
-  font-size: 0.9rem;
+.assets-proof-caption {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--light-gray);
+  opacity: 0.8;
 }
 
-.pdf-missing {
-  padding: 1rem;
-  color: rgba(227, 229, 234, 0.85);
-  font-size: 0.95rem;
-  line-height: 1.5;
+.assets-proof-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
 }
 
-.pdf-missing code {
+.assets-proof-notes {
+  margin: 0 0 0.25rem;
+  padding-left: 1.25rem;
+}
+
+.assets-proof-row strong {
   color: var(--plasma-green);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 0.9em;
 }
+
+.assets-proof-row p {
+  margin: 0.25rem 0 0;
+  color: var(--light-gray);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .assets-proof-content {
+    grid-template-columns: 1fr;
+  }
+}
+
