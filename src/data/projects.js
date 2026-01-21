@@ -54,7 +54,7 @@ export const projects = [
 
     // This is the “Blood Mage image on the side” — now safely in Assets at the top.
     designProof: {
-      image: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageProof.png`,
+      image: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`,
       imageAlt: 'Gameplay system proof (Blood Mage)',
       caption: 'In-development combat UI. AI-generated concept art. Animation pending.',
       notes: [
@@ -133,20 +133,18 @@ export const projects = [
     status: 'In Progress',
     date: '2025',
     category: 'Web Development',
-    route: '/projects/joint',
+    // Updated route to match App.jsx and JointTheatricalPage component
+    route: '/projects/joint-theatrical-ventures',
 
     assets: {
       images: [
-        // swap these to your real files if named differently
-        `${process.env.PUBLIC_URL}/assets/projects/Joint/JointThumb.png`
+        // Updated paths to match actual folder name 'Joint Theatrical Ventures'
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/JointTitle.JPG`,
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/HomePage.JPG`
       ],
       pdfs: [
-        // IMPORTANT: can be strings OR {title,url} now
-        // `${process.env.PUBLIC_URL}/assets/projects/Joint/JointCaseStudy.pdf`,
-        {
-          title: 'Product Overview / Notes',
-          url: `${process.env.PUBLIC_URL}/assets/projects/Joint/JointOverview.pdf`
-        }
+        // Note: JointOverview.pdf does not exist in the repo, removed for now
+        // Add back when PDF is available in the Joint Theatrical Ventures folder
       ],
       videos: [],
       documents: [],
