@@ -238,6 +238,62 @@
   line-height: 1.6;
 }
 
+/* Design Notes Section */
+.design-notes-section {
+  background: var(--card-bg);
+  border: 1px solid var(--plasma-green);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
+  margin-bottom: 3rem;
+}
+
+.design-notes-title {
+  color: var(--plasma-green);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-heading);
+  text-align: center;
+}
+
+.design-notes-subtitle {
+  color: var(--starlight-gold);
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.design-notes-caption {
+  color: var(--light-gray);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  opacity: 0.85;
+}
+
+.design-notes-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.design-notes-bullets li {
+  color: var(--light-gray);
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.design-notes-bullets li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--plasma-green);
+  font-size: 1.2rem;
+}
+
 /* Sidebar-ish sections (in main column) */
 .sidebar-section {
   background: var(--card-bg);
