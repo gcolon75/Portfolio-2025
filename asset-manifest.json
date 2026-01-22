@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Portfolio-2025/static/css/main.4aac26b1.css",
-    "main.js": "/Portfolio-2025/static/js/main.a43fbb81.js",
+    "main.css": "/Portfolio-2025/static/css/main.1e8a26b2.css",
+    "main.js": "/Portfolio-2025/static/js/main.0677e4a6.js",
     "static/media/AI-GenZ-Cover.png": "/Portfolio-2025/static/media/AI-GenZ-Cover.19149e858d7ec5587bb6.png",
     "static/media/AI and Gen Z Final Draft.pdf": "/Portfolio-2025/static/media/AI and Gen Z Final Draft.7a9df196668a3523286a.pdf",
     "static/media/HumanityArticleTitle.webp": "/Portfolio-2025/static/media/HumanityArticleTitle.7cadf825a4561dd1858e.webp",
@@ -12,11 +12,11 @@
     "static/media/whova.jpg": "/Portfolio-2025/static/media/whova.0aca90468805b8ed54c8.jpg",
     "static/media/openAILogo.jpg": "/Portfolio-2025/static/media/openAILogo.2971546fde57f19accef.jpg",
     "index.html": "/Portfolio-2025/index.html",
-    "main.4aac26b1.css.map": "/Portfolio-2025/static/css/main.4aac26b1.css.map",
-    "main.a43fbb81.js.map": "/Portfolio-2025/static/js/main.a43fbb81.js.map"
+    "main.1e8a26b2.css.map": "/Portfolio-2025/static/css/main.1e8a26b2.css.map",
+    "main.0677e4a6.js.map": "/Portfolio-2025/static/js/main.0677e4a6.js.map"
   },
   "entrypoints": [
-    "static/css/main.4aac26b1.css",
-    "static/js/main.a43fbb81.js"
+    "static/css/main.1e8a26b2.css",
+    "static/js/main.0677e4a6.js"
   ]
 }
