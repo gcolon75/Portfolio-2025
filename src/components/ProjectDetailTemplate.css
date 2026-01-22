@@ -344,7 +344,7 @@
   background: var(--card-bg);
   border: 1px solid var(--plasma-green);
   border-radius: 12px;
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
 }
 
