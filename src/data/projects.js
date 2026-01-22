@@ -44,7 +44,7 @@ export const projects = [
     route: '/projects/tower-of-greed',
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`,
       ],
       pdfs: [
         {
@@ -101,46 +101,58 @@ export const projects = [
   // --------------------------------------------------------------------
   // Joint Theatrical Ventures (ONLY relevant change: image order)
   // --------------------------------------------------------------------
-  {
+   {
     id: 'joint-theatrical-ventures',
     name: 'Joint Theatrical Ventures',
     title: 'Joint Theatrical Ventures',
     year: 2025,
-    description: 'A modern creative network for reels, scripts, and collaboration',
+    description:
+      'A modern creative network for reels, scripts, and collaboration (In Development)',
     tagline: 'Your work deserves a stage',
-    fullSummary: 'A platform concept and build focused on connecting creatives, showcasing portfolios, and enabling collaboration.',
-    problem: 'Creative professionals struggle to present work cleanly and connect with collaborators without fragmented tools.',
-    approach: 'Designed and built profile system, gated sharing, media presentation flows, and social interactions with a strong emphasis on UX clarity and scalability.',
-    result: 'Core product experience is functional and iterating. Remaining work focuses on social interactions, notifications, and polish.',
-    role: 'Lead UX / Product + Project Manager',
+    fullSummary:
+      'A platform for creative professionals to present work cleanly, connect with collaborators, and manage sharing without fragmented tools.',
+    problem:
+      'Creative professionals struggle to present work cleanly and connect with collaborators without fragmented tools.',
+    approach:
+      'Designed and built profile systems, gated sharing, media presentation flows, and social interactions with a strong emphasis on UX clarity and scalability.',
+    result:
+      'Core product experience is functional and iterating. Remaining work focuses on social interactions, notifications, and polish.',
+    role: 'Lead UX Designer & Product Manager',
     whatISpecificallyDid: [
       'Led UX strategy and end-to-end interaction design',
       'Designed profile architecture, portfolio presentation, and discovery flows',
       'Wrote clear engineering-ready requirements and acceptance criteria',
       'Managed Kanban/task breakdown and GitHub workflow with lead programmer'
     ],
-    tech: ['React', 'UX Design', 'Product Design', 'Kanban / PM', 'GitHub'],
-    skills: ['UX Design', 'Product Strategy', 'Information Architecture', 'Interaction Design', 'Project Management'],
+    tech: ['React', 'Node', 'AWS', 'Postgres', 'Prisma', 'Serverless'],
+    skills: ['Product Design', 'UX Strategy', 'Information Architecture', 'Systems Thinking'],
+    concepts: ['Creator Tools', 'Collaboration', 'Sharing Controls', 'Media Presentation'],
     status: 'In Progress',
     date: '2025',
     category: 'Web Development',
     route: '/projects/joint-theatrical-ventures',
+
+    // ✅ What you asked for:
+    // - Title thumbnail on top (hero)
+    // - Only homepage image in Assets (full screen style handled by CSS change below)
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/JointTitle.JPG`,
+
     assets: {
-  images: [
-    // Title thumbnail FIRST
-    `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/JointTitle.JPG`,
-    // Homepage SECOND
-    `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Homepage.JPG`,
-  ],
-  pdfs: [],
-  videos: [],
-  documents: [],
-  links: []
-}
-  }
+      images: [
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Homepage.JPG`
+      ],
+      pdfs: [],
+      videos: [
+        // If you want the mp4 shown in assets later, add it here:
+        // { title: 'Demo', url: `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/JointDemo.mp4` }
+      ],
+      documents: [],
+      links: []
+    }
+  },
+
 
   // ...keep the rest of your projects below exactly as-is..
-,
 
   /* --------------------------------------------------
      AMADEUS
