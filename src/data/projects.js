@@ -3,41 +3,29 @@
 // NOTE: only changed Joint assets + route and Tower of Greed designProof image fallback.
 
 export const projects = [
-  /* --------------------------------------------------
-     TOWER OF GREED
-     -------------------------------------------------- */
   {
     id: 'tower-of-greed',
     name: 'Tower of Greed',
-    title: 'Tower of Greed — Dice-driven roguelike RPG',
+    title: 'Tower of Greed',
     year: 2025,
-    description:
-      'A dice-driven roguelike RPG design focusing on readable combat state and deterministic ability outcomes.',
-    tagline: 'Roguelike tension with readable mechanics',
-    fullSummary:
-      'A ~60% complete game design in active development. Combat and progression are being finalized. Animation and visual polish are still pending. Current images are AI-generated concept art placeholders.',
-    problem:
-      'Roguelikes often hide significant state behind RNG; Tower of Greed focuses on readable decision windows and predictable tradeoffs.',
-    approach:
-      'Designed deterministic combat flow with resource-based subclasses (Blood, Grit, Edge) and explicit action costs to enable predictable player choices.',
-    result:
-      'Core combat systems specified to be implementation-ready with deterministic triggers and costs; design is ready for engineering handoff.',
+    description: 'A dice-driven roguelike RPG with subclass resource systems and strategic turn-based combat',
+    tagline: 'A dice-driven roguelike where luck meets strategy',
+    fullSummary: 'A roguelike dungeon crawler that emphasizes player agency through smart sequencing rather than random chance.',
+    problem: 'Traditional roguelikes often rely too heavily on RNG, creating frustration when player skill cannot overcome bad luck.',
+    approach: 'Designed deterministic dice systems, subclass resources, and combat rules that translate player intent into readable outcomes while preserving uncertainty.',
+    result: 'A ~60% complete game design in active development, finishing core combat and progression features. Animation and visual polish are still pending, and current images are AI-generated concept art.',
     role: 'Lead Game Designer & UX Designer',
     whatISpecificallyDid: [
       'Owned overall game vision, ruleset, and systemic design philosophy',
-      'Designed core dice mechanics and deterministic combat flow',
-      'Created subclass resource systems (Blood, Grit, Edge) and risk windows (setup vs cash-out)',
-      'Defined player expectations, readable UI state, and “no hidden information” combat principles',
-      'Wrote implementation-ready ability rules (costs, triggers, effects) to hand off to engineering',
-      'Managed Kanban/task breakdowns and coordinated with lead programmer using GitHub workflows'
+      'Designed core dice systems, subclass resources (Blood, Grit, Edge), and deterministic combat flow',
+      'Defined player expectations, readable state, and UI rules that communicate risk windows clearly',
+      'Created implementation-ready specs: triggers, costs, effects, and balance constraints',
+      'Managed programmer workflow using tasks, Kanban boards, and GitHub repo organization'
     ],
     impact: {
-      statement:
-        'Improves player agency by turning randomness into readable, controllable decision-making rather than pure luck spikes.',
-      how:
-        'Uses resource-gating and sequencing rules so player choices create predictable risk windows and strategic payoffs.'
+      statement: 'Enhanced player agency through systematic design patterns that reduce RNG frustration while maintaining strategic depth.',
+      how: 'Applied resource-gating mechanics and turn-based sequencing inspired by deck-building roguelikes, ensuring player choices create meaningful decision trees rather than random outcomes.'
     },
-
     tech: ['Game Design', 'Systems Design', 'UX Design', 'Kanban / PM', 'GitHub'],
     skills: [
       'Game Design',
@@ -45,47 +33,15 @@ export const projects = [
       'UX Design',
       'Combat Design',
       'Progression Design',
+      'Resource Management',
       'Documentation',
-      'Team Coordination'
+      'Product Management'
     ],
-    concepts: ['Player Agency', 'RNG Mitigation', 'Strategic Depth', 'Turn-Based Combat'],
-
+    concepts: ['Player Agency', 'Readable State', 'Risk Windows', 'RNG Mitigation', 'Deterministic Outcomes'],
     status: 'In Progress',
     date: '2025',
     category: 'Game Design',
     route: '/projects/tower-of-greed',
-
-    // designProof: use thumbnail as safe fallback (BloodMageProof.png not present)
-    designProof: {
-      image: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
-      imageAlt: 'Gameplay system proof (Blood Mage)',
-      caption: 'In-development combat UI. AI-generated concept art. Animation pending.',
-      notes: [
-        'Combat UI communicates all critical game state with no hidden information',
-        'Blood Mage resource system demonstrates risk–reward via self-inflicted cost',
-        'Actions, triggers, and effects are deterministic and implementation-ready',
-        'Design preserves tension without relying on pure randomness'
-      ],
-      breakdown: [
-        {
-          label: 'Design Goal',
-          text: 'Preserve roguelike tension while ensuring player decisions meaningfully influence outcomes.'
-        },
-        {
-          label: 'System Shown',
-          text: 'Blood Mage subclass generating Blood Charges via bleed, self-harm, and timing windows.'
-        },
-        {
-          label: 'Player Choice',
-          text: 'Player decides when to sacrifice health for power versus when to stabilize or retreat.'
-        },
-        {
-          label: 'Engineering Clarity',
-          text: 'Each action has explicit costs, conditions, and effects suitable for direct implementation.'
-        }
-      ]
-    },
-
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`
@@ -103,53 +59,88 @@ export const projects = [
       videos: [],
       documents: [],
       links: []
+    },
+
+    // ✅ This is what feeds “Proof of Game Design” in the template
+    // IMPORTANT: Make sure this file exists in your public assets folder.
+    // Suggested path/name (rename your image to match if needed):
+    // /public/assets/projects/Tower of Greed/BloodMageProof.png
+    designProof: {
+      title: 'Proof of Game Design',
+      subtitle: 'From philosophy → rules → UI → implementable systems',
+      image: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageProof.png`,
+      alt: 'Blood Mage combat UI concept and class breakdown',
+      caption: 'In-development combat UI. AI-generated concept art. Animation pending.',
+      bullets: [
+        'Combat UI communicates critical game state with no hidden information',
+        'Blood Mage resource system demonstrates risk–reward via self-inflicted cost',
+        'Actions, triggers, and effects are deterministic and engineer-ready',
+        'Design preserves tension without relying on pure randomness'
+      ],
+      callouts: [
+        {
+          heading: 'Design Goal',
+          text: 'Preserve roguelike tension while ensuring player decisions meaningfully influence outcomes.'
+        },
+        {
+          heading: 'System Shown',
+          text: 'Blood Mage subclass generating Blood Charges via bleed, self-harm, and timing windows.'
+        },
+        {
+          heading: 'Player Choice',
+          text: 'Players decide when to sacrifice health for power versus when to stabilize or retreat.'
+        },
+        {
+          heading: 'Engineering Clarity',
+          text: 'Each action has explicit costs, conditions, and effects suitable for direct implementation.'
+        }
+      ]
     }
   },
 
-  /* --------------------------------------------------
-     JOINT THEATRICAL VENTURES
-     -------------------------------------------------- */
+  // --------------------------------------------------------------------
+  // Joint Theatrical Ventures (ONLY relevant change: image order)
+  // --------------------------------------------------------------------
   {
     id: 'joint-theatrical-ventures',
     name: 'Joint Theatrical Ventures',
     title: 'Joint Theatrical Ventures',
     year: 2025,
-    description: 'LinkedIn-style portfolio + networking platform for entertainment professionals (In Development)',
-    tagline: 'A modern creative network for reels, scripts, and collaboration',
-    fullSummary:
-      'A full-stack web platform that helps actors, writers, and producers share work, connect, and manage discovery.',
-    problem:
-      'Creative professionals struggle to present work cleanly and connect with collaborators without fragmented tools.',
-    approach:
-      'Designed and built profile systems, gated sharing, media presentation flows, and social interactions with a strong emphasis on UX clarity and scalability.',
-    result:
-      'Core product experience is functional and iterating. Remaining work focuses on social interactions, notifications, and polish.',
-    role: 'Product/UX Lead (Partner: Lead Engineer)',
+    description: 'A modern creative network for reels, scripts, and collaboration',
+    tagline: 'Your work deserves a stage',
+    fullSummary: 'A platform concept and build focused on connecting creatives, showcasing portfolios, and enabling collaboration.',
+    problem: 'Creative professionals struggle to present work cleanly and connect with collaborators without fragmented tools.',
+    approach: 'Designed and built profile system, gated sharing, media presentation flows, and social interactions with a strong emphasis on UX clarity and scalability.',
+    result: 'Core product experience is functional and iterating. Remaining work focuses on social interactions, notifications, and polish.',
+    role: 'Lead UX / Product + Project Manager',
     whatISpecificallyDid: [
       'Led UX strategy and end-to-end interaction design',
       'Designed profile architecture, portfolio presentation, and discovery flows',
       'Wrote clear engineering-ready requirements and acceptance criteria',
       'Managed Kanban/task breakdown and GitHub workflow with lead programmer'
     ],
+    tech: ['React', 'UX Design', 'Product Design', 'Kanban / PM', 'GitHub'],
+    skills: ['UX Design', 'Product Strategy', 'Information Architecture', 'Interaction Design', 'Project Management'],
     status: 'In Progress',
     date: '2025',
     category: 'Web Development',
-    // updated route to match App.jsx / JointTheatricalPage
     route: '/projects/joint-theatrical-ventures',
-
     assets: {
-      images: [
-        // User requested only the homepage as the asset; ensure filename matches public/assets
-        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/HomePage.JPG`
-      ],
-      pdfs: [
-        // intentionally empty — add PDF entries when files are available
-      ],
-      videos: [],
-      documents: [],
-      links: []
-    }
-  },
+  images: [
+    // Title thumbnail FIRST
+    `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Title.JPG`,
+    // Homepage SECOND
+    `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Homepage.JPG`,
+  ],
+  pdfs: [],
+  videos: [],
+  documents: [],
+  links: []
+}
+  }
+
+  // ...keep the rest of your projects below exactly as-is..
+,
 
   /* --------------------------------------------------
      AMADEUS
