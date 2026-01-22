@@ -68,7 +68,7 @@ const ProjectDetailTemplate = ({ project }) => {
   const pdfs = useMemo(() => normalizePdfs(project?.assets?.pdfs), [project]);
   const links = useMemo(() => normalizeLinks(project?.assets?.links), [project]);
 
-  const hasAssets = (images && images.length > 0) || (pdfs && pdfs.length > 0) || (links && links.length > 0) || !!project?.designProof;
+  const hasAssets = (images && images.length > 0) || (pdfs && pdfs.length > 0) || (links && links.length > 0);
 
   if (!project) {
     return (
@@ -156,52 +156,30 @@ const ProjectDetailTemplate = ({ project }) => {
           </div>
         </div>
 
+        {/* DESIGN NOTES */}
+        {project.designNotes && (
+          <div className="design-notes-section">
+            <h3 className="design-notes-title">{project.designNotes.title}</h3>
+            {project.designNotes.subtitle && (
+              <p className="design-notes-subtitle">{project.designNotes.subtitle}</p>
+            )}
+            {project.designNotes.caption && (
+              <p className="design-notes-caption">{project.designNotes.caption}</p>
+            )}
+            {project.designNotes.bullets && (
+              <ul className="design-notes-bullets">
+                {project.designNotes.bullets.map((bullet, idx) => (
+                  <li key={idx}>{bullet}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+
         {/* ASSETS */}
         {hasAssets && (
           <section className="assets-section">
             <h3 className="assets-title">Assets</h3>
-
-            {/* PROOF OF GAME DESIGN (use assets-proof classes for correct side-by-side layout) */}
-            {project.designProof && (
-              <div className="assets-block assets-proof">
-                <h4 className="assets-subtitle">Proof of Game Design</h4>
-
-                <div className="assets-proof-content">
-                  <div className="assets-proof-image">
-                    <div className="proof-image-shell">
-                      <img
-                        src={project.designProof.image}
-                        alt={project.designProof.imageAlt || 'Gameplay system proof'}
-                        className="proof-image"
-                        onClick={() => setLightboxSrc(project.designProof.image)}
-                      />
-                    </div>
-                    <div className="assets-proof-caption">
-                      {project.designProof.caption || 'In-development combat UI. AI-generated concept art. Animation pending.'}
-                    </div>
-                  </div>
-
-                  <div className="assets-proof-text">
-                    {Array.isArray(project.designProof.notes) && project.designProof.notes.length > 0 && (
-                      <ul className="assets-proof-notes">
-                        {project.designProof.notes.map((n, i) => <li key={i}>{n}</li>)}
-                      </ul>
-                    )}
-
-                    {Array.isArray(project.designProof.breakdown) && project.designProof.breakdown.length > 0 && (
-                      <div className="assets-proof-breakdown">
-                        {project.designProof.breakdown.map((row, i) => (
-                          <div key={i} className="assets-proof-row">
-                            <div className="proof-label">{row.label}</div>
-                            <div className="proof-body">{row.text}</div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
 
             {/* Screenshots */}
             {images.length > 0 && (

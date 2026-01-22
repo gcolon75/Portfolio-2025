@@ -14,6 +14,17 @@ export const projects = [
     problem: 'Traditional roguelikes often rely too heavily on RNG, creating frustration when player skill cannot overcome bad luck.',
     approach: 'Designed deterministic dice systems, subclass resources, and combat rules that translate player intent into readable outcomes while preserving uncertainty.',
     result: 'A ~60% complete game design in active development, finishing core combat and progression features. Animation and visual polish are still pending, and current images are AI-generated concept art.',
+    designNotes: {
+      title: 'Proof of Game Design',
+      subtitle: 'From philosophy → rules → UI → implementable systems',
+      caption: 'In-development combat UI. AI-generated concept art. Animation pending.',
+      bullets: [
+        'Combat UI communicates critical game state with no hidden information',
+        'Blood Mage resource system demonstrates risk–reward via self-inflicted cost',
+        'Actions, triggers, and effects are deterministic and engineer-ready',
+        'Design preserves tension without relying on pure randomness'
+      ]
+    },
     role: 'Lead Game Designer & UX Designer',
     whatISpecificallyDid: [
       'Owned overall game vision, ruleset, and systemic design philosophy',
@@ -42,9 +53,11 @@ export const projects = [
     date: '2025',
     category: 'Game Design',
     route: '/projects/tower-of-greed',
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
+    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`,
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`
       ],
       pdfs: [
         {
@@ -59,42 +72,6 @@ export const projects = [
       videos: [],
       documents: [],
       links: []
-    },
-
-    // ✅ This is what feeds “Proof of Game Design” in the template
-    // IMPORTANT: Make sure this file exists in your public assets folder.
-    // Suggested path/name (rename your image to match if needed):
-    // /public/assets/projects/Tower of Greed/BloodMageProof.png
-    designProof: {
-      title: 'Proof of Game Design',
-      subtitle: 'From philosophy → rules → UI → implementable systems',
-      image: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageProof.png`,
-      alt: 'Blood Mage combat UI concept and class breakdown',
-      caption: 'In-development combat UI. AI-generated concept art. Animation pending.',
-      bullets: [
-        'Combat UI communicates critical game state with no hidden information',
-        'Blood Mage resource system demonstrates risk–reward via self-inflicted cost',
-        'Actions, triggers, and effects are deterministic and engineer-ready',
-        'Design preserves tension without relying on pure randomness'
-      ],
-      callouts: [
-        {
-          heading: 'Design Goal',
-          text: 'Preserve roguelike tension while ensuring player decisions meaningfully influence outcomes.'
-        },
-        {
-          heading: 'System Shown',
-          text: 'Blood Mage subclass generating Blood Charges via bleed, self-harm, and timing windows.'
-        },
-        {
-          heading: 'Player Choice',
-          text: 'Players decide when to sacrifice health for power versus when to stabilize or retreat.'
-        },
-        {
-          heading: 'Engineering Clarity',
-          text: 'Each action has explicit costs, conditions, and effects suitable for direct implementation.'
-        }
-      ]
     }
   },
 
