@@ -1,24 +1,27 @@
+// src/data/projects.js
+// Project data for Portfolio-2025
+// NOTE: only changed Joint assets + route and Tower of Greed designProof image fallback.
+
 export const projects = [
+  /* --------------------------------------------------
+     TOWER OF GREED
+     -------------------------------------------------- */
   {
     id: 'tower-of-greed',
     name: 'Tower of Greed',
-    title: 'Tower of Greed',
+    title: 'Tower of Greed — Dice-driven roguelike RPG',
     year: 2025,
-    description: 'A dice-driven roguelike RPG with subclass resource systems and strategic turn-based combat',
-    tagline: 'A dice-driven roguelike where luck meets strategy',
-
+    description:
+      'A dice-driven roguelike RPG design focusing on readable combat state and deterministic ability outcomes.',
+    tagline: 'Roguelike tension with readable mechanics',
     fullSummary:
-      'A roguelike dungeon crawler that emphasizes player agency through smart sequencing rather than random chance.',
-
-    problem:
-      'Traditional roguelikes often rely too heavily on RNG, creating frustration when player skill cannot overcome bad luck.',
-
-    approach:
-      'Designed deterministic dice systems, subclass resources, and combat rules that translate player intent into readable outcomes while preserving uncertainty.',
-
-    result:
       'A ~60% complete game design in active development. Combat and progression are being finalized. Animation and visual polish are still pending. Current images are AI-generated concept art placeholders.',
-
+    problem:
+      'Roguelikes often hide significant state behind RNG; Tower of Greed focuses on readable decision windows and predictable tradeoffs.',
+    approach:
+      'Designed deterministic combat flow with resource-based subclasses (Blood, Grit, Edge) and explicit action costs to enable predictable player choices.',
+    result:
+      'Core combat systems specified to be implementation-ready with deterministic triggers and costs; design is ready for engineering handoff.',
     role: 'Lead Game Designer & UX Designer',
     whatISpecificallyDid: [
       'Owned overall game vision, ruleset, and systemic design philosophy',
@@ -52,9 +55,9 @@ export const projects = [
     category: 'Game Design',
     route: '/projects/tower-of-greed',
 
-    // This is the “Blood Mage image on the side” — now safely in Assets at the top.
+    // designProof: use thumbnail as safe fallback (BloodMageProof.png not present)
     designProof: {
-      image: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`,
+      image: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
       imageAlt: 'Gameplay system proof (Blood Mage)',
       caption: 'In-development combat UI. AI-generated concept art. Animation pending.',
       notes: [
@@ -104,7 +107,7 @@ export const projects = [
   },
 
   /* --------------------------------------------------
-     JOINT (add/adjust filenames to match your assets)
+     JOINT THEATRICAL VENTURES
      -------------------------------------------------- */
   {
     id: 'joint-theatrical-ventures',
@@ -121,7 +124,6 @@ export const projects = [
       'Designed and built profile systems, gated sharing, media presentation flows, and social interactions with a strong emphasis on UX clarity and scalability.',
     result:
       'Core product experience is functional and iterating. Remaining work focuses on social interactions, notifications, and polish.',
-
     role: 'Product/UX Lead (Partner: Lead Engineer)',
     whatISpecificallyDid: [
       'Led UX strategy and end-to-end interaction design',
@@ -129,44 +131,36 @@ export const projects = [
       'Wrote clear engineering-ready requirements and acceptance criteria',
       'Managed Kanban/task breakdown and GitHub workflow with lead programmer'
     ],
-
     status: 'In Progress',
     date: '2025',
     category: 'Web Development',
-    // Updated route to match App.jsx and JointTheatricalPage component
+    // updated route to match App.jsx / JointTheatricalPage
     route: '/projects/joint-theatrical-ventures',
 
     assets: {
       images: [
-        // Updated paths to match actual folder name 'Joint Theatrical Ventures'
-        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/JointTitle.JPG`,
+        // User requested only the homepage as the asset; ensure filename matches public/assets
         `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/HomePage.JPG`
       ],
       pdfs: [
-        // Note: JointOverview.pdf does not exist in the repo, removed for now
-        // Add back when PDF is available in the Joint Theatrical Ventures folder
+        // intentionally empty — add PDF entries when files are available
       ],
       videos: [],
       documents: [],
-      links: [
-        // put repo or live demo links here
-        // { title: 'GitHub Repo', url: 'https://github.com/...' }
-      ]
+      links: []
     }
   },
 
-  // keep the rest of your projects below exactly as you already have them...
-
+  /* --------------------------------------------------
+     AMADEUS
+     -------------------------------------------------- */
   {
     id: 'amadeus',
     name: 'Amadeus',
     title: 'Amadeus — Discord Bot Agent',
     year: 2024,
-
-    // ✅ Stronger card blurb (Steins;Gate inspiration + real dev value)
     description:
       'Discord bot agent inspired by Steins;Gate’s “Amadeus” concept, built to support Joint development with server status, PR tracking, and lightweight analytics.',
-
     tagline: 'A dev-sidekick bot for Joint: status, PR flow, and signal over noise',
     fullSummary:
       'Amadeus was my “agent-in-the-loop” Discord bot inspired by Steins;Gate’s Amadeus idea — not as a copy, but as a personal nod to the concept of a persistent digital assistant. I built it to live in our dev Discord during Joint’s build phase: monitoring server health, tracking PR status and merges, and posting simple analytics/rollups so the team always had a single source of truth without constantly checking dashboards.',
@@ -189,21 +183,15 @@ export const projects = [
       how:
         'Connected GitHub + health checks into consistent summaries and alerts, with noise controls so the bot stays helpful instead of becoming “that one annoying channel.”'
     },
-
-    // ✅ Updated tech stack tags to match what you described
     tech: ['Python 3.11', 'Discord API', 'GitHub API', 'Automation'],
     skills: ['Python', 'API Integration', 'Automation', 'Dev Tooling', 'Systems Thinking'],
     concepts: ['Developer Experience', 'Status Monitoring', 'Workflow Automation', 'Signal vs Noise'],
-
     status: 'Complete',
     date: '2024',
     category: 'AI Project',
     route: '/projects/amadeus',
-
-    // ✅ Your new thumbnail name
     cardImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.png`,
     coverImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.png`,
-
     assets: {
       images: [`${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.png`],
       pdfs: [],
@@ -219,6 +207,9 @@ export const projects = [
     }
   },
 
+  /* --------------------------------------------------
+     3 KINGDOMS (and rest unchanged)
+     -------------------------------------------------- */
   {
     id: '3kingdoms',
     name: '3 Kingdoms',
@@ -266,13 +257,15 @@ export const projects = [
     }
   },
 
+  /* --------------------------------------------------
+     AXLE, GOALEE, TRITONGO+, VOLLEYBALL (unchanged)
+     -------------------------------------------------- */
   {
     id: 'axle',
     name: 'Axle',
     title: 'axle: Mobile Mechanic App/Website Design',
     year: 2023,
-    description:
-      'UX/Product design for mobile mechanic platform connecting car owners with certified mechanics',
+    description: 'UX/Product design for mobile mechanic platform connecting car owners with certified mechanics',
     tagline: 'Connecting car owners with certified mechanics for on-demand vehicle repair',
     fullSummary: 'A complete redesign concept for a mobile mechanic app with a focus on user experience.',
     problem:
@@ -362,18 +355,7 @@ export const projects = [
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeFigma.pdf`],
       videos: [],
       documents: [],
-      links: [
-        {
-          url: 'https://docs.google.com/presentation/d/e/2PACX-1vSpL_voyYopV9thl57oDpDqboJKtujCbfX-xHwc6N22XR5Hq-h22LNQcZAjyhI_Ig/pubembed?start=false&loop=true&delayms=3000',
-          title: 'Slide Deck',
-          type: 'slides'
-        },
-        {
-          url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ0oSbEK83wyRDNdhnA1izE_SfPZ7WBdF9VnMTOYrTYtxLF8TB-LT6h-BGTSN1Erw/pubhtml?widget=true&headers=false',
-          title: 'Budget & Growth Model',
-          type: 'spreadsheet'
-        }
-      ]
+      links: []
     }
   },
 

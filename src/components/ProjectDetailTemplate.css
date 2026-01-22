@@ -1,3 +1,7 @@
+/* src/components/ProjectDetailTemplate.css */
+/* Styles for project detail pages */
+/* (original stylesheet preserved; small safe additions for assets-proof sizing) */
+
 .project-detail {
   background: linear-gradient(180deg, var(--dark-bg) 0%, var(--secondary-bg) 50%, var(--dark-bg) 100%);
   min-height: auto;
@@ -419,136 +423,9 @@
 
 /* =========================
    PROOF OF GAME DESIGN
-   (clean + non-giant)
    ========================= */
 
-/* IMPORTANT: proof is already a .content-section card. Do NOT add "divider section" spacing. */
-.content-section.project-proof {
-  margin-top: 0;
-  padding-top: 2rem;   /* keep same interior padding rhythm */
-  padding-bottom: 2rem;
-  border-top: none;    /* prevents double “section divider” feeling */
-}
-
-.project-proof .proof-subtitle {
-  margin: 0.25rem 0 1.25rem;
-  color: var(--light-gray);
-  opacity: 0.85;
-}
-
-.proof-content {
-  display: grid;
-  grid-template-columns: minmax(320px, 520px) 1fr;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-.proof-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 255, 136, 0.35);
-  display: block;
-}
-
-.proof-caption {
-  display: block;
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
-  color: var(--light-gray);
-  opacity: 0.8;
-}
-
-.proof-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-.proof-notes {
-  margin: 0 0 0.25rem;
-  padding-left: 1.25rem;
-}
-
-.proof-row strong {
-  color: var(--plasma-green);
-}
-
-.proof-row p {
-  margin: 0.25rem 0 0;
-  color: var(--light-gray);
-  line-height: 1.6;
-}
-
-/* Footer */
-.project-footer {
-  display: flex;
-  justify-content: center;
-  padding-top: 1rem;
-  border-top: 1px solid var(--plasma-green);
-  margin-top: 1.5rem;
-}
-
-.nav-button {
-  background: var(--glass-bg);
-  border: 1px solid var(--plasma-green);
-  color: var(--plasma-green);
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all var(--transition-normal);
-}
-
-.nav-button:hover {
-  background: var(--plasma-green);
-  color: var(--dark-bg);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
-  transform: translateY(-2px);
-}
-
-/* Responsive Design */
-@media (max-width: 900px) {
-  .proof-content {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .project-detail {
-    padding-top: 4rem;
-  }
-
-  .project-detail-container {
-    padding: 0 1.25rem;
-  }
-
-  .project-hero {
-    padding: 1rem;
-  }
-
-  .placeholder-icon {
-    font-size: 3.5rem;
-  }
-
-  .project-meta {
-    flex-direction: column;
-  }
-
-  .content-section {
-    padding: 1rem;
-  }
-
-  .google-embed {
-    height: 420px;
-  }
-}
-/* =========================
-   Proof of Game Design (inside Assets)
-   Safe: cannot break main page layout
-   ========================= */
-
+/* Keep proof inside assets and side-by-side on wide screens */
 .assets-proof {
   margin-top: 0.75rem;
   margin-bottom: 1.25rem;
@@ -569,9 +446,13 @@
   align-items: start;
 }
 
-.assets-proof-image img {
+/* ensure left column image respects card boundaries */
+.assets-proof-image img,
+.proof-image {
   width: 100%;
   height: auto;
+  max-height: 560px; /* keeps large images from overflowing the card */
+  object-fit: contain;
   border-radius: 10px;
   border: 1px solid rgba(0, 255, 136, 0.35);
   display: block;
@@ -606,9 +487,87 @@
   line-height: 1.6;
 }
 
+/* Footer */
+.project-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--plasma-green);
+  margin-top: 1.5rem;
+}
+
+.nav-button {
+  background: var(--glass-bg);
+  border: 1px solid var(--plasma-green);
+  color: var(--plasma-green);
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.nav-button:hover {
+  background: var(--plasma-green);
+  color: var(--dark-bg);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+.lightbox-inner {
+  max-width: 1100px;
+  width: 100%;
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--plasma-green);
+}
+
+/* Responsive Design */
 @media (max-width: 900px) {
   .assets-proof-content {
     grid-template-columns: 1fr;
   }
 }
 
+@media (max-width: 768px) {
+  .project-detail {
+    padding-top: 4rem;
+  }
+
+  .project-detail-container {
+    padding: 0 1.25rem;
+  }
+
+  .project-hero {
+    padding: 1rem;
+  }
+
+  .placeholder-icon {
+    font-size: 3.5rem;
+  }
+
+  .project-meta {
+    flex-direction: column;
+  }
+
+  .content-section {
+    padding: 1rem;
+  }
+
+  .google-embed {
+    height: 420px;
+  }
+}

@@ -1,3 +1,4 @@
+// src/components/ProjectDetailTemplate.jsx
 import React, { useMemo, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PDFViewer from './PDFViewer';
@@ -57,9 +58,7 @@ const ProjectDetailTemplate = ({ project }) => {
 
   const heroImage = useMemo(() => {
     if (!project) return null;
-    // prefer explicit coverImage if used by other projects
     if (project.coverImage) return project.coverImage;
-
     const imgs = project.assets?.images;
     if (Array.isArray(imgs) && imgs.length > 0) return imgs[0];
     return null;
@@ -90,63 +89,51 @@ const ProjectDetailTemplate = ({ project }) => {
   return (
     <section className="project-detail">
       <div className="project-detail-container">
-
         <button className="back-button" onClick={() => navigate('/projects')}>
           ← Back
         </button>
 
         {/* HERO */}
         <div className="project-hero">
-          <div className="hero-image-wrapper">
-            {heroImage ? (
-              <img className="hero-image" src={heroImage} alt={project.title} />
-            ) : (
-              <div className="hero-placeholder">
-                <div className="placeholder-icon">🧩</div>
-              </div>
-            )}
-          </div>
-
+          {heroImage ? (
+            <div className="hero-image-wrapper">
+              <img src={heroImage} alt={project.title} className="hero-image" />
+            </div>
+          ) : (
+            <div className="hero-placeholder">
+              <div className="placeholder-icon">🎮</div>
+            </div>
+          )}
           <div className="hero-content">
             <h1 className="project-title">{project.title}</h1>
-            {project.tagline && <p className="project-tagline">{project.tagline}</p>}
-
+            {project.tagline && <div className="project-tagline">{project.tagline}</div>}
             <div className="project-meta">
-              {project.role && <span className="meta-badge">{project.role}</span>}
-              {project.year && <span className="meta-badge">{project.year}</span>}
-              {project.status && (
-                <span className={`meta-badge status ${String(project.status).toLowerCase().replace(' ', '-')}`}>
-                  {project.status}
-                </span>
-              )}
+              <div className={`meta-badge status ${String(project.status || '').toLowerCase().replace(/\s+/g, '-')}`}>
+                {project.status}
+              </div>
+              {project.date && <div className="meta-badge">{project.date}</div>}
+              {project.category && <div className="meta-badge">{project.category}</div>}
             </div>
           </div>
         </div>
 
-        {/* MAIN CONTENT */}
+        {/* CONTENT GRID */}
         <div className="project-content-grid">
           <div className="content-main">
+            <div className="content-section">
+              <h3 className="section-title">Problem</h3>
+              <p className="section-text">{project.problem}</p>
+            </div>
 
-            {project.problem && (
-              <div className="content-section">
-                <h3 className="section-title">Problem</h3>
-                <p className="section-text">{project.problem}</p>
-              </div>
-            )}
+            <div className="content-section">
+              <h3 className="section-title">Approach</h3>
+              <p className="section-text">{project.approach}</p>
+            </div>
 
-            {project.approach && (
-              <div className="content-section">
-                <h3 className="section-title">Approach</h3>
-                <p className="section-text">{project.approach}</p>
-              </div>
-            )}
-
-            {project.result && (
-              <div className="content-section">
-                <h3 className="section-title">Result</h3>
-                <p className="section-text">{project.result}</p>
-              </div>
-            )}
+            <div className="content-section">
+              <h3 className="section-title">Result</h3>
+              <p className="section-text">{project.result}</p>
+            </div>
 
             {Array.isArray(project.whatISpecificallyDid) && project.whatISpecificallyDid.length > 0 && (
               <div className="content-section">
@@ -166,7 +153,6 @@ const ProjectDetailTemplate = ({ project }) => {
                 {project.impact.how && <p className="impact-how">{project.impact.how}</p>}
               </div>
             )}
-
           </div>
         </div>
 
@@ -175,13 +161,13 @@ const ProjectDetailTemplate = ({ project }) => {
           <section className="assets-section">
             <h3 className="assets-title">Assets</h3>
 
-            {/* PROOF OF GAME DESIGN (SAFE: kept inside assets only) */}
+            {/* PROOF OF GAME DESIGN (use assets-proof classes for correct side-by-side layout) */}
             {project.designProof && (
-              <div className="assets-block">
+              <div className="assets-block assets-proof">
                 <h4 className="assets-subtitle">Proof of Game Design</h4>
 
-                <div className="proof-grid">
-                  <div className="proof-media">
+                <div className="assets-proof-content">
+                  <div className="assets-proof-image">
                     <div className="proof-image-shell">
                       <img
                         src={project.designProof.image}
@@ -190,22 +176,22 @@ const ProjectDetailTemplate = ({ project }) => {
                         onClick={() => setLightboxSrc(project.designProof.image)}
                       />
                     </div>
-                    <div className="proof-caption">
+                    <div className="assets-proof-caption">
                       {project.designProof.caption || 'In-development combat UI. AI-generated concept art. Animation pending.'}
                     </div>
                   </div>
 
-                  <div className="proof-text">
+                  <div className="assets-proof-text">
                     {Array.isArray(project.designProof.notes) && project.designProof.notes.length > 0 && (
-                      <ul className="proof-notes">
+                      <ul className="assets-proof-notes">
                         {project.designProof.notes.map((n, i) => <li key={i}>{n}</li>)}
                       </ul>
                     )}
 
                     {Array.isArray(project.designProof.breakdown) && project.designProof.breakdown.length > 0 && (
-                      <div className="proof-breakdown">
+                      <div className="assets-proof-breakdown">
                         {project.designProof.breakdown.map((row, i) => (
-                          <div key={i} className="proof-row">
+                          <div key={i} className="assets-proof-row">
                             <div className="proof-label">{row.label}</div>
                             <div className="proof-body">{row.text}</div>
                           </div>
@@ -243,8 +229,11 @@ const ProjectDetailTemplate = ({ project }) => {
                 <h4 className="assets-subtitle">Documents & PDFs</h4>
                 {pdfs.map((pdf, i) => (
                   <div key={i} className="pdf-wrapper">
-                    <h4 className="pdf-title">{pdf.title}</h4>
-                    <PDFViewer pdfUrl={pdf.url} />
+                    <div className="pdf-title">{pdf.title}</div>
+                    <div className="pdf-embed-shell">
+                      <PDFViewer url={pdf.url} />
+                    </div>
+                    <div className="pdf-note">View or download: <code>{pdf.url}</code></div>
                   </div>
                 ))}
               </div>
@@ -254,34 +243,34 @@ const ProjectDetailTemplate = ({ project }) => {
             {links.length > 0 && (
               <div className="assets-block">
                 <h4 className="assets-subtitle">Links</h4>
-                <div className="links-list">
+                <ul>
                   {links.map((l, i) => (
-                    <a key={i} className="asset-link" href={l.url} target="_blank" rel="noreferrer">
-                      {l.title}
-                    </a>
+                    <li key={i}><a href={l.url} target="_blank" rel="noreferrer">{l.title || l.url}</a></li>
                   ))}
-                </div>
+                </ul>
               </div>
             )}
           </section>
         )}
 
-        {/* Lightbox */}
+        {/* SMALL LIGHTBOX */}
         {lightboxSrc && (
-          <div className="lightbox" onClick={() => setLightboxSrc(null)} role="button" tabIndex={0}>
-            <button className="lightbox-close" onClick={() => setLightboxSrc(null)} type="button" aria-label="Close">
-              ×
-            </button>
-            <img className="lightbox-image" src={lightboxSrc} alt="Expanded preview" />
+          <div
+            className="lightbox-overlay"
+            onClick={() => setLightboxSrc(null)}
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="lightbox-inner" onClick={(e) => e.stopPropagation()}>
+              <button className="nav-button" onClick={() => setLightboxSrc(null)}>Close</button>
+              <img src={lightboxSrc} alt="Preview" style={{ width: '100%', height: 'auto', marginTop: '1rem' }} />
+            </div>
           </div>
         )}
 
         <div className="project-footer">
-          <button className="nav-button" onClick={() => navigate('/projects')}>
-            ← Back to Projects
-          </button>
+          <button className="nav-button" onClick={() => navigate('/projects')}>Back to Projects</button>
         </div>
-
       </div>
     </section>
   );
