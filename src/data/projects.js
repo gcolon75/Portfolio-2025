@@ -242,7 +242,7 @@ export const projects = [
         `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsTitleScreen.png`,
         `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsMap.JPG`
       ],
-      pdfs: [],
+      pdfs: [`${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/Three Kingdoms.pdf`],
       videos: [],
       documents: [],
       links: []
