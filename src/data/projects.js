@@ -53,8 +53,8 @@ export const projects = [
     date: '2025',
     category: 'Game Design',
     route: '/projects/tower-of-greed',
-    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumbnail.png`,
-    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumbnail.png`,
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
+    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`
