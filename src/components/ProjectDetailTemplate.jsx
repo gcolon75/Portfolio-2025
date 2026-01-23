@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import PDFViewer from './PDFViewer';
 import './ProjectDetailTemplate.css';
 
-function titleFromPath(url = '') {
+const safeStr = (v) => (typeof v === 'string' && v.trim().length > 0 ? v : null);
+
+const titleFromPath = (url = '') => {
   try {
     const clean = url.split('?')[0];
     const last = clean.split('/').pop() || 'Document';
@@ -12,51 +14,46 @@ function titleFromPath(url = '') {
   } catch {
     return 'Document';
   }
-}
+};
 
-function normalizePdfs(pdfs) {
+const normalizeImages = (images) => (Array.isArray(images) ? images.filter(Boolean) : []);
+
+const normalizePdfs = (pdfs) => {
   if (!Array.isArray(pdfs)) return [];
   return pdfs
-    .map(item => {
+    .map((item) => {
       if (!item) return null;
-      if (typeof item === 'string') {
-        return { title: titleFromPath(item), url: item };
-      }
+      if (typeof item === 'string') return { title: titleFromPath(item), url: item };
       if (typeof item === 'object') {
         const url = item.url || '';
         return { title: item.title || titleFromPath(url), url };
       }
       return null;
     })
-    .filter(x => x && typeof x.url === 'string' && x.url.trim().length > 0);
-}
+    .filter((x) => x && typeof x.url === 'string' && x.url.trim().length > 0);
+};
 
-function normalizeLinks(links) {
+const normalizeLinks = (links) => {
   if (!Array.isArray(links)) return [];
   return links
-    .map(item => {
+    .map((item) => {
       if (!item) return null;
       if (typeof item === 'string') return { title: item, url: item };
       if (typeof item === 'object') return { title: item.title || item.url, url: item.url };
       return null;
     })
-    .filter(x => x && x.url && String(x.url).trim().length > 0);
-}
+    .filter((x) => x && x.url && String(x.url).trim().length > 0);
+};
 
-function normalizeImages(images) {
-  if (!Array.isArray(images)) return [];
-  return images.filter(Boolean);
-}
-
-function toSafeUrl(url = '') {
+const toSafeUrl = (url = '') => {
   try {
-    return encodeURI(url);
+    return encodeURI(url); // good for spaces in paths
   } catch {
     return url;
   }
-}
+};
 
-const ProjectDetailTemplate = ({ project }) => {
+export default function ProjectDetailTemplate({ project }) {
   const navigate = useNavigate();
   const [lightboxSrc, setLightboxSrc] = useState(null);
 
@@ -64,19 +61,21 @@ const ProjectDetailTemplate = ({ project }) => {
     window.scrollTo(0, 0);
   }, []);
 
-  const heroImage = useMemo(() => {
-    if (!project) return null;
-    if (project.coverImage) return project.coverImage;
-    const imgs = project.assets?.images;
-    if (Array.isArray(imgs) && imgs.length > 0) return imgs[0];
-    return null;
-  }, [project]);
-
   const images = useMemo(() => normalizeImages(project?.assets?.images), [project]);
   const pdfs = useMemo(() => normalizePdfs(project?.assets?.pdfs), [project]);
   const links = useMemo(() => normalizeLinks(project?.assets?.links), [project]);
 
-  const hasAssets = (images && images.length > 0) || (pdfs && pdfs.length > 0) || (links && links.length > 0);
+  const hasAssets = images.length > 0 || pdfs.length > 0 || links.length > 0;
+
+  const heroImage = useMemo(() => {
+    if (!project) return null;
+    const candidate =
+      safeStr(project.coverImage) ||
+      safeStr(project.cardImage) ||
+      safeStr(project.assets?.images?.[0]) ||
+      null;
+    return candidate ? toSafeUrl(candidate) : null;
+  }, [project]);
 
   if (!project) {
     return (
@@ -105,18 +104,30 @@ const ProjectDetailTemplate = ({ project }) => {
         <div className="project-hero">
           {heroImage ? (
             <div className="hero-image-wrapper">
-              <img src={heroImage} alt={project.title} className="hero-image" />
+              <img
+                src={heroImage}
+                alt={project.title}
+                className="hero-image"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
             </div>
           ) : (
             <div className="hero-placeholder">
               <div className="placeholder-icon">🎮</div>
             </div>
           )}
+
           <div className="hero-content">
             <h1 className="project-title">{project.title}</h1>
             {project.tagline && <div className="project-tagline">{project.tagline}</div>}
             <div className="project-meta">
-              <div className={`meta-badge status ${String(project.status || '').toLowerCase().replace(/\s+/g, '-')}`}>
+              <div
+                className={`meta-badge status ${String(project.status || '')
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')}`}
+              >
                 {project.status}
               </div>
               {project.date && <div className="meta-badge">{project.date}</div>}
@@ -125,7 +136,7 @@ const ProjectDetailTemplate = ({ project }) => {
           </div>
         </div>
 
-        {/* CONTENT GRID */}
+        {/* CONTENT */}
         <div className="project-content-grid">
           <div className="content-main">
             <div className="content-section">
@@ -189,22 +200,28 @@ const ProjectDetailTemplate = ({ project }) => {
           <section className="assets-section">
             <h3 className="assets-title">Assets</h3>
 
-            {/* Screenshots */}
+            {/* Images */}
             {images.length > 0 && (
               <div className="assets-block">
                 <h4 className="assets-subtitle">Images</h4>
                 <div className={`image-gallery ${images.length === 1 ? 'single' : ''}`.trim()}>
-                  {images.map((src, i) => (
-                    <button
-                      key={i}
-                      className="gallery-item"
-                      onClick={() => setLightboxSrc(src)}
-                      aria-label="Open image"
-                      type="button"
-                    >
-                      <img src={src} alt={`${project.title} screenshot ${i + 1}`} />
-                    </button>
-                  ))}
+                  {images
+                    .map((src) => safeStr(src))
+                    .filter(Boolean)
+                    .map((src, i) => {
+                      const safeSrc = toSafeUrl(src);
+                      return (
+                        <button
+                          key={i}
+                          className="gallery-item"
+                          onClick={() => setLightboxSrc(safeSrc)}
+                          aria-label="Open image"
+                          type="button"
+                        >
+                          <img src={safeSrc} alt={`${project.title} screenshot ${i + 1}`} />
+                        </button>
+                      );
+                    })}
                 </div>
               </div>
             )}
@@ -214,16 +231,16 @@ const ProjectDetailTemplate = ({ project }) => {
               <div className="assets-block">
                 <h4 className="assets-subtitle">Documents & PDFs</h4>
                 {pdfs.map((pdf, i) => {
-                  const rawUrl = pdf.url;
-                  const safeUrl = toSafeUrl(rawUrl);
+                  const raw = pdf.url; // let PDFViewer handle encoding + checks
+                  const href = toSafeUrl(raw);
                   return (
                     <div key={i} className="pdf-wrapper">
                       <div className="pdf-title">{pdf.title}</div>
-                      <PDFViewer pdfUrl={rawUrl} title={pdf.title} />
+                      <PDFViewer pdfUrl={raw} title={pdf.title} />
                       <div className="pdf-note">
                         View or download:{' '}
-                        <a href={safeUrl} target="_blank" rel="noreferrer">
-                          <code>{safeUrl}</code>
+                        <a href={href} target="_blank" rel="noreferrer">
+                          <code>{href}</code>
                         </a>
                       </div>
                     </div>
@@ -238,7 +255,11 @@ const ProjectDetailTemplate = ({ project }) => {
                 <h4 className="assets-subtitle">Links</h4>
                 <ul>
                   {links.map((l, i) => (
-                    <li key={i}><a href={l.url} target="_blank" rel="noreferrer">{l.title || l.url}</a></li>
+                    <li key={i}>
+                      <a href={toSafeUrl(l.url)} target="_blank" rel="noreferrer">
+                        {l.title || l.url}
+                      </a>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -246,7 +267,7 @@ const ProjectDetailTemplate = ({ project }) => {
           </section>
         )}
 
-        {/* SMALL LIGHTBOX */}
+        {/* LIGHTBOX */}
         {lightboxSrc && (
           <div
             className="lightbox-overlay"
@@ -255,18 +276,20 @@ const ProjectDetailTemplate = ({ project }) => {
             aria-modal="true"
           >
             <div className="lightbox-inner" onClick={(e) => e.stopPropagation()}>
-              <button className="nav-button" onClick={() => setLightboxSrc(null)}>Close</button>
+              <button className="nav-button" onClick={() => setLightboxSrc(null)}>
+                Close
+              </button>
               <img src={lightboxSrc} alt="Preview" style={{ width: '100%', height: 'auto', marginTop: '1rem' }} />
             </div>
           </div>
         )}
 
         <div className="project-footer">
-          <button className="nav-button" onClick={() => navigate('/projects')}>Back to Projects</button>
+          <button className="nav-button" onClick={() => navigate('/projects')}>
+            Back to Projects
+          </button>
         </div>
       </div>
     </section>
   );
-};
-
-export default ProjectDetailTemplate;
+}
