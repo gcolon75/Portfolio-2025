@@ -53,8 +53,8 @@ export const projects = [
     date: '2025',
     category: 'Game Design',
     route: '/projects/tower-of-greed',
-    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
-    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
+    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedThumb.png`,
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedThumb.png`,
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`
@@ -127,7 +127,7 @@ export const projects = [
     category: 'Web Development',
     route: '/projects/joint-theatrical-ventures',
 
-    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/JointTitle.JPG`,
+    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/JointTitle.JPG`,
 
     assets: {
       images: [
@@ -242,7 +242,7 @@ export const projects = [
         `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsTitleScreen.png`,
         `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsMap.JPG`
       ],
-      pdfs: [],
+      pdfs: [`${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/Three Kingdoms.pdf`],
       videos: [],
       documents: [],
       links: []
