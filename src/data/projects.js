@@ -53,8 +53,8 @@ export const projects = [
     date: '2025',
     category: 'Game Design',
     route: '/projects/tower-of-greed',
-    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
-    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumb.png`,
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumbnail.png`,
+    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TowerOfGreedThumbnail.png`,
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`
@@ -84,34 +84,49 @@ export const projects = [
     title: 'Joint Theatrical Ventures',
     year: 2025,
     description:
-      'A modern creative network for reels, scripts, and collaboration (In Development)',
+      'Co-founded and shipped a production-ready creative networking platform — PM + UX + full-stack delivery',
     tagline: 'Your work deserves a stage',
     fullSummary:
-      'A platform for creative professionals to present work cleanly, connect with collaborators, and manage sharing without fragmented tools.',
+      'Joint is an early-stage platform for entertainment professionals to showcase work, discover collaborators, and share media without the chaos of scattered links and DMs. I led the product end-to-end — market research to UX to implementation — and shipped the core experience to production.',
     problem:
-      'Creative professionals struggle to present work cleanly and connect with collaborators without fragmented tools.',
+      'Creators need a single place to present their work professionally and connect with collaborators, but existing workflows are fragmented, inconsistent, and hard to manage.',
     approach:
-      'Designed and built profile systems, gated sharing, media presentation flows, and social interactions with a strong emphasis on UX clarity and scalability.',
+      'Validated the direction with lightweight market research and UX surveys, mapped the core user journeys in Figma, then built and deployed the product using a rapid PM/engineering loop (Kanban roadmap → scoped tickets → ship → iterate).',
     result:
-      'Core product experience is functional and iterating. Remaining work focuses on social interactions, notifications, and polish.',
-    role: 'Lead UX Designer & Product Manager',
+      'Delivered a live, functional MVP with authentication, profiles, media uploads, posting tools, feed/discovery, search, and account settings. Ongoing work focuses on deeper social interactions, notifications, and polish.',
+    role: 'Co-Founder • Product Manager • Lead UX/Frontend Engineer',
     whatISpecificallyDid: [
-      'Led UX strategy and end-to-end interaction design',
-      'Designed profile architecture, portfolio presentation, and discovery flows',
-      'Wrote clear engineering-ready requirements and acceptance criteria',
-      'Managed Kanban/task breakdown and GitHub workflow with lead programmer'
+      'Owned product strategy: market/competitor research, positioning, MVP scope, and feature prioritization',
+      'Designed the UX in Figma: information architecture, key flows, interaction patterns, and reusable UI components',
+      'Ran lightweight UX surveys/interviews and translated findings into roadmap decisions and iteration plans',
+      'Built the React app end-to-end: auth, profiles, uploads, posting, feed, search, notifications, and settings',
+      'Integrated with AWS serverless backend (Lambda, API Gateway, S3, CloudFront) and managed deploys/environments',
+      'Led execution as PM: Kanban backlog, contractor interviews, timeline/budget scope control, and release coordination',
+      'Used AI-assisted workflows for prototyping/debugging while keeping final architecture and code quality deliberate'
     ],
-    tech: ['React', 'Node', 'AWS', 'Postgres', 'Prisma', 'Serverless'],
-    skills: ['Product Design', 'UX Strategy', 'Information Architecture', 'Systems Thinking'],
-    concepts: ['Creator Tools', 'Collaboration', 'Sharing Controls', 'Media Presentation'],
+    impact: {
+      statement:
+        'Demonstrated full-spectrum product execution — research, UX, engineering, and delivery — by shipping a real platform under startup constraints.',
+      how:
+        'Kept velocity high with a tight PM loop (clear tickets + acceptance criteria), while maintaining scalable UI patterns and deploy-ready infrastructure.'
+    },
+    tech: ['React', 'AWS (Lambda/API Gateway/S3/CloudFront)', 'Postgres', 'Prisma', 'Serverless', 'Figma'],
+    skills: [
+      'Product Management',
+      'UX Design',
+      'User Research',
+      'Information Architecture',
+      'Frontend Engineering',
+      'System Integration',
+      'Project Planning',
+      'Contractor Interviewing'
+    ],
+    concepts: ['Creator Tools', 'Collaboration', 'Sharing Controls', 'Marketplace Discovery', 'MVP Execution'],
     status: 'In Progress',
     date: '2025',
     category: 'Web Development',
     route: '/projects/joint-theatrical-ventures',
 
-    // ✅ What you asked for:
-    // - Title thumbnail on top (hero)
-    // - Only homepage image in Assets (full screen style handled by CSS change below)
     coverImage: `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/JointTitle.JPG`,
 
     assets: {
@@ -119,10 +134,7 @@ export const projects = [
         `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Homepage.JPG`
       ],
       pdfs: [],
-      videos: [
-        // If you want the mp4 shown in assets later, add it here:
-        // { title: 'Demo', url: `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/JointDemo.mp4` }
-      ],
+      videos: [],
       documents: [],
       links: []
     }

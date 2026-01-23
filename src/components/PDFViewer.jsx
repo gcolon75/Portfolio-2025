@@ -3,74 +3,111 @@ import React, { useEffect, useMemo, useState } from 'react';
 /**
  * PDFViewer
  * - Embeds a PDF (scrollable) using an iframe
- * - Detects missing assets on SPA hosts (where missing files often fall back to index.html)
- * - No download / open controls (embed-only)
- *
- * Defensive: accepts either a string URL or an object like { url }.
+ * - Tries to detect “SPA fallback to index.html” without false positives
+ * - Defensive props: accepts pdfUrl OR url OR src (string or { url })
  */
-export default function PDFViewer({ pdfUrl, title = 'Document' }) {
+
+function extractUrl(input) {
+  if (!input) return '';
+  if (typeof input === 'string') return input;
+  if (typeof input === 'object') {
+    if (typeof input.url === 'string') return input.url;
+    if (typeof input.href === 'string') return input.href;
+    if (typeof input.src === 'string') return input.src;
+  }
+  return String(input);
+}
+
+function safeEncode(u) {
+  try {
+    return encodeURI(u);
+  } catch {
+    return u;
+  }
+}
+
+function startsWithPdfSignature(buf) {
+  if (!buf || buf.byteLength < 4) return false;
+  const u8 = new Uint8Array(buf.slice(0, 4));
+  const sig = String.fromCharCode(u8[0], u8[1], u8[2], u8[3]);
+  return sig === '%PDF';
+}
+
+export default function PDFViewer({ pdfUrl, url, src, title = 'Document' }) {
   const [status, setStatus] = useState('loading'); // loading | ok | missing | unknown
   const [contentType, setContentType] = useState('');
 
   const rawUrl = useMemo(() => {
-    if (!pdfUrl) return '';
-    if (typeof pdfUrl === 'string') return pdfUrl;
-    if (typeof pdfUrl === 'object' && typeof pdfUrl.url === 'string') return pdfUrl.url;
-    return String(pdfUrl);
-  }, [pdfUrl]);
+    return (extractUrl(pdfUrl) || extractUrl(url) || extractUrl(src) || '').trim();
+  }, [pdfUrl, url, src]);
 
-  const url = useMemo(() => {
-    if (!rawUrl) return '';
-    // encodeURI keeps slashes intact but safely escapes spaces and other characters
-    return encodeURI(rawUrl);
-  }, [rawUrl]);
+  const encodedUrl = useMemo(() => (rawUrl ? safeEncode(rawUrl) : ''), [rawUrl]);
 
   useEffect(() => {
     let cancelled = false;
 
     async function check() {
-      if (!url) {
+      if (!encodedUrl) {
         setStatus('missing');
         return;
       }
 
-      const looksLikePdf = url.toLowerCase().includes('.pdf');
+      const looksLikePdf = rawUrl.toLowerCase().includes('.pdf');
 
+      // 1) Quick HEAD check: only treat a hard 404 as missing.
       try {
-        // HEAD is cheap, but some hosts disallow it. We handle that gracefully.
-        const res = await fetch(url, { method: 'HEAD' });
-
+        const head = await fetch(encodedUrl, { method: 'HEAD', cache: 'no-store' });
         if (cancelled) return;
 
-        if (!res.ok) {
-          setStatus('missing');
-          return;
-        }
-
-        const ct = (res.headers.get('content-type') || '').toLowerCase();
+        const ct = (head.headers.get('content-type') || '').toLowerCase();
         setContentType(ct);
 
-        // If the host SPA falls back to index.html, this usually comes back as text/html.
-        if (ct.includes('text/html')) {
+        if (head.status === 404) {
           setStatus('missing');
           return;
         }
 
-        if (ct.includes('application/pdf') || looksLikePdf) {
+        if (head.ok && (ct.includes('application/pdf') || (ct.includes('octet-stream') && looksLikePdf))) {
           setStatus('ok');
           return;
         }
+        // Don’t mark missing just because ct is text/html — we verify by signature below.
+      } catch {
+        // ignore and fall through
+      }
 
-        // Some hosts return application/octet-stream for PDFs; allow it if extension matches.
-        if (ct.includes('octet-stream') && looksLikePdf) {
-          setStatus('ok');
-          return;
-        }
+      // 2) Byte sniff: grab the first chunk and look for %PDF
+      try {
+        const res = await fetch(encodedUrl, {
+          method: 'GET',
+          cache: 'no-store',
+          headers: { Range: 'bytes=0-1023' }
+        });
 
-        setStatus('unknown');
-      } catch (e) {
         if (cancelled) return;
-        // If HEAD isn't supported, we still try to render the iframe.
+
+        if (res.status === 404) {
+          setStatus('missing');
+          return;
+        }
+
+        if (!res.ok) {
+          setStatus(looksLikePdf ? 'unknown' : 'missing');
+          return;
+        }
+
+        const buf = await res.arrayBuffer();
+        if (cancelled) return;
+
+        if (startsWithPdfSignature(buf)) {
+          setStatus('ok');
+          return;
+        }
+
+        // Not a PDF signature (often index.html fallback on SPA hosts).
+        setStatus(looksLikePdf ? 'missing' : 'unknown');
+      } catch {
+        if (cancelled) return;
         setStatus(looksLikePdf ? 'unknown' : 'missing');
       }
     }
@@ -82,14 +119,13 @@ export default function PDFViewer({ pdfUrl, title = 'Document' }) {
     return () => {
       cancelled = true;
     };
-  }, [url]);
+  }, [encodedUrl, rawUrl]);
 
-  // Common PDF viewer params
   const iframeSrc = useMemo(() => {
-    if (!url) return '';
-    // Keep the toolbar hidden and fit nicely by default.
-    return `${url}#view=FitH&toolbar=0&navpanes=0&scrollbar=1`;
-  }, [url]);
+    if (!encodedUrl) return '';
+    const base = encodedUrl.split('#')[0];
+    return `${base}#view=FitH&toolbar=0&navpanes=0&scrollbar=1`;
+  }, [encodedUrl]);
 
   return (
     <div className="pdf-embed-shell">
@@ -100,16 +136,16 @@ export default function PDFViewer({ pdfUrl, title = 'Document' }) {
             Expected: <code>{rawUrl || '(empty url)'}</code>
           </div>
           <div style={{ marginTop: '0.6rem' }}>
-            If you&apos;re seeing your portfolio inside this box, the PDF URL is 404ing and your host is
-            falling back to <code>index.html</code>.
+            If you&apos;re seeing your portfolio inside this box, the PDF URL is failing and your host is falling back to{' '}
+            <code>index.html</code>.
           </div>
         </div>
       ) : (
         <>
           {status === 'unknown' && (
             <div className="pdf-note">
-              Couldn&apos;t verify the file type{contentType ? ` (${contentType})` : ''}. If this looks wrong,
-              double-check the asset path/casing.
+              Couldn&apos;t verify the file type{contentType ? ` (${contentType})` : ''}. If this looks wrong, double-check the
+              asset path/casing.
             </div>
           )}
 

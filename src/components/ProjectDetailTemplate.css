@@ -346,6 +346,9 @@
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
+  /* override any global `section { min-height: 100vh; }` rules */
+  min-height: 0;
+  height: auto;
 }
 
 .assets-title {
@@ -407,6 +410,22 @@
   height: 100%;
   object-fit: contain;
   object-position: center;
+}
+
+/* Single-image gallery: keep it tidy (no giant empty scroll) */
+.image-gallery.single {
+  grid-template-columns: minmax(0, 980px);
+  justify-content: center;
+}
+
+.image-gallery.single .gallery-item {
+  aspect-ratio: auto;
+  max-height: 560px;
+}
+
+.image-gallery.single .gallery-item img {
+  height: auto;
+  max-height: 560px;
 }
 
 /* Embeds */
@@ -582,6 +601,7 @@
   z-index: 9999;
   padding: 2rem;
 }
+
 .lightbox-inner {
   max-width: 1100px;
   width: 100%;

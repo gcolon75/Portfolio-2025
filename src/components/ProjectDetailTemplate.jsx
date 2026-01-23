@@ -48,6 +48,14 @@ function normalizeImages(images) {
   return images.filter(Boolean);
 }
 
+function toSafeUrl(url = '') {
+  try {
+    return encodeURI(url);
+  } catch {
+    return url;
+  }
+}
+
 const ProjectDetailTemplate = ({ project }) => {
   const navigate = useNavigate();
   const [lightboxSrc, setLightboxSrc] = useState(null);
@@ -185,7 +193,7 @@ const ProjectDetailTemplate = ({ project }) => {
             {images.length > 0 && (
               <div className="assets-block">
                 <h4 className="assets-subtitle">Images</h4>
-                <div className="image-gallery">
+                <div className={`image-gallery ${images.length === 1 ? 'single' : ''}`.trim()}>
                   {images.map((src, i) => (
                     <button
                       key={i}
@@ -205,15 +213,22 @@ const ProjectDetailTemplate = ({ project }) => {
             {pdfs.length > 0 && (
               <div className="assets-block">
                 <h4 className="assets-subtitle">Documents & PDFs</h4>
-                {pdfs.map((pdf, i) => (
-                  <div key={i} className="pdf-wrapper">
-                    <div className="pdf-title">{pdf.title}</div>
-                    <div className="pdf-embed-shell">
-                      <PDFViewer url={pdf.url} />
+                {pdfs.map((pdf, i) => {
+                  const rawUrl = pdf.url;
+                  const safeUrl = toSafeUrl(rawUrl);
+                  return (
+                    <div key={i} className="pdf-wrapper">
+                      <div className="pdf-title">{pdf.title}</div>
+                      <PDFViewer pdfUrl={rawUrl} title={pdf.title} />
+                      <div className="pdf-note">
+                        View or download:{' '}
+                        <a href={safeUrl} target="_blank" rel="noreferrer">
+                          <code>{safeUrl}</code>
+                        </a>
+                      </div>
                     </div>
-                    <div className="pdf-note">View or download: <code>{pdf.url}</code></div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 
