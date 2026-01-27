@@ -131,7 +131,7 @@ export const projects = [
 
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Homepage.JPG`
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/HomePage.JPG`
       ],
       pdfs: [],
       videos: [],
