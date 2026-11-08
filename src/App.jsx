@@ -19,6 +19,7 @@ import AxlePage from './components/AxlePage';
 import GoaleePage from './components/GoaleePage';
 import TritonGoPlusPage from './components/TritonGoPlusPage';
 import VolleyballPage from './components/VolleyballPage';
+import VIChat from './components/VIChat';
 import './index.css';
 
 function HomePage() {
@@ -63,6 +64,7 @@ function App() {
             <p>&copy; 2025 Gabriel Colon. Built with React & Framer Motion.</p>
           </div>
         </footer>
+        <VIChat />
       </div>
     </Router>
   );
