@@ -1,8 +1,14 @@
 import { answerLocally } from './localEngine';
 import { buildSystemPrompt } from './knowledge';
 
-test('answers current role from profile', () => {
-  expect(answerLocally('What does Gabriel do right now?')).toMatch(/PCI Pharma/);
+test('answers current role from profile, in third person, without repeating the intro', () => {
+  const a = answerLocally('What does Gabriel do right now?');
+  expect(a).toMatch(/^Right now Gabriel holds two roles/);
+  expect(a).not.toMatch(/\bI'm\b|\bI build\b/);
+});
+
+test('answers who-is questions with the third-person intro', () => {
+  expect(answerLocally('Who is Gabriel?')).toMatch(/^Gabriel Colon builds/);
 });
 
 test('answers a specific project by name', () => {

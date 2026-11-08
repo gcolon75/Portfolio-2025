@@ -15,13 +15,14 @@ export function buildChunks() {
     {
       id: 'intro',
       title: 'Who Gabriel is',
-      keywords: ['who', 'about', 'yourself', 'gabriel', 'background', 'summary', 'intro', 'tell', 'bio', 'you'],
-      text: `${p.bio} Focus: ${p.headline}.`
+      // No 'gabriel' keyword: nearly every question names him, so it would drown out real topics.
+      keywords: ['who', 'about', 'yourself', 'background', 'summary', 'intro', 'bio', 'overview'],
+      text: p.viIntro
     },
     {
       id: 'current-role',
       title: 'Current work',
-      keywords: ['job', 'work', 'role', 'current', 'now', 'pci', 'pharma', 'employer', 'company', 'doing', 'position', 'title'],
+      keywords: ['job', 'work', 'role', 'roles', 'current', 'currently', 'now', 'right', 'today', 'pci', 'pharma', 'employer', 'company', 'doing', 'position', 'title'],
       text:
         'Right now Gabriel holds two roles. ' +
         p.experience

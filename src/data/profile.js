@@ -17,6 +17,12 @@ export const profile = {
     'PCI Pharma Services, a CDMO, where I migrate and validate quality records in a regulated environment. ' +
     'I also lead AI-driven product development at Joint Theatrical Ventures. My background is Cognitive ' +
     'Science from UCSD, so I design for how people actually think, then build the thing end to end.',
+  // Third-person version the VI uses.
+  viIntro:
+    'Gabriel Colon builds AI automation and moves data that has to be right. He is a QA Data Migration ' +
+    'Specialist at PCI Pharma Services and leads AI-driven product development at Joint Theatrical Ventures. ' +
+    'He has a B.S. in Cognitive Science from UCSD and is based in San Diego. His focus: AI automation, ' +
+    'AI enablement, data migration, and full-stack building.',
   openTo: 'Roles in AI automation, AI enablement, data migration, and full-stack development. Open to relocation.',
   experience: [
     {
