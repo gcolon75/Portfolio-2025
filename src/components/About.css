@@ -25,7 +25,6 @@
 
 .about-card {
   background: var(--card-bg);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(74, 158, 255, 0.2);
   border-radius: 15px;
   padding: 2rem;

@@ -14,7 +14,6 @@
   right: -10%;
   border-radius: 50%;
   filter: blur(100px);
-  animation: float 12s infinite ease-in-out;
 }
 
 .contact-grid {
@@ -198,7 +197,6 @@
 
 .info-card {
   background: var(--card-bg);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(74, 158, 255, 0.2);
   border-radius: 20px;
   padding: 2.5rem;
