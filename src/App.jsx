@@ -61,7 +61,7 @@ function App() {
         </main>
         <footer className="footer">
           <div className="container">
-            <p>&copy; 2025 Gabriel Colon. Built with React & Framer Motion.</p>
+            <p>&copy; {new Date().getFullYear()} Gabriel Colon. Built with React, Framer Motion, and a Claude-powered VI.</p>
           </div>
         </footer>
         <VIChat />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { profile } from '../data/profile';
 import './Hero.css';
 
 const Hero = () => {
@@ -7,7 +8,7 @@ const Hero = () => {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  const roles = useMemo(() => ['UX Designer', 'Frontend Developer', 'Project Manager', 'AI Enthusiast'], []);
+  const roles = useMemo(() => profile.roles, []);
 
   useEffect(() => {
     const currentRole = roles[currentRoleIndex];

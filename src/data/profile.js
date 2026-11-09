@@ -9,7 +9,7 @@ export const profile = {
   phone: '(847) 778-1274',
   github: 'https://github.com/gcolon75',
   linkedin: 'https://www.linkedin.com/in/gabriel-colon',
-  education: 'UCSD, B.S. Cognitive Science',
+  education: 'UCSD, B.S. Cognitive Science: Human Computer Interaction',
   headline: 'AI automation, AI enablement, data migration, full-stack builder',
   roles: ['AI Automation Builder', 'Data Migration Specialist', 'Full-Stack Developer', 'AI Enablement Lead'],
   bio:

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaMapMarkerAlt, FaUniversity, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { profile } from '../data/profile';
 import './About.css';
 
 const About = () => {
@@ -48,29 +49,25 @@ const About = () => {
           >
             <h3>About Me</h3>
             <p className="bio-text">
-              I'm a UX designer and creative technologist passionate about building intuitive digital experiences 
-              that blend user-centered design with cutting-edge technology. With a B.S. in Cognitive Science from 
-              UC San Diego, I bring a unique perspective combining psychology, design thinking, and technical 
-              implementation to every project. My work spans UX/UI design, frontend development, game design, 
-              and AI integration—always focused on creating solutions that are both innovative and accessible.
+              {profile.bio}
             </p>
             
             <div className="info-grid">
               <div className="info-item">
                 <FaMapMarkerAlt className="info-icon" />
-                <span>San Diego, CA</span>
+                <span>{profile.location}</span>
               </div>
               <div className="info-item">
                 <FaUniversity className="info-icon" />
-                <span>UCSD B.S. Cognitive Science: Human Computer Interaction</span>
+                <span>{profile.education}</span>
               </div>
               <div className="info-item">
                 <FaEnvelope className="info-icon" />
-                <span>ghawk075@gmail.com</span>
+                <span>{profile.email}</span>
               </div>
               <div className="info-item">
                 <FaPhone className="info-icon" />
-                <span>(847) 778-1274</span>
+                <span>{profile.phone}</span>
               </div>
             </div>
           </motion.div>
