@@ -4,7 +4,7 @@ import { projects } from '../data/projects';
 
 test('answers current role from profile, in third person, without repeating the intro', () => {
   const a = answerLocally('What does Gabriel do right now?');
-  expect(a).toMatch(/^Right now Gabriel holds two roles/);
+  expect(a).toMatch(/^Right now Gabriel is an AI Enablement Specialist at Axos Bank/);
   expect(a).not.toMatch(/\bI'm\b|\bI build\b/);
 });
 
@@ -68,4 +68,14 @@ test('no doubled periods when data already ends with one', () => {
   projects.forEach((pr) => {
     expect(answerLocally(`Tell me about ${pr.name}`)).not.toMatch(/\.\./);
   });
+});
+
+test('Axos questions get the current role, not PCI', () => {
+  const a = answerLocally('What does he do at Axos?');
+  expect(a).toMatch(/AI Enablement Specialist at Axos Bank/);
+  expect(a).not.toMatch(/holds two roles/);
+});
+
+test('hiring answers say he just started at Axos', () => {
+  expect(answerLocally('Is he open to new roles?')).toMatch(/just started/);
 });

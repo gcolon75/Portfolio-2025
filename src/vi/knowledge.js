@@ -32,23 +32,25 @@ export function buildChunks() {
     {
       id: 'current-role',
       title: 'Current work',
-      keywords: ['job', 'work', 'role', 'roles', 'current', 'currently', 'now', 'right', 'today', 'pci', 'pharma', 'employer', 'company', 'doing', 'position', 'title'],
+      keywords: ['job', 'work', 'role', 'roles', 'current', 'currently', 'now', 'right', 'today', 'axos', 'bank', 'banking', 'employer', 'company', 'doing', 'position', 'title'],
       text:
-        'Right now Gabriel holds two roles. ' +
+        'Right now Gabriel is ' +
         p.experience
           .filter((e) => /present/i.test(e.dates))
-          .map((e) => `${e.title} at ${e.org} (${e.dates}): ${e.summary}`)
-          .join(' ')
+          .map((e) => `${/^[aeiou]/i.test(e.title) ? 'an' : 'a'} ${e.title} at ${e.org} (${e.dates}). ${e.summary}`)
+          .join(' ') +
+        ' Before that he was a QA Data Migration Specialist at PCI Pharma Services and co-founded Joint Theatrical Ventures.'
     },
     {
       id: 'data-migration',
       title: 'Data migration',
-      keywords: ['data', 'migration', 'migrate', 'qa', 'quality', 'gmp', 'validation', 'reconcile', 'reconciliation', 'regulated', 'sql', 'powershell', 'excel'],
+      keywords: ['data', 'migration', 'migrate', 'qa', 'quality', 'pci', 'pharma', 'gmp', 'validation', 'reconcile', 'reconciliation', 'regulated', 'sql', 'powershell', 'excel'],
       text:
-        'At PCI Pharma Services Gabriel migrates and validates quality system data in a regulated pharma environment. ' +
-        'The core of the job is reconciliation: making the system of record, the file share, and the Excel tracker agree, then ' +
-        'proving it. He built PowerShell tooling that reconciles all three, writes findings CSVs explaining every mismatch, ' +
-        'runs bulk renames and moves as reversible dry runs, and cleans up the tracker by script. ' +
+        'At PCI Pharma Services (March to September 2026) Gabriel migrated and audited 50,000+ regulated records with Quality, IT, and Compliance. ' +
+        'The core of the job was reconciliation: making the system of record, the file share, and the Excel tracker agree, then ' +
+        'proving it. He built a 58-function PowerShell suite that reconciled 20,000+ controlled documents and cut a multi-day ' +
+        'manual review to about 3 minutes. It wrote findings CSVs explaining every mismatch, ran bulk renames and moves as ' +
+        'reversible dry runs, and cleaned up the tracker by script. ' +
         'The portfolio has a full project page on it: "PCI QA Data Migration Automation".'
     },
     {
@@ -58,7 +60,8 @@ export function buildChunks() {
       text:
         'Gabriel builds AI automation: agents, LLM workflows, and prompt-engineered tooling that remove manual work. ' +
         `Certifications: ${p.certifications.filter((c) => !/project management/i.test(c)).join(', ')}. ` +
-        'At Joint Theatrical Ventures he leads AI-driven product development. ' +
+        'At Axos Bank he is an AI Enablement Specialist: building AI tools for the Consumer Division, running intake for AI initiatives, and applying AI governance. ' +
+        'Before that he co-founded Joint Theatrical Ventures and led its AI-driven product development. ' +
         `AI and automation projects in the portfolio: ${projects.filter(isAI).map((pr) => `${pr.name} (${clean(pr.description)})`).join('; ')}. ` +
         'This VI is one of his builds: a React chat front end with a Claude-backed serverless agent behind it.'
     },
@@ -102,7 +105,7 @@ export function buildChunks() {
     {
       id: 'hire',
       title: 'Hiring and availability',
-      keywords: ['hire', 'hiring', 'available', 'availability', 'open', 'looking', 'relocate', 'relocation', 'remote', 'opportunity', 'opportunities', 'salary', 'freelance'],
+      keywords: ['hire', 'hiring', 'new', 'available', 'availability', 'open', 'looking', 'relocate', 'relocation', 'remote', 'opportunity', 'opportunities', 'salary', 'freelance'],
       text: `${p.openTo} For specifics like compensation or start date, reach Gabriel directly at ${p.email}.`
     },
     {
@@ -172,5 +175,5 @@ export const SUGGESTED_QUESTIONS = [
   'What does Gabriel do right now?',
   'What AI automation has he built?',
   'Tell me about his data migration work',
-  'Is he open to new roles?'
+  'What does he do at Axos?'
 ];
