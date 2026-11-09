@@ -196,3 +196,8 @@ section {
     scroll-behavior: auto !important;
   }
 }
+
+/* Holds the page height while a lazy route loads, so the footer does not jump. */
+.route-loading {
+  min-height: 100vh;
+}
