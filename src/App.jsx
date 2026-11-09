@@ -19,6 +19,7 @@ import AxlePage from './components/AxlePage';
 import GoaleePage from './components/GoaleePage';
 import TritonGoPlusPage from './components/TritonGoPlusPage';
 import VolleyballPage from './components/VolleyballPage';
+import PCIAutomationPage from './components/PCIAutomationPage';
 import VIChat from './components/VIChat';
 import './index.css';
 
@@ -57,6 +58,7 @@ function App() {
             <Route path="/projects/goalee" element={<GoaleePage />} />
             <Route path="/projects/tritongoplus" element={<TritonGoPlusPage />} />
             <Route path="/projects/volleyball" element={<VolleyballPage />} />
+            <Route path="/projects/pci-qa-automation" element={<PCIAutomationPage />} />
           </Routes>
         </main>
         <footer className="footer">

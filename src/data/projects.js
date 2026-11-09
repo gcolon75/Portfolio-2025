@@ -141,6 +141,71 @@ export const projects = [
   },
 
 
+  /* --------------------------------------------------
+     PCI PHARMA SERVICES: QA DATA MIGRATION AUTOMATION
+     Public page: names PCI, keeps everything generic.
+     No internal system names, document IDs, screenshots, or data.
+     -------------------------------------------------- */
+  {
+    id: 'pci-qa-automation',
+    name: 'PCI QA Data Migration Automation',
+    title: 'PCI Pharma Services: QA Data Migration Automation',
+    year: 2026,
+    description:
+      'PowerShell automation that reconciles a quality system of record, a file share, and an Excel tracker during a regulated pharma data migration.',
+    tagline: 'Three systems, one answer: automated reconciliation for a regulated document migration',
+    fullSummary:
+      'As a QA Data Migration Specialist at PCI Pharma Services, a CDMO, I move quality records where every count has to match and every change has to be defensible in an audit. I built PowerShell tooling that reconciles the three places a record lives, explains every mismatch, and makes bulk changes safe to run.',
+    problem:
+      'In a GMP migration the same controlled documents live in three places: the system of record, the file share, and a shared Excel tracker kept by hand. They drift. Cross-checking them manually is slow and error prone, and a count that does not match is hard to explain to QA.',
+    approach:
+      'Built PowerShell tooling that snapshots each source as a golden copy, normalizes identifiers, and reconciles all three against each other. Every mismatch becomes a row in a findings CSV with a reason. Bulk renames and moves run as a dry run first, with a reversible plan, before anything touches controlled records. Tracker corrections are applied by script with dedupe across tabs.',
+    result:
+      'Reconciliation went from a manual cross-check to a repeatable, auditable run. Every count difference is traceable to a findings row, and bulk changes are previewed and reversible before they are applied.',
+    role: 'QA Data Migration Specialist, Automation Builder',
+    whatISpecificallyDid: [
+      'Built a three-way reconciliation tool in PowerShell comparing the system of record, file share, and Excel tracker',
+      'Automated bulk rename and move of controlled documents with dry runs, golden-copy snapshots, and rollback',
+      'Produced findings and triage reports (CSV) that classify orphans, duplicates, stale inputs, and missing records',
+      'Scripted safe tracker cleanup: dedupe across tabs and status corrections without hand edits'
+    ],
+    impact: {
+      statement:
+        'Made migration counts explainable: when two systems disagree, the answer is a findings row, not a guess.',
+      how:
+        'Snapshot first, compare everything, change nothing without a dry run. The same discipline that GMP data integrity asks for, enforced by the tooling instead of by memory.'
+    },
+    designNotes: {
+      title: 'How a Reconciliation Run Works',
+      subtitle: 'Snapshot, compare, explain, then change',
+      caption: 'Generic illustration. No PCI systems, documents, or data are shown.',
+      bullets: [
+        'Snapshot: capture golden copies of all three sources so every run is reproducible',
+        'Normalize: clean identifiers so the same record matches across systems',
+        'Reconcile: compare all three ways and classify every difference',
+        'Triage: write findings CSVs that QA can review line by line',
+        'Dry run: preview bulk renames and moves as a reversible plan',
+        'Apply and verify: execute, then re-run reconciliation to confirm counts match'
+      ]
+    },
+    tech: ['PowerShell', 'Excel', 'CSV', 'Data Validation', 'Automation'],
+    skills: ['Data Migration', 'Reconciliation', 'Scripting', 'Quality Assurance', 'Process Automation', 'Documentation'],
+    concepts: ['Three-Way Reconciliation', 'Golden Copies', 'Dry Runs', 'Audit Trails', 'GMP Data Integrity'],
+    status: 'In Progress',
+    date: '2026',
+    category: 'Data Migration & Automation',
+    route: '/projects/pci-qa-automation',
+    cardImage: `${process.env.PUBLIC_URL}/assets/projects/PCI Automation/pci-reconciliation.svg`,
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/PCI Automation/pci-reconciliation.svg`,
+    assets: {
+      images: [`${process.env.PUBLIC_URL}/assets/projects/PCI Automation/pci-reconciliation.svg`],
+      pdfs: [],
+      videos: [],
+      documents: [],
+      links: []
+    }
+  },
+
   // ...keep the rest of your projects below exactly as-is..
 
   /* --------------------------------------------------
