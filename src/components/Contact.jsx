@@ -58,12 +58,12 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // If you haven’t set up Formspree yet, don’t silently “pretend”:
+    // Until a Formspree endpoint is set, hand the message to the visitor's mail client instead.
     if (FORMSPREE_ENDPOINT.includes('XXXX')) {
-      setStatus({
-        type: 'error',
-        message: 'Form not configured yet. Add your Formspree endpoint in Contact.jsx.',
-      });
+      const subject = encodeURIComponent(`Portfolio message from ${formData.name}`);
+      const body = encodeURIComponent(`${formData.message}\n\nFrom: ${formData.name} (${formData.email})`);
+      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+      setStatus({ type: 'success', message: 'Opening your email app with the message ready to send.' });
       return;
     }
 
