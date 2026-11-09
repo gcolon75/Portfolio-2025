@@ -37,3 +37,15 @@ All commits are on `overhaul/main`, rebased onto `main` at 4601911.
 - Worker `gabriel-vi` deployed to https://gabriel-vi.gabriel-vi-worker.workers.dev; owner set `ANTHROPIC_API_KEY` as a Cloudflare secret
 - feat(vi): `viClient.js` defaults to the live worker; `REACT_APP_VI_ENDPOINT` overrides it, `off` forces local mode
 - Verify: worker returns a grounded Claude answer (HTTP 200), build PASS, tests 13/13 PASS, site redeployed
+
+## Workstream: Performance (owner request, 2026-11-09: "running fairly slow")
+- db672a8 fix(perf): hero stars generated once and twinkled in CSS; typewriter isolated in its own component;
+  leaked pause timeout fixed. DOM changes on the home page dropped from about 11,600 to 12 per 3 seconds.
+- ce5dc3a fix(perf): header scroll tracking measures at most once per frame from a passive listener
+- efcfc7d fix(perf): card backdrop blur removed (cards are 80% opaque), Contact glow no longer floats, card orbits
+  spin on hover only, OS reduce-motion setting honored
+- 13948f3 perf: 13 detail pages lazy-loaded as separate chunks; framer-motion follows reduce-motion
+- 403c20a perf: seven multi-MB images served as resized WebP (about 17 MB to under 1 MB). Originals kept.
+- Lighthouse, old vs new build on the same local server: mobile 19 to 50, desktop 55 to 90,
+  layout shift 9.5 to 0.03 (mobile) and 2.2 to 0.002 (desktop), page weight 10.5 MB to 1.2 MB (desktop)
+- Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, home page, cards, and a lazy detail route checked in browser
