@@ -23,3 +23,12 @@ All commits are on `overhaul/main`, rebased onto `main` at 4601911.
 
 ## Tooling
 - 6bb1370 chore: `.claude/agents`, `/overhaul` command, `CLAUDE.md`, `.overhaul/STACK.md`
+
+## Workstream: PCI page and current-focus retune (owner request, 2026-11-08)
+- cefb234 feat(projects): PCI QA Data Migration Automation page at `/projects/pci-qa-automation`.
+  Owner choices: name PCI, keep generic; cover reconciliation, bulk rename/migration, findings reports, tracker cleanup.
+  No metrics supplied, so none shown. Cover is a generic SVG diagram.
+- dc3edd6 feat(content): About stats now AI Automation 90, Data Migration & QA 90, Full-Stack 85, PM 85, UX 80 (self-rated, owner approved).
+  Skill tree: new Data Migration & QA class, AI Builder adds AI Agents, LLM APIs, Spec-Driven; Frontend becomes Full-Stack.
+- 4c44c89 feat(vi): VI describes the PCI tooling; fixed doubled periods in project answers
+- Verify: build PASS, tests 13/13 PASS, PCI page, project order, stats, skill tree, and VI answer checked in browser
