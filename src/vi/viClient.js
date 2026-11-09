@@ -1,8 +1,11 @@
-// Talks to the Claude-backed vi-worker when REACT_APP_VI_ENDPOINT is set at build time.
+// Talks to the Claude-backed vi-worker (DEFAULT_ENDPOINT below).
 // Falls back to the offline engine if the endpoint is missing, slow, or down.
 import { answerLocally } from './localEngine.js';
 
-const ENDPOINT = process.env.REACT_APP_VI_ENDPOINT || '';
+// Live Claude worker. Override with REACT_APP_VI_ENDPOINT, or set it to 'off' to force local mode.
+const DEFAULT_ENDPOINT = 'https://gabriel-vi.gabriel-vi-worker.workers.dev';
+const ENV_ENDPOINT = process.env.REACT_APP_VI_ENDPOINT;
+const ENDPOINT = ENV_ENDPOINT === 'off' ? '' : ENV_ENDPOINT || DEFAULT_ENDPOINT;
 const TIMEOUT_MS = 20000;
 const MAX_HISTORY = 12;
 
