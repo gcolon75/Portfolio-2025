@@ -1,5 +1,6 @@
 import { answerLocally } from './localEngine';
 import { buildSystemPrompt } from './knowledge';
+import { projects } from '../data/projects';
 
 test('answers current role from profile, in third person, without repeating the intro', () => {
   const a = answerLocally('What does Gabriel do right now?');
@@ -11,8 +12,27 @@ test('answers who-is questions with the third-person intro', () => {
   expect(answerLocally('Who is Gabriel?')).toMatch(/^Gabriel Colon builds/);
 });
 
-test('answers a specific project by name', () => {
-  expect(answerLocally('What is Valine?')).toMatch(/^Valine/);
+test('answers a specific project by name, with role and result', () => {
+  const a = answerLocally('What is Joint Theatrical Ventures?');
+  expect(a).toMatch(/^Joint Theatrical Ventures/);
+  expect(a).toMatch(/Gabriel's role:/);
+  expect(a).toMatch(/Result:/);
+});
+
+test('every portfolio project is answerable by name', () => {
+  projects.forEach((pr) => {
+    expect(answerLocally(`Tell me about ${pr.name}`).startsWith(pr.name)).toBe(true);
+  });
+});
+
+test('AI questions mention AI projects from the portfolio', () => {
+  expect(answerLocally('What AI automation has he built?')).toMatch(/Amadeus/);
+});
+
+test('answers never contain em dashes or bullet separators', () => {
+  ['Who is Gabriel?', 'What projects has he built?', 'Tell me about Tower of Greed', 'What has he written?'].forEach((q) => {
+    expect(answerLocally(q)).not.toMatch(/[\u2014\u2022\u2192]/);
+  });
 });
 
 test('answers contact questions with email', () => {
@@ -35,5 +55,5 @@ test('system prompt carries the knowledge base and contains no em dashes', () =>
   const prompt = buildSystemPrompt();
   expect(prompt).toMatch(/Knowledge base:/);
   expect(prompt).toMatch(/Joint Theatrical Ventures/);
-  expect(prompt).not.toMatch(/—/);
+  expect(prompt).not.toMatch(/\u2014/);
 });

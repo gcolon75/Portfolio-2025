@@ -8,6 +8,15 @@ import { articles } from '../data/writing.js';
 export const VI_NAME = 'G.A.B.E.';
 export const VI_LONG_NAME = "Gabriel's Autonomous Briefing Engine";
 
+// House style: no em dashes, no bullet separators, no arrows in anything the VI says.
+const clean = (s = '') =>
+  String(s)
+    .replace(/\s*\u2014\s*/g, ', ')
+    .replace(/\s*[\u2022\u2192]\s*/g, ', ')
+    .replace(/\s+/g, ' ')
+    .trim();
+const isAI = (pr) => /\bai\b|agent|llm|automation/i.test(`${pr.category} ${(pr.tech || []).join(' ')} ${pr.description}`);
+
 // Topic chunks. `keywords` drive offline matching; `text` is what gets said and what Claude reads.
 export function buildChunks() {
   const p = profile;
@@ -47,6 +56,7 @@ export function buildChunks() {
         'Gabriel builds AI automation: agents, LLM workflows, and prompt-engineered tooling that remove manual work. ' +
         `Certifications: ${p.certifications.filter((c) => !/project management/i.test(c)).join(', ')}. ` +
         'At Joint Theatrical Ventures he leads AI-driven product development. ' +
+        `AI-related portfolio projects: ${projects.filter(isAI).map((pr) => `${pr.name} (${clean(pr.description)})`).join('; ')}. ` +
         'This VI is one of his builds: a React chat front end with a Claude-backed serverless agent behind it.'
     },
     {
@@ -75,13 +85,16 @@ export function buildChunks() {
       id: 'projects',
       title: 'Projects',
       keywords: ['project', 'projects', 'built', 'build', 'portfolio', 'work', 'made', 'apps', 'games'],
-      text: projects.map((pr) => `${pr.name} (${pr.date}, ${pr.status}): ${pr.description}. Stack: ${pr.tech.join(', ')}.`).join(' ')
+      text:
+        `Gabriel's portfolio has ${projects.length} projects. ` +
+        projects.map((pr) => `${pr.name} (${pr.date}, ${pr.status}): ${clean(pr.description)}.`).join(' ') +
+        ' Ask about any of them by name for details.'
     },
     {
       id: 'writing',
       title: 'Writing',
       keywords: ['writing', 'article', 'articles', 'essay', 'paper', 'blog', 'wrote', 'gen', 'genz'],
-      text: articles.map((a) => `"${a.title}" (${a.date}): ${a.description}.`).join(' ')
+      text: articles.map((a) => `"${clean(a.title)}" (${a.date}): ${clean(a.description)}.`).join(' ')
     },
     {
       id: 'hire',
@@ -103,13 +116,21 @@ export function buildChunks() {
     }
   ];
 
-  // One chunk per project so specific questions ("what is Valine?") get a precise answer.
+  // One chunk per project so specific questions ("what is Amadeus?") get a precise answer.
   projects.forEach((pr) => {
+    const name = pr.name.toLowerCase();
+    const parts = [
+      `${pr.name} (${pr.category}, ${pr.date}, ${pr.status}): ${clean(pr.description)}.`,
+      pr.role && `Gabriel's role: ${clean(pr.role)}.`,
+      pr.problem && `Problem: ${clean(pr.problem)}`,
+      pr.result && `Result: ${clean(pr.result)}`,
+      pr.tech?.length && `Built with ${pr.tech.map(clean).join(', ')}.`
+    ].filter(Boolean);
     chunks.push({
       id: `project-${pr.id}`,
       title: pr.name,
-      keywords: [pr.name.toLowerCase().replace(/[^a-z0-9 ]/g, ''), ...pr.name.toLowerCase().split(/\s+/)],
-      text: `${pr.name} (${pr.category}, ${pr.date}, ${pr.status}): ${pr.description}. Built with ${pr.tech.join(', ')}.`
+      keywords: [name, ...name.split(/\s+/).filter((w) => w.length > 2), ...String(pr.id).split('-').filter((w) => w.length > 2)],
+      text: parts.join(' ')
     });
   });
 
