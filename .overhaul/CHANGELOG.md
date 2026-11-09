@@ -32,3 +32,8 @@ All commits are on `overhaul/main`, rebased onto `main` at 4601911.
   Skill tree: new Data Migration & QA class, AI Builder adds AI Agents, LLM APIs, Spec-Driven; Frontend becomes Full-Stack.
 - 4c44c89 feat(vi): VI describes the PCI tooling; fixed doubled periods in project answers
 - Verify: build PASS, tests 13/13 PASS, PCI page, project order, stats, skill tree, and VI answer checked in browser
+
+## Workstream: Claude mode (owner request, 2026-11-08)
+- Worker `gabriel-vi` deployed to https://gabriel-vi.gabriel-vi-worker.workers.dev; owner set `ANTHROPIC_API_KEY` as a Cloudflare secret
+- feat(vi): `viClient.js` defaults to the live worker; `REACT_APP_VI_ENDPOINT` overrides it, `off` forces local mode
+- Verify: worker returns a grounded Claude answer (HTTP 200), build PASS, tests 13/13 PASS, site redeployed
