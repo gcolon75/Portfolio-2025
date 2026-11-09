@@ -14,7 +14,8 @@ const clean = (s = '') =>
     .replace(/\s*\u2014\s*/g, ', ')
     .replace(/\s*[\u2022\u2192]\s*/g, ', ')
     .replace(/\s+/g, ' ')
-    .trim();
+    .trim()
+    .replace(/[.\s]+$/, ''); // callers add their own period
 const isAI = (pr) => /\bai\b|agent|llm|automation/i.test(`${pr.category} ${(pr.tech || []).join(' ')} ${pr.description}`);
 
 // Topic chunks. `keywords` drive offline matching; `text` is what gets said and what Claude reads.
@@ -45,8 +46,10 @@ export function buildChunks() {
       keywords: ['data', 'migration', 'migrate', 'qa', 'quality', 'gmp', 'validation', 'reconcile', 'reconciliation', 'regulated', 'sql', 'powershell', 'excel'],
       text:
         'At PCI Pharma Services Gabriel migrates and validates quality system data in a regulated pharma environment. ' +
-        'The core of the job is reconciliation: making the system of record, file shares, and trackers agree, then ' +
-        'proving it. He automates the checks with tools like PowerShell, SQL, Python, and Excel/VBA.'
+        'The core of the job is reconciliation: making the system of record, the file share, and the Excel tracker agree, then ' +
+        'proving it. He built PowerShell tooling that reconciles all three, writes findings CSVs explaining every mismatch, ' +
+        'runs bulk renames and moves as reversible dry runs, and cleans up the tracker by script. ' +
+        'The portfolio has a full project page on it: "PCI QA Data Migration Automation".'
     },
     {
       id: 'ai',
@@ -56,7 +59,7 @@ export function buildChunks() {
         'Gabriel builds AI automation: agents, LLM workflows, and prompt-engineered tooling that remove manual work. ' +
         `Certifications: ${p.certifications.filter((c) => !/project management/i.test(c)).join(', ')}. ` +
         'At Joint Theatrical Ventures he leads AI-driven product development. ' +
-        `AI-related portfolio projects: ${projects.filter(isAI).map((pr) => `${pr.name} (${clean(pr.description)})`).join('; ')}. ` +
+        `AI and automation projects in the portfolio: ${projects.filter(isAI).map((pr) => `${pr.name} (${clean(pr.description)})`).join('; ')}. ` +
         'This VI is one of his builds: a React chat front end with a Claude-backed serverless agent behind it.'
     },
     {

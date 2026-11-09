@@ -30,8 +30,8 @@ export const profile = {
       org: 'PCI Pharma Services (CDMO)',
       dates: 'March 2026 - Present',
       summary:
-        'Migrates and validates quality system data in a regulated pharma manufacturing environment. ' +
-        'Reconciles records across the system of record, file shares, and trackers so counts match.'
+        'Migrates and validates quality system data in a regulated pharma manufacturing environment, ' +
+        'and builds PowerShell automation that reconciles the system of record, file share, and Excel tracker so every count is explained.'
     },
     {
       title: 'AI-Driven Product Developer & Project Manager',

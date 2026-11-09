@@ -25,6 +25,12 @@ test('every portfolio project is answerable by name', () => {
   });
 });
 
+test('PCI automation is answerable and stays generic', () => {
+  const a = answerLocally('Tell me about his PCI automation');
+  expect(a).toMatch(/PowerShell/);
+  expect(a).toMatch(/reconcil/i);
+});
+
 test('AI questions mention AI projects from the portfolio', () => {
   expect(answerLocally('What AI automation has he built?')).toMatch(/Amadeus/);
 });
@@ -56,4 +62,10 @@ test('system prompt carries the knowledge base and contains no em dashes', () =>
   expect(prompt).toMatch(/Knowledge base:/);
   expect(prompt).toMatch(/Joint Theatrical Ventures/);
   expect(prompt).not.toMatch(/\u2014/);
+});
+
+test('no doubled periods when data already ends with one', () => {
+  projects.forEach((pr) => {
+    expect(answerLocally(`Tell me about ${pr.name}`)).not.toMatch(/\.\./);
+  });
 });
