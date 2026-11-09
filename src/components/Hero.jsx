@@ -1,40 +1,72 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { profile } from '../data/profile';
 import './Hero.css';
 
-const Hero = () => {
+// Generated once at module load so re-renders never move the stars.
+// Twinkle runs in CSS (opacity and transform only), so it stays on the compositor.
+const STARS = Array.from({ length: 60 }, (_, i) => ({
+  id: i,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  size: Math.random() * 2 + 1,
+  duration: Math.random() * 3 + 2,
+  delay: Math.random() * -5
+}));
+
+const Starfield = React.memo(() => (
+  <div className="stars-container" aria-hidden="true">
+    {STARS.map((star) => (
+      <div
+        key={star.id}
+        className="star"
+        style={{
+          left: `${star.x}%`,
+          top: `${star.y}%`,
+          width: `${star.size}px`,
+          height: `${star.size}px`,
+          animationDuration: `${star.duration}s`,
+          animationDelay: `${star.delay}s`
+        }}
+      />
+    ))}
+  </div>
+));
+Starfield.displayName = 'Starfield';
+
+// Owns the typing state so each keystroke re-renders only this span, not the whole hero.
+const Typewriter = ({ roles }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  
-  const roles = useMemo(() => profile.roles, []);
 
   useEffect(() => {
     const currentRole = roles[currentRoleIndex];
-    const typingSpeed = isDeleting ? 50 : 100;
-    const pauseTime = isDeleting ? 500 : 2000;
+    let delay = isDeleting ? 50 : 100;
+    let step;
 
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayedText.length < currentRole.length) {
-          setDisplayedText(currentRole.substring(0, displayedText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), pauseTime);
-        }
-      } else {
-        if (displayedText.length > 0) {
-          setDisplayedText(currentRole.substring(0, displayedText.length - 1));
-        } else {
-          setIsDeleting(false);
-          setCurrentRoleIndex((currentRoleIndex + 1) % roles.length);
-        }
-      }
-    }, typingSpeed);
+    if (!isDeleting && displayedText === currentRole) {
+      delay = 2000;
+      step = () => setIsDeleting(true);
+    } else if (isDeleting && displayedText === '') {
+      delay = 500;
+      step = () => {
+        setIsDeleting(false);
+        setCurrentRoleIndex((i) => (i + 1) % roles.length);
+      };
+    } else {
+      step = () =>
+        setDisplayedText(currentRole.substring(0, displayedText.length + (isDeleting ? -1 : 1)));
+    }
 
+    const timer = setTimeout(step, delay);
     return () => clearTimeout(timer);
   }, [displayedText, currentRoleIndex, isDeleting, roles]);
 
+  return <span className="hero-role">{displayedText}</span>;
+};
+
+const Hero = () => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -42,40 +74,9 @@ const Hero = () => {
     }
   };
 
-  // Create stars
-  const stars = Array.from({ length: 100 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 3 + 2
-  }));
-
   return (
     <section id="home" className="hero">
-      <div className="stars-container">
-        {stars.map((star) => (
-          <motion.div
-            key={star.id}
-            className="star"
-            style={{
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-            }}
-            animate={{
-              opacity: [0.2, 1, 0.2],
-              scale: [1, 1.2, 1]
-            }}
-            transition={{
-              duration: star.duration,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }}
-          />
-        ))}
-      </div>
+      <Starfield />
 
       <div className="hero-content">
         <motion.div
@@ -86,7 +87,7 @@ const Hero = () => {
           <p className="hero-greeting">Hello, I'm</p>
           <h1 className="hero-name glow">Gabriel Colon</h1>
           <div className="hero-role-container">
-            <span className="hero-role">{displayedText}</span>
+            <Typewriter roles={profile.roles} />
             <span className="cursor">|</span>
           </div>
         </motion.div>
