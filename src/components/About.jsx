@@ -5,11 +5,13 @@ import { profile } from '../data/profile';
 import './About.css';
 
 const About = () => {
+  // Self-rated, ordered by current focus.
   const stats = [
-    { name: 'UX Design', level: 95, color: 'var(--plasma-green)' },
-    { name: 'Frontend Dev', level: 90, color: 'var(--starlight-gold)' },
-    { name: 'Project Management', level: 85, color: 'var(--nebula-purple)' },
-    { name: 'AI Integration', level: 80, color: 'var(--rocket-red)' }
+    { name: 'AI Automation', level: 90, color: 'var(--plasma-green)' },
+    { name: 'Data Migration & QA', level: 90, color: 'var(--starlight-gold)' },
+    { name: 'Full-Stack Dev', level: 85, color: 'var(--nebula-purple)' },
+    { name: 'Project Management', level: 85, color: 'var(--rocket-red)' },
+    { name: 'UX Design', level: 80, color: 'var(--neutral-ui)' }
   ];
 
   const containerVariants = {
