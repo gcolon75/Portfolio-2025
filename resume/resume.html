@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- Source for public/resume.pdf and src/assets/Gabriel Colon 2026 Resume.pdf. Rebuild: chrome --headless=new --no-pdf-header-footer --print-to-pdf=public/resume.pdf resume/resume.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gabriel Colon Resume</title>
+<style>
+  @page { size: Letter; margin: 0.4in 0.5in; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 9.4pt; line-height: 1.28; color: #1a1a1a; margin: 0; }
+  header { text-align: center; margin-bottom: 6pt; }
+  h1 { font-size: 19pt; letter-spacing: 2.5pt; margin: 0; font-weight: 700; }
+  .tagline { font-size: 10.5pt; color: #1f4e8c; font-weight: 600; margin: 1pt 0 3pt; }
+  .contact { font-size: 9pt; color: #333; }
+  .contact a { color: #333; text-decoration: none; }
+  h2 { font-size: 10pt; letter-spacing: 1.2pt; color: #1f4e8c; border-bottom: 1px solid #1f4e8c; margin: 7pt 0 3pt; padding-bottom: 1pt; }
+  p { margin: 0 0 3pt; }
+  .job { margin-bottom: 5pt; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; }
+  .role { font-weight: 700; }
+  .org { font-weight: 400; }
+  .dates { font-size: 9pt; color: #333; white-space: nowrap; margin-left: 8pt; }
+  ul { margin: 1.5pt 0 0 0; padding-left: 13pt; }
+  li { margin-bottom: 1.5pt; }
+  .skills p { margin-bottom: 2pt; }
+  .label { font-weight: 700; }
+</style>
+</head>
+<body>
+<header>
+  <h1>GABRIEL COLON</h1>
+  <div class="tagline">AI Enablement | Automation | Data Migration</div>
+  <div class="contact">
+    San Diego, CA | (847) 778-1274 | <a href="mailto:ghawk075@gmail.com">ghawk075@gmail.com</a><br>
+    <a href="https://www.linkedin.com/in/gabriel-colon-3b4487253/">linkedin.com/in/gabriel-colon-3b4487253</a> |
+    <a href="https://github.com/gcolon75">github.com/gcolon75</a> |
+    <a href="https://gcolon75.github.io/Portfolio-2025/">gcolon75.github.io/Portfolio-2025</a>
+  </div>
+</header>
+
+<h2>SUMMARY</h2>
+<p>AI enablement builder who turns manual work into tools other people run themselves. Now an AI Enablement Specialist in
+Axos Bank's Consumer Division. Before that, migrated and audited 50,000+ regulated records at a pharma CDMO and built a
+suite that cut a multi-day document review to a 3-minute run, and co-founded a software company that shipped across 2,461
+commits with 107 tests gating every deploy.</p>
+
+<h2>EXPERIENCE</h2>
+<div class="job">
+  <div class="row"><span><span class="role">AI Enablement Specialist</span> <span class="org">| Axos Bank, Consumer Division, San Diego, CA</span></span><span class="dates">Nov 2026 to Present</span></div>
+  <ul>
+    <li>Build and maintain AI-powered tools, and the platforms behind them, for business teams across Consumer Banking.</li>
+    <li>Run intake and coordination for AI initiatives submitted by business partners, and prepare progress reporting for leadership.</li>
+    <li>Apply governance, risk, and compliance standards so AI initiatives scale safely inside a regulated bank.</li>
+  </ul>
+</div>
+<div class="job">
+  <div class="row"><span><span class="role">QA Data Migration Specialist</span> <span class="org">| PCI Pharma Services (CDMO), San Diego, CA</span></span><span class="dates">Mar 2026 to Sep 2026</span></div>
+  <ul>
+    <li>Partnered with Quality, IT, and Compliance to migrate and audit 50,000+ regulated records with full metadata traceability in a GxP environment.</li>
+    <li>Took an internal automation idea from prototype to daily production use: a 58-function PowerShell suite (~2,000 lines) reconciling 20,000+ controlled documents across nine document classes, cutting a multi-day manual review to about 3 minutes.</li>
+    <li>Built a two-source verification layer that proves every result against independent queries; it caught a silent parsing defect mislabeling document revisions across the archive.</li>
+    <li>Put a GUI and exception-only reports over the tool so the business team runs its own morning check, and designed a move-never-delete file architecture with a CSV audit trail for every action.</li>
+  </ul>
+</div>
+<div class="job">
+  <div class="row"><span><span class="role">AI Solutions Engineer &amp; Product Manager (Co-Founder)</span> <span class="org">| Joint Theatrical Ventures LLC, Remote</span></span><span class="dates">Sep 2025 to Sep 2026</span></div>
+  <ul>
+    <li>Owned delivery end to end with a two-person core team: roadmap, backlog, contractor hiring, scope, budget, and release.</li>
+    <li>Shipped the product across 2,461 commits: React front end, Node.js serverless API on AWS (Lambda, API Gateway, DynamoDB, S3), with 107 tests gating every deploy.</li>
+    <li>Built a multi-agent Discord orchestrator in Python whose agents own deployment, infrastructure diagnostics, CI failure triage, and status reporting, with DynamoDB state and audit logging.</li>
+  </ul>
+</div>
+<div class="job">
+  <div class="row"><span><span class="role">Event Coordinator &amp; Finance Intern</span> <span class="org">| Tritonthenix (UCSD). Ran budget and outreach; grew event attendance 40% in one year.</span></span><span class="dates">Jun 2023 to Jun 2025</span></div>
+</div>
+
+<h2>PROJECTS</h2>
+<ul>
+  <li><span class="label">G.A.B.E. portfolio VI:</span> Claude-backed agent that answers recruiter questions from a single source of truth, served from a Cloudflare Worker with origin allowlisting, rate limiting, and an offline fallback.</li>
+  <li><span class="label">sop-rag:</span> retrieval over a controlled-document corpus with a labeled eval set and enforced citations: 1.00 recall@4, 1.00 correct abstention, 0.00 false abstention. CI gates on eval regression.</li>
+</ul>
+
+<h2>SKILLS</h2>
+<div class="skills">
+  <p><span class="label">AI &amp; Automation:</span> Claude API, LLM agents, prompt engineering, RAG and evals, Python, PowerShell, JavaScript / React, JSON, REST APIs</p>
+  <p><span class="label">Governance &amp; Delivery:</span> AI governance, GxP / SOP compliance, audit traceability, intake and requirements, UAT and acceptance criteria, stakeholder reporting</p>
+  <p><span class="label">Data &amp; Cloud:</span> SQL, Snowflake, data validation and reconciliation, AWS (Lambda, S3, DynamoDB, API Gateway), Cloudflare Workers, Git / GitHub Actions</p>
+</div>
+
+<h2>EDUCATION &amp; CERTIFICATIONS</h2>
+<div class="row"><span><span class="role">B.S. Cognitive Science, Design &amp; Interaction</span> <span class="org">| University of California, San Diego. Minor in Computational Social Science.</span></span><span class="dates">Jun 2025</span></div>
+<p>Google Project Management Professional Certificate; Agentic AI; Agent Memory; A2A: The Agent2Agent Protocol; Spec-Driven Development with Coding Agents; HarvardX CS50 Databases with SQL; Snowflake for Developers</p>
+</body>
+</html>
