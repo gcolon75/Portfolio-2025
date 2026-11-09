@@ -1,9 +1,9 @@
 // G.A.B.E. VI worker: a thin, locked-down proxy between the portfolio chat and the Claude API.
 // The system prompt is built from the same src/data files the site renders, so answers stay in sync.
 import Anthropic from '@anthropic-ai/sdk';
-import { buildSystemPrompt } from '../../src/vi/knowledge.js';
+import { SYSTEM_PROMPT } from './generated/system-prompt.js';
 
-const SYSTEM_PROMPT = buildSystemPrompt();
+
 const MAX_MESSAGES = 12;
 const MAX_CHARS_PER_MESSAGE = 1000;
 const RATE_LIMIT = { windowMs: 60_000, max: 15 };
@@ -86,7 +86,7 @@ export default {
         .filter((b) => b.type === 'text')
         .map((b) => b.text)
         .join('')
-        .replace(/—/g, ', ')
+        .replace(/\u2014/g, ', ')
         .trim();
       return json({ text }, 200, cors);
     } catch (err) {

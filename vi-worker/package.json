@@ -13,6 +13,7 @@
     "@anthropic-ai/sdk": "^1.6.0"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "wrangler": "^4.158.0"
   }
 }
