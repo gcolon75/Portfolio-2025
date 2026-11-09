@@ -1,14 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaMapMarkerAlt, FaUniversity, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { profile } from '../data/profile';
 import './About.css';
 
 const About = () => {
+  // Self-rated, ordered by current focus.
   const stats = [
-    { name: 'UX Design', level: 95, color: 'var(--plasma-green)' },
-    { name: 'Frontend Dev', level: 90, color: 'var(--starlight-gold)' },
-    { name: 'Project Management', level: 85, color: 'var(--nebula-purple)' },
-    { name: 'AI Integration', level: 80, color: 'var(--rocket-red)' }
+    { name: 'AI Automation', level: 90, color: 'var(--plasma-green)' },
+    { name: 'Data Migration & QA', level: 90, color: 'var(--starlight-gold)' },
+    { name: 'Full-Stack Dev', level: 85, color: 'var(--nebula-purple)' },
+    { name: 'Project Management', level: 85, color: 'var(--rocket-red)' },
+    { name: 'UX Design', level: 80, color: 'var(--neutral-ui)' }
   ];
 
   const containerVariants = {
@@ -48,29 +51,25 @@ const About = () => {
           >
             <h3>About Me</h3>
             <p className="bio-text">
-              I'm a UX designer and creative technologist passionate about building intuitive digital experiences 
-              that blend user-centered design with cutting-edge technology. With a B.S. in Cognitive Science from 
-              UC San Diego, I bring a unique perspective combining psychology, design thinking, and technical 
-              implementation to every project. My work spans UX/UI design, frontend development, game design, 
-              and AI integration—always focused on creating solutions that are both innovative and accessible.
+              {profile.bio}
             </p>
             
             <div className="info-grid">
               <div className="info-item">
                 <FaMapMarkerAlt className="info-icon" />
-                <span>San Diego, CA</span>
+                <span>{profile.location}</span>
               </div>
               <div className="info-item">
                 <FaUniversity className="info-icon" />
-                <span>UCSD B.S. Cognitive Science: Human Computer Interaction</span>
+                <span>{profile.education}</span>
               </div>
               <div className="info-item">
                 <FaEnvelope className="info-icon" />
-                <span>ghawk075@gmail.com</span>
+                <span>{profile.email}</span>
               </div>
               <div className="info-item">
                 <FaPhone className="info-icon" />
-                <span>(847) 778-1274</span>
+                <span>{profile.phone}</span>
               </div>
             </div>
           </motion.div>

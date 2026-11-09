@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="t d">
+  <title id="t">Three-way reconciliation pipeline</title>
+  <desc id="d">Generic illustration: a system of record, a file share, and an Excel tracker feed a PowerShell reconciler, which produces findings, a dry-run plan, and tracker fixes. No PCI systems or data are shown.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d1b2a"/>
+      <stop offset="1" stop-color="#0a0a0f"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#00d9ff"/>
+    </marker>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#4a9eff" stroke-opacity="0.07"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+
+  <text x="600" y="78" text-anchor="middle" font-family="Orbitron, Arial, sans-serif" font-size="34" font-weight="700" fill="#00d9ff" letter-spacing="3">THREE-WAY RECONCILIATION</text>
+  <text x="600" y="114" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="19" fill="#94a3b8">Every count mismatch gets a findings row. Every bulk change gets a dry run first.</text>
+
+  <g font-family="Inter, Arial, sans-serif" font-size="21" fill="#f1f5f9" text-anchor="middle">
+    <g>
+      <rect x="70" y="180" width="280" height="96" rx="12" fill="#0d1b2a" stroke="#4a9eff" stroke-width="2"/>
+      <text x="210" y="222" font-weight="600">System of record</text>
+      <text x="210" y="252" font-size="16" fill="#94a3b8">quality system inventory</text>
+    </g>
+    <g>
+      <rect x="70" y="300" width="280" height="96" rx="12" fill="#0d1b2a" stroke="#4a9eff" stroke-width="2"/>
+      <text x="210" y="342" font-weight="600">File share</text>
+      <text x="210" y="372" font-size="16" fill="#94a3b8">files on disk</text>
+    </g>
+    <g>
+      <rect x="70" y="420" width="280" height="96" rx="12" fill="#0d1b2a" stroke="#4a9eff" stroke-width="2"/>
+      <text x="210" y="462" font-weight="600">Excel tracker</text>
+      <text x="210" y="492" font-size="16" fill="#94a3b8">shared, manually kept</text>
+    </g>
+
+    <path d="M350 228C410 228 420 330 470 340" fill="none" stroke="#00d9ff" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M350 348H468" fill="none" stroke="#00d9ff" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M350 468C410 468 420 366 470 356" fill="none" stroke="#00d9ff" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <g>
+      <rect x="475" y="250" width="250" height="196" rx="16" fill="#0a0a0f" stroke="#00d9ff" stroke-width="3"/>
+      <text x="600" y="312" font-family="Orbitron, Arial, sans-serif" font-size="22" font-weight="700" fill="#00d9ff">RECONCILER</text>
+      <text x="600" y="346" font-size="17" fill="#f1f5f9">PowerShell</text>
+      <text x="600" y="378" font-size="15" fill="#94a3b8">snapshot, normalize IDs,</text>
+      <text x="600" y="400" font-size="15" fill="#94a3b8">compare all three sources</text>
+    </g>
+
+    <path d="M725 330C780 320 790 228 846 228" fill="none" stroke="#00d9ff" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M725 348H846" fill="none" stroke="#00d9ff" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M725 366C780 376 790 468 846 468" fill="none" stroke="#00d9ff" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <g>
+      <rect x="850" y="180" width="280" height="96" rx="12" fill="#0d1b2a" stroke="#2ee59d" stroke-width="2"/>
+      <text x="990" y="222" font-weight="600">Findings CSV</text>
+      <text x="990" y="252" font-size="16" fill="#94a3b8">orphans, duplicates, stale, missing</text>
+    </g>
+    <g>
+      <rect x="850" y="300" width="280" height="96" rx="12" fill="#0d1b2a" stroke="#2ee59d" stroke-width="2"/>
+      <text x="990" y="342" font-weight="600">Dry-run plan</text>
+      <text x="990" y="372" font-size="16" fill="#94a3b8">bulk rename and move, reversible</text>
+    </g>
+    <g>
+      <rect x="850" y="420" width="280" height="96" rx="12" fill="#0d1b2a" stroke="#2ee59d" stroke-width="2"/>
+      <text x="990" y="462" font-weight="600">Tracker fixes</text>
+      <text x="990" y="492" font-size="16" fill="#94a3b8">dedupe across tabs, status updates</text>
+    </g>
+  </g>
+
+  <text x="600" y="610" text-anchor="middle" font-family="Fira Code, monospace" font-size="15" fill="#64748b">Generic illustration. No PCI systems, documents, or data shown.</text>
+</svg>

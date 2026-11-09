@@ -1,0 +1,16 @@
+name = "gabriel-vi"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Regenerates src/generated/system-prompt.js from the site data before every dev and deploy.
+[build]
+command = "node scripts/build-prompt.mjs"
+
+[vars]
+# Comma-separated origins allowed to call the VI.
+ALLOWED_ORIGINS = "https://gcolon75.github.io,http://localhost:3000"
+MODEL = "claude-opus-5-5"
+EFFORT = "low"
+
+# Set the key as a secret, never here:  npx wrangler secret put ANTHROPIC_API_KEY

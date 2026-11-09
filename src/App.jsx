@@ -19,6 +19,8 @@ import AxlePage from './components/AxlePage';
 import GoaleePage from './components/GoaleePage';
 import TritonGoPlusPage from './components/TritonGoPlusPage';
 import VolleyballPage from './components/VolleyballPage';
+import PCIAutomationPage from './components/PCIAutomationPage';
+import VIChat from './components/VIChat';
 import './index.css';
 
 function HomePage() {
@@ -56,13 +58,15 @@ function App() {
             <Route path="/projects/goalee" element={<GoaleePage />} />
             <Route path="/projects/tritongoplus" element={<TritonGoPlusPage />} />
             <Route path="/projects/volleyball" element={<VolleyballPage />} />
+            <Route path="/projects/pci-qa-automation" element={<PCIAutomationPage />} />
           </Routes>
         </main>
         <footer className="footer">
           <div className="container">
-            <p>&copy; 2025 Gabriel Colon. Built with React & Framer Motion.</p>
+            <p>&copy; {new Date().getFullYear()} Gabriel Colon. Built with React, Framer Motion, and a Claude-powered VI.</p>
           </div>
         </footer>
+        <VIChat />
       </div>
     </Router>
   );
