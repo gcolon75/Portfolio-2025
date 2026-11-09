@@ -103,7 +103,7 @@ export default function Contact() {
     {
       name: 'LinkedIn',
       icon: <FaLinkedin />,
-      url: 'https://www.linkedin.com/in/gabriel-colon-3b4487253/',
+      url: 'https://www.linkedin.com/in/gabrielcolon75/',
       color: '#0077b5',
       type: 'link',
     },
