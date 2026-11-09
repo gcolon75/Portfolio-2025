@@ -53,11 +53,11 @@ export const projects = [
     date: '2025',
     category: 'Game Design',
     route: '/projects/tower-of-greed',
-    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedThumb.png`,
-    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedThumb.png`,
+    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedCover.webp`,
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedThumb.webp`,
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.webp`
       ],
       pdfs: [
         {
@@ -127,7 +127,7 @@ export const projects = [
     category: 'Web Development',
     route: '/projects/joint-theatrical-ventures',
 
-    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/JointTitle.JPG`,
+    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/JointTitle.webp`,
 
     assets: {
       images: [
@@ -248,10 +248,10 @@ export const projects = [
     date: '2024',
     category: 'AI Project',
     route: '/projects/amadeus',
-    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.png`,
-    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.png`,
+    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.webp`,
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.webp`,
     assets: {
-      images: [`${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.png`],
+      images: [`${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.webp`],
       pdfs: [],
       videos: [],
       documents: [],
@@ -305,7 +305,7 @@ export const projects = [
     route: '/projects/3kingdoms',
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsTitleScreen.png`,
+        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsTitleScreen.webp`,
         `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsMap.JPG`
       ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/Three Kingdoms.pdf`],
@@ -407,7 +407,7 @@ export const projects = [
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeHomescreen.JPG`,
-        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleePoster.jpg`,
+        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleePoster.webp`,
         `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeTitle.JPG`
       ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeFigma.pdf`],
