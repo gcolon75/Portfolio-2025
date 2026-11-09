@@ -1,18 +1,25 @@
 # Changelog
 
+All commits are on `overhaul/main`, rebased onto `main` at 4601911.
+
 ## Workstream: VI agent (owner request: "my own agent that acts as a VI of myself")
-- 7eeb0b0 refactor(data): `src/data/profile.js` as single source of truth (from resume on file, Nov 2026)
-- 8c53237 feat(vi): knowledge base, offline engine, client, 8 Jest tests
-- 3e48b2e feat(vi-worker): Cloudflare Worker calling Claude (origin lock, rate limit, input caps, prompt caching, refusal fallback)
-- 93a91de fix(vi): third-person answers, better topic ranking
-- 241e7b5 feat(vi): G.A.B.E. chat widget, desktop and mobile verified in browser
-- Verify: `CI=true npm run build` PASS, `npm test` 8/8 PASS, worker `wrangler deploy --dry-run` PASS, worker guard paths curl-tested locally
+- 8bb6b4a refactor(data): `src/data/profile.js` as single source of truth (from resume on file, Nov 2026)
+- c75452d feat(vi): knowledge base, offline engine, client, tests
+- 42c05f8 feat(vi-worker): Cloudflare Worker calling Claude (origin lock, rate limit, input caps, prompt caching, refusal fallback)
+- 3366a0d fix(vi): third-person answers, better topic ranking
+- 4a7a98d feat(vi): G.A.B.E. chat widget on every page
+- 1e235f1 feat(vi): answers use project role, problem, and result; em dashes stripped from VI output
+- 049cf12 fix(vi-worker): prebuild system prompt so image and PDF imports in `writing.js` do not break the Worker bundle
+- Verify: `CI=true npm run build` PASS, `npm test` 11/11 PASS, `wrangler deploy --dry-run` PASS,
+  worker guard paths tested locally, desktop and mobile layouts and project detail pages checked in browser
 
 ## Workstream: Content and fixes
-- 9a3b4e2 feat(content): hero roles, About bio, meta + Open Graph, dynamic footer year, hero resume path
-- 6c911c8 fix(contact): form opens a prefilled email instead of a fake "sent" message; resume path fixed
-- docs: README rewritten
-- Verify: build PASS, no em dashes in src/public/README, no console errors in browser
+- 9acd908 feat(content): hero roles, About bio from `profile.js`, meta and Open Graph tags (kept the GitHub Pages
+  SPA redirect script), dynamic footer year
+- bb37c70 fix(contact): kept main's reworked Contact page; the form now falls back to a prefilled email while the
+  Formspree endpoint is still the `XXXX` placeholder, instead of showing an error on every submit
+- ba2954f docs: kept main's README and added the VI, Claude mode, and structure sections
+- `profile.js` now uses main's education line (HCI) and full LinkedIn URL
 
 ## Tooling
-- 200603a chore: `.claude/agents`, `/overhaul` command, `CLAUDE.md`, `.overhaul/STACK.md`
+- 6bb1370 chore: `.claude/agents`, `/overhaul` command, `CLAUDE.md`, `.overhaul/STACK.md`
