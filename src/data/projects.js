@@ -152,22 +152,23 @@ export const projects = [
     title: 'PCI Pharma Services: QA Data Migration Automation',
     year: 2026,
     description:
-      'PowerShell automation that reconciles a quality system of record, a file share, and an Excel tracker during a regulated pharma data migration.',
+      'PowerShell suite that reconciled 20,000+ controlled documents across a system of record, a file share, and an Excel tracker, cutting a multi-day review to about 3 minutes.',
     tagline: 'Three systems, one answer: automated reconciliation for a regulated document migration',
     fullSummary:
-      'As a QA Data Migration Specialist at PCI Pharma Services, a CDMO, I move quality records where every count has to match and every change has to be defensible in an audit. I built PowerShell tooling that reconciles the three places a record lives, explains every mismatch, and makes bulk changes safe to run.',
+      'As a QA Data Migration Specialist at PCI Pharma Services, a CDMO, I migrated and audited 50,000+ quality records where every count had to match and every change had to be defensible in an audit. I built a PowerShell suite that reconciled the three places a record lived, explained every mismatch, and made bulk changes safe to run.',
     problem:
       'In a GMP migration the same controlled documents live in three places: the system of record, the file share, and a shared Excel tracker kept by hand. They drift. Cross-checking them manually is slow and error prone, and a count that does not match is hard to explain to QA.',
     approach:
       'Built PowerShell tooling that snapshots each source as a golden copy, normalizes identifiers, and reconciles all three against each other. Every mismatch becomes a row in a findings CSV with a reason. Bulk renames and moves run as a dry run first, with a reversible plan, before anything touches controlled records. Tracker corrections are applied by script with dedupe across tabs.',
     result:
-      'Reconciliation went from a manual cross-check to a repeatable, auditable run. Every count difference is traceable to a findings row, and bulk changes are previewed and reversible before they are applied.',
+      'A multi-day manual review became a run of about 3 minutes. The 58-function suite (~2,000 lines) reconciled 20,000+ controlled documents across nine document classes, every count difference traced to a findings row, and a two-source check caught a silent parsing defect that was mislabeling document revisions.',
     role: 'QA Data Migration Specialist, Automation Builder',
     whatISpecificallyDid: [
       'Built a three-way reconciliation tool in PowerShell comparing the system of record, file share, and Excel tracker',
       'Automated bulk rename and move of controlled documents with dry runs, golden-copy snapshots, and rollback',
       'Produced findings and triage reports (CSV) that classify orphans, duplicates, stale inputs, and missing records',
-      'Scripted safe tracker cleanup: dedupe across tabs and status corrections without hand edits'
+      'Scripted safe tracker cleanup: dedupe across tabs and status corrections without hand edits',
+      'Put a GUI and exception-only reports over the tool so the business team ran its own morning check'
     ],
     impact: {
       statement:
@@ -191,7 +192,7 @@ export const projects = [
     tech: ['PowerShell', 'Excel', 'CSV', 'Data Validation', 'Automation'],
     skills: ['Data Migration', 'Reconciliation', 'Scripting', 'Quality Assurance', 'Process Automation', 'Documentation'],
     concepts: ['Three-Way Reconciliation', 'Golden Copies', 'Dry Runs', 'Audit Trails', 'GMP Data Integrity'],
-    status: 'In Progress',
+    status: 'Completed',
     date: '2026',
     category: 'Data Migration & Automation',
     route: '/projects/pci-qa-automation',

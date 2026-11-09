@@ -11,33 +11,43 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/gabriel-colon-3b4487253/',
   education: 'UCSD, B.S. Cognitive Science: Human Computer Interaction',
   headline: 'AI automation, AI enablement, data migration, full-stack builder',
-  roles: ['AI Automation Builder', 'Data Migration Specialist', 'Full-Stack Developer', 'AI Enablement Lead'],
+  roles: ['AI Enablement Specialist', 'AI Automation Builder', 'Data Migration Specialist', 'Full-Stack Developer'],
   bio:
-    "I build AI automation and move data that has to be right. I'm a QA Data Migration Specialist at " +
-    'PCI Pharma Services, a CDMO, where I migrate and validate quality records in a regulated environment. ' +
-    'I also lead AI-driven product development at Joint Theatrical Ventures. My background is Cognitive ' +
-    'Science from UCSD, so I design for how people actually think, then build the thing end to end.',
+    "I build AI automation and move data that has to be right. I'm an AI Enablement Specialist at Axos Bank, " +
+    'helping the Consumer Division turn AI ideas into tools teams actually use. Before that I migrated and audited ' +
+    '50,000+ regulated records at PCI Pharma Services and co-founded Joint Theatrical Ventures. My background is ' +
+    'Cognitive Science from UCSD, so I design for how people actually think, then build the thing end to end.',
   // Third-person version the VI uses.
   viIntro:
-    'Gabriel Colon builds AI automation and moves data that has to be right. He is a QA Data Migration ' +
-    'Specialist at PCI Pharma Services and leads AI-driven product development at Joint Theatrical Ventures. ' +
-    'He has a B.S. in Cognitive Science from UCSD and is based in San Diego. His focus: AI automation, ' +
-    'AI enablement, data migration, and full-stack building.',
-  openTo: 'Roles in AI automation, AI enablement, data migration, and full-stack development. Open to relocation.',
+    'Gabriel Colon builds AI automation and moves data that has to be right. He is an AI Enablement ' +
+    'Specialist at Axos Bank in the Consumer Division, starting November 2026. Before that he was a QA Data Migration ' +
+    'Specialist at PCI Pharma Services and co-founded Joint Theatrical Ventures. He has a B.S. in Cognitive Science ' +
+    'from UCSD and is based in San Diego. His focus: AI automation, AI enablement, data migration, and full-stack building.',
+  openTo: 'Gabriel just started as an AI Enablement Specialist at Axos Bank, so he is not looking for a new full-time role. He is happy to talk about AI enablement, automation, and data migration work.',
   experience: [
+    {
+      title: 'AI Enablement Specialist',
+      org: 'Axos Bank, Consumer Division',
+      dates: 'November 2026 - Present',
+      summary:
+        'Builds and maintains AI-powered tools for Consumer Banking teams, runs intake for AI initiatives from business partners, ' +
+        'reports progress to leadership, and applies governance, risk, and compliance standards so AI work scales safely in a regulated bank.'
+    },
     {
       title: 'QA Data Migration Specialist',
       org: 'PCI Pharma Services (CDMO)',
-      dates: 'March 2026 - Present',
+      dates: 'March 2026 - September 2026',
       summary:
-        'Migrates and validates quality system data in a regulated pharma manufacturing environment, ' +
-        'and builds PowerShell automation that reconciles the system of record, file share, and Excel tracker so every count is explained.'
+        'Migrated and audited 50,000+ regulated records with Quality, IT, and Compliance, and built a 58-function PowerShell suite ' +
+        'that reconciled 20,000+ controlled documents, cutting a multi-day manual review to about 3 minutes.'
     },
     {
-      title: 'AI-Driven Product Developer & Project Manager',
+      title: 'AI Solutions Engineer & Product Manager (Co-Founder)',
       org: 'Joint Theatrical Ventures LLC',
-      dates: 'September 2025 - Present',
-      summary: 'Leads product development and project management with AI-driven tooling and automation.'
+      dates: 'September 2025 - September 2026',
+      summary:
+        'Co-founded the company and owned delivery end to end. Shipped the product across 2,461 commits with 107 tests gating every deploy, ' +
+        'and built a multi-agent Discord orchestrator for deployment, diagnostics, and CI triage.'
     },
     {
       title: 'Event Coordinator, Finance & Social Intern',
