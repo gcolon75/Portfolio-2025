@@ -65,3 +65,11 @@ All commits are on `overhaul/main`, rebased onto `main` at 4601911.
 - Image count per detail page now: Tower 4, Joint 4, Axle 4, Volleyball 4, GoaLee 3, 3 Kingdoms 2,
   TritonGo+ 1, Amadeus 1, PCI 1 (generic diagram by design). TritonGo+ and Amadeus have no other source images in the repo.
 - Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, every image on 6 detail pages returns 200 as WebP
+
+## Workstream: Job Search Automation project (owner request, 2026-11-09)
+- 64a950f feat: new project page at /projects/job-search-automation, card shown second after Joint.
+  Pipeline and adoption diagrams (SVG), tracker screenshot on sample data, square card icon.
+  Friends listed by background only. Copy states Claude wrote the code; Gabriel owned workflow, guardrails, rollout.
+- e48aa22 fix(vi): project Problem and Result sentences now end with a period in VI answers
+- Still open: [NEED] results to publish (roles surfaced, applications, interviews) and the public repo URL
+- Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, page and card checked in browser, no console errors
