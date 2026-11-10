@@ -59,3 +59,9 @@ All commits are on `overhaul/main`, rebased onto `main` at 4601911.
 - Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, all 9 card images load in browser, Axle detail hero unchanged
 - 340db65 feat: Joint detail page shows 4 screenshots (landing, features, feed, Create Post) as WebP, 17 to 40 KB.
   Excluded for privacy: Search and Notifications (other users' names and photos), sign-in screen (email address).
+- 1a0e005 perf: 9 remaining gallery JPGs (Axle, GoaLee, 3 Kingdoms, TritonGo+, Volleyball) served as WebP, 624 KB to 355 KB
+- ea31149 feat: Volleyball and Tower of Greed galleries go from 1 image to 4, rendered from PDFs already in the repo.
+  Skipped Volleyball profile and chat screens (a person's photo).
+- Image count per detail page now: Tower 4, Joint 4, Axle 4, Volleyball 4, GoaLee 3, 3 Kingdoms 2,
+  TritonGo+ 1, Amadeus 1, PCI 1 (generic diagram by design). TritonGo+ and Amadeus have no other source images in the repo.
+- Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, every image on 6 detail pages returns 200 as WebP
