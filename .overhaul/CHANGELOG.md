@@ -57,3 +57,5 @@ All commits are on `overhaul/main`, rebased onto `main` at 4601911.
 - Still open: Job Search Automation, ACE, Valine, Fate, and Tape and Wire have no project entries yet, so no cards.
   Most projects have 1 detail image (target 2 to 4); Joint has 9 screenshots on disk but shows 1.
 - Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, all 9 card images load in browser, Axle detail hero unchanged
+- 340db65 feat: Joint detail page shows 4 screenshots (landing, features, feed, Create Post) as WebP, 17 to 40 KB.
+  Excluded for privacy: Search and Notifications (other users' names and photos), sign-in screen (email address).
