@@ -1,474 +1,288 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { skillTree } from '../data/skills';
+import { projects } from '../data/projects';
+import { profile } from '../data/profile';
 import './SkillTree.css';
 
-const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
+// Character sheet: ability scores pick a class, the class shows its talent tree,
+// and the selected talent shows its rank, description, and the projects it was earned in.
+
+const MAX_RANK = 5;
+const RANK_TITLES = ['Initiate', 'Adept', 'Veteran', 'Expert', 'Master'];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V'];
+
+const projectById = Object.fromEntries(projects.map((p) => [p.id, p]));
+
+// Score works like a tabletop ability score: 10 is average, each rank above 3 per skill adds one.
+const classScore = (cls) => 10 + cls.skills.reduce((sum, s) => sum + s.level, 0) - cls.skills.length * 3;
+const modifier = (score) => {
+  const m = Math.floor((score - 10) / 2);
+  return m >= 0 ? `+${m}` : `${m}`;
+};
+
+// Original line-art emblems, one per class.
+function Sigil({ id }) {
+  const common = { fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round' };
+  switch (id) {
+    case 'ai-builder':
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path {...common} d="M24 4l17 10v20L24 44 7 34V14z" />
+          <circle {...common} cx="24" cy="24" r="6" />
+          <path {...common} d="M24 10v8M24 30v8M12 17l7 4M29 27l7 4M36 17l-7 4M19 27l-7 4" />
+        </svg>
+      );
+    case 'data-migration':
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <ellipse {...common} cx="24" cy="11" rx="14" ry="5" />
+          <path {...common} d="M10 11v26c0 2.8 6.3 5 14 5s14-2.2 14-5V11" />
+          <path {...common} d="M10 20c0 2.8 6.3 5 14 5s14-2.2 14-5M10 29c0 2.8 6.3 5 14 5s14-2.2 14-5" />
+        </svg>
+      );
+    case 'frontend-dev':
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path {...common} d="M16 14L6 24l10 10M32 14l10 10-10 10M27 9l-6 30" />
+        </svg>
+      );
+    case 'project-strategist':
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle {...common} cx="24" cy="24" r="18" />
+          <path {...common} d="M24 6v5M24 37v5M6 24h5M37 24h5" />
+          <path {...common} d="M30 18l-4 10-8 2 4-10z" />
+        </svg>
+      );
+    case 'ux-designer':
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path {...common} d="M24 5l12 14-12 24L12 19z" />
+          <path {...common} d="M24 5v17M12 19h24" />
+          <circle {...common} cx="24" cy="25" r="3" />
+        </svg>
+      );
+    default:
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle {...common} cx="24" cy="24" r="16" />
+        </svg>
+      );
+  }
+}
+
+function RankBar({ level, color, size = 'sm', animateKey }) {
+  return (
+    <div className={`cs-rankbar cs-rankbar--${size}`} style={{ '--c': color }} aria-hidden="true">
+      {Array.from({ length: MAX_RANK }, (_, i) => (
+        <span
+          key={`${animateKey}-${i}`}
+          className={`cs-pip ${i < level ? 'is-on' : ''}`}
+          style={{ animationDelay: `${i * 70}ms` }}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function SkillTree() {
-  const [activeClassId, setActiveClassId] = useState(null);
-  const [selectedSkill, setSelectedSkill] = useState(null);
-  const [canvasSize, setCanvasSize] = useState(900);
-
-  const containerRef = useRef(null);
-
-  useLayoutEffect(() => {
-    if (!containerRef.current) return;
-
-    const el = containerRef.current;
-    const ro = new ResizeObserver(() => {
-      const rect = el.getBoundingClientRect();
-      const size = Math.floor(Math.min(rect.width, rect.height));
-      setCanvasSize(clamp(size, 680, 1150));
-    });
-
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
+  const classes = skillTree;
+  const [classId, setClassId] = useState(classes[0].id);
+  const cls = classes.find((c) => c.id === classId) || classes[0];
+  const [talentName, setTalentName] = useState(cls.skills[0].name);
+  const talent = cls.skills.find((s) => s.name === talentName) || cls.skills[0];
 
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape') {
-        setSelectedSkill(null);
-        setActiveClassId(null);
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
+    setTalentName(cls.skills[0].name);
+  }, [cls]);
 
-  const half = canvasSize / 2;
+  const { spent, max, level } = useMemo(() => {
+    const all = classes.flatMap((c) => c.skills);
+    const s = all.reduce((sum, k) => sum + k.level, 0);
+    return { spent: s, max: all.length * MAX_RANK, level: Math.floor(s / MAX_RANK) };
+  }, [classes]);
 
-  // ✅ Larger center + larger subskills (per your request)
-  const CENTER_SIZE = clamp(Math.round(canvasSize * 0.3), 175, 255);
-  const CLASS_SIZE = clamp(Math.round(canvasSize * 0.20), 155, 195);
-  const SKILL_SIZE = clamp(Math.round(canvasSize * 0.152), 106, 140);
+  const title = profile.experience?.[0]?.title || profile.roles?.[0] || '';
+  const quests = (talent.quests || []).map((id) => projectById[id]).filter(Boolean);
 
-  const CLASS_HALF = CLASS_SIZE / 2;
-  const SKILL_HALF = SKILL_SIZE / 2;
-
-  // --------------------------------------------
-  // ✅ NEW: enforce "skills never touch category"
-  // and auto-adjust radii if canvas is tight.
-  // --------------------------------------------
-  const maxOuterRadius = half - SKILL_HALF - 22;
-
-  // minimum center-to-center distance so circles don't touch:
-  // parent radius + child radius + padding
-  const PARENT_CLEARANCE = CLASS_HALF + SKILL_HALF + 12;
-
-  // Base main ring radius
-  const classRadiusBase = clamp(half * 0.5, 220, half * 0.60);
-
-  // If we’re cramped, pull the class ring inward so subskills can sit farther out
-  const classRadius = clamp(
-    Math.min(classRadiusBase, maxOuterRadius - PARENT_CLEARANCE),
-    170,
-    classRadiusBase
-  );
-
-  // Base subskill gap (how far beyond the class ring we want)
-  const outerRingGapBase = clamp(canvasSize * 0.24, 210, 300);
-
-  // Ensure gap is always at least clearance (+ extra breathing room)
-  const outerRingGap = Math.max(outerRingGapBase, PARENT_CLEARANCE + 18);
-
-  // Final outer radius (never off-canvas)
-  const outerRadius = Math.min(maxOuterRadius, classRadius + outerRingGap);
-
-  const rootStyle = useMemo(
-    () => ({
-      '--canvas': `${canvasSize}px`,
-      '--center-size': `${CENTER_SIZE}px`,
-      '--class-size': `${CLASS_SIZE}px`,
-      '--skill-size': `${SKILL_SIZE}px`,
-    }),
-    [canvasSize, CENTER_SIZE, CLASS_SIZE, SKILL_SIZE]
-  );
-
-  const classes = useMemo(() => skillTree, []);
-
-  const getClassPosition = (index, total) => {
-    const angle = (index * 2 * Math.PI) / total - Math.PI / 2;
-    return { angle, x: Math.cos(angle) * classRadius, y: Math.sin(angle) * classRadius };
-  };
-
-  const getArcSpread = (count) => {
-    if (count <= 1) return 0;
-
-    // Chord-based spacing so bubbles don't collide (between skills)
-    const minSpacing = SKILL_SIZE + 25;
-    const safe = clamp(minSpacing / (2 * outerRadius), 0.06, 0.45);
-    const step = 2 * Math.asin(safe);
-    const spread = step * (count - 1);
-
-    return clamp(spread, 1.1, 1.8);
-  };
-
-  // ------------------------------------------------------------
-  // ✅ "Centered + consistent" arc solver
-  // ------------------------------------------------------------
-  const arcPenalty = (centerAngle, count) => {
-    const spread = getArcSpread(count);
-    const margin = SKILL_HALF + 16;
-
-    const minX = -half + margin;
-    const maxX = half - margin;
-    const minY = -half + margin;
-    const maxY = half - margin;
-
-    let penalty = 0;
-
-    for (let i = 0; i < count; i++) {
-      const t = count === 1 ? 0.5 : i / (count - 1);
-      const a = centerAngle - spread / 2 + t * spread;
-      const x = Math.cos(a) * outerRadius;
-      const y = Math.sin(a) * outerRadius;
-
-      const dx = x < minX ? minX - x : x > maxX ? x - maxX : 0;
-      const dy = y < minY ? minY - y : y > maxY ? y - maxY : 0;
-
-      penalty += dx * dx + dy * dy;
-    }
-
-    return penalty;
-  };
-
-  const getArcCenterAngleForClass = (classPos, count) => {
-    const base = classPos.angle;
-    if (count <= 1) return base;
-
-    const step = Math.PI / 36; // 5 degrees
-    const max = Math.PI / 2; // up to 90 degrees
-
-    let bestAngle = base;
-    let bestPenalty = arcPenalty(base, count);
-
-    if (bestPenalty === 0) return base;
-
-    for (let d = step; d <= max; d += step) {
-      const a1 = base + d;
-      const a2 = base - d;
-
-      const p1 = arcPenalty(a1, count);
-      if (p1 < bestPenalty) {
-        bestPenalty = p1;
-        bestAngle = a1;
-        if (bestPenalty === 0) break;
-      }
-
-      const p2 = arcPenalty(a2, count);
-      if (p2 < bestPenalty) {
-        bestPenalty = p2;
-        bestAngle = a2;
-        if (bestPenalty === 0) break;
-      }
-    }
-
-    return bestAngle;
-  };
-
-  const getSkillAbsolutePosition = (skillIndex, totalSkills, arcCenterAngle) => {
-    if (totalSkills <= 1) {
-      return { x: Math.cos(arcCenterAngle) * outerRadius, y: Math.sin(arcCenterAngle) * outerRadius };
-    }
-
-    const spread = getArcSpread(totalSkills);
-    const t = skillIndex / (totalSkills - 1);
-    const angle = arcCenterAngle - spread / 2 + t * spread;
-
-    return { x: Math.cos(angle) * outerRadius, y: Math.sin(angle) * outerRadius };
-  };
-
-  const getFittedLabelStyle = (label) => {
-    const text = (label || '').toString();
-    const len = text.length;
-
-    let fontSize = 0.78;
-    let letterSpacing = 0.9;
-
-    if (len >= 11) {
-      fontSize = 0.72;
-      letterSpacing = 0.55;
-    }
-    if (len >= 13) {
-      fontSize = 0.68;
-      letterSpacing = 0.45;
-    }
-    if (len >= 15) {
-      fontSize = 0.64;
-      letterSpacing = 0.35;
-    }
-
-    return {
-      fontSize: `${fontSize}rem`,
-      letterSpacing: `${letterSpacing}px`,
-    };
-  };
-
-  const activeClass = activeClassId ? classes.find((c) => c.id === activeClassId) : null;
-  const hudColor = selectedSkill?.classColor || activeClass?.color || '#4a9eff';
-
-  const onClassClick = (cls) => {
-    const next = activeClassId === cls.id ? null : cls.id;
-    setActiveClassId(next);
-    setSelectedSkill(null);
-  };
-
-  const onSkillClick = (skill, cls) => {
-    setSelectedSkill({
-      ...skill,
-      classId: cls.id,
-      className: cls.class,
-      classIcon: cls.icon,
-      classColor: cls.color,
-    });
+  const onTabKey = (e, idx) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    const next = (idx + (e.key === 'ArrowRight' ? 1 : -1) + classes.length) % classes.length;
+    setClassId(classes[next].id);
+    document.getElementById(`cs-tab-${classes[next].id}`)?.focus();
   };
 
   return (
-    <section id="skills" className="skill-tree">
+    <section id="skills" className="cs">
       <div className="container">
         <motion.h2
-          className="skill-tree-title"
+          className="cs-heading"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          RPG Skill Tree
+          Character Sheet
         </motion.h2>
 
-        <div className="skill-tree-radial" ref={containerRef} style={rootStyle}>
-          <svg
-            className="connection-lines"
-            viewBox={`${-half} ${-half} ${canvasSize} ${canvasSize}`}
-            aria-hidden="true"
-          >
-            <defs>
-              <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-                <feGaussianBlur stdDeviation="2.2" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
+        <motion.div
+          className="cs-frame"
+          style={{ '--c': cls.color }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="cs-corner cs-corner--tl" aria-hidden="true" />
+          <span className="cs-corner cs-corner--tr" aria-hidden="true" />
+          <span className="cs-corner cs-corner--bl" aria-hidden="true" />
+          <span className="cs-corner cs-corner--br" aria-hidden="true" />
 
-              {classes.map((cls, i) => {
-                const j = (i + 1) % classes.length;
-                const p1 = getClassPosition(i, classes.length);
-                const p2 = getClassPosition(j, classes.length);
-                return (
-                  <linearGradient
-                    key={`seg-grad-${i}`}
-                    id={`seg-grad-${i}`}
-                    gradientUnits="userSpaceOnUse"
-                    x1={p1.x}
-                    y1={p1.y}
-                    x2={p2.x}
-                    y2={p2.y}
-                  >
-                    <stop offset="0%" stopColor={cls.color} stopOpacity="0.55" />
-                    <stop offset="100%" stopColor={classes[j].color} stopOpacity="0.55" />
-                  </linearGradient>
-                );
-              })}
-            </defs>
-
-            {classes.map((_, i) => {
-              const j = (i + 1) % classes.length;
-              const p1 = getClassPosition(i, classes.length);
-              const p2 = getClassPosition(j, classes.length);
-              return (
-                <line
-                  key={`ring-${i}`}
-                  x1={p1.x}
-                  y1={p1.y}
-                  x2={p2.x}
-                  y2={p2.y}
-                  stroke={`url(#seg-grad-${i})`}
-                  strokeWidth="2"
-                  strokeDasharray="6 7"
-                  opacity="0.55"
-                  filter="url(#glow)"
-                />
-              );
-            })}
-
-            {classes.map((cls, i) => {
-              const p = getClassPosition(i, classes.length);
-              return (
-                <line
-                  key={`ray-${cls.id}`}
-                  x1={0}
-                  y1={0}
-                  x2={p.x}
-                  y2={p.y}
-                  stroke={cls.color}
-                  strokeWidth="2"
-                  strokeDasharray="3 10"
-                  opacity="0.18"
-                  filter="url(#glow)"
-                />
-              );
-            })}
-
-            {activeClass &&
-              (() => {
-                const classIndex = classes.findIndex((c) => c.id === activeClass.id);
-                const classPos = getClassPosition(classIndex, classes.length);
-                const arcCenter = getArcCenterAngleForClass(classPos, activeClass.skills.length);
-
-                return activeClass.skills.map((_, si) => {
-                  const sp = getSkillAbsolutePosition(si, activeClass.skills.length, arcCenter);
-                  return (
-                    <line
-                      key={`skill-link-${activeClass.id}-${si}`}
-                      x1={classPos.x}
-                      y1={classPos.y}
-                      x2={sp.x}
-                      y2={sp.y}
-                      stroke={activeClass.color}
-                      strokeWidth="2"
-                      strokeDasharray="5 7"
-                      opacity="0.35"
-                      filter="url(#glow)"
-                    />
-                  );
-                });
-              })()}
-          </svg>
-
-          {/* Center HUD */}
-          <motion.button
-            type="button"
-            className={`center-circle ${selectedSkill ? 'is-active' : ''}`}
-            style={{ '--hud-color': hudColor }}
-            onClick={() => {
-              if (selectedSkill) setSelectedSkill(null);
-              else if (activeClassId) setActiveClassId(null);
-            }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            {!selectedSkill ? (
-              <div className="center-content">
-                <div className="center-icon">⚡</div>
-                <div className="center-text">SKILLS</div>
-                <div className="center-subtext">
-                  {activeClassId ? 'Click to collapse' : 'Click a class to expand'}
-                </div>
+          {/* Identity and experience */}
+          <header className="cs-hero">
+            <div className="cs-crest" aria-hidden="true">
+              <span>GC</span>
+            </div>
+            <div className="cs-id">
+              <div className="cs-eyebrow">
+                Level {level} <span className="cs-dot">◆</span> {title}
               </div>
-            ) : (
-              <div className="hud-content">
-                <div className="hud-topline">
-                  <span className="hud-class">{selectedSkill.className}</span>
-                  <span className="hud-chip" style={{ borderColor: hudColor }}>
-                    {selectedSkill.classIcon} {selectedSkill.name}
-                  </span>
-                </div>
-                <div className="hud-body">{selectedSkill.description}</div>
-                <div className="hud-hint">ESC to reset</div>
-              </div>
-            )}
-          </motion.button>
-
-          {/* Class nodes */}
-          {classes.map((cls, idx) => {
-            const pos = getClassPosition(idx, classes.length);
-            const isActive = activeClassId === cls.id;
-
-            return (
-              <motion.button
-                key={cls.id}
-                type="button"
-                className={`class-node ${isActive ? 'active' : ''}`}
-                style={{
-                  '--class-color': cls.color,
-                  left: '50%',
-                  top: '50%',
-                  marginLeft: -CLASS_HALF,
-                  marginTop: -CLASS_HALF,
-                  x: pos.x,
-                  y: pos.y,
-                }}
-                onClick={() => onClassClick(cls)}
-                initial={{ opacity: 0, scale: 0.88 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, type: 'spring', stiffness: 120, damping: 14 }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+              <div className="cs-name">{profile.name}</div>
+              <div
+                className="cs-xp"
+                role="progressbar"
+                aria-label="Skill ranks earned"
+                aria-valuenow={spent}
+                aria-valuemin={0}
+                aria-valuemax={max}
               >
-                <div className="class-node-content">
-                  <div className="class-icon" aria-hidden="true">
-                    {cls.icon}
-                  </div>
-                  <div className="class-name">{cls.class}</div>
+                <motion.span
+                  className="cs-xp-fill"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${(spent / max) * 100}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
+                />
+              </div>
+              <div className="cs-xp-label">
+                <span>{spent} / {max} ranks</span>
+                <span>{max - spent} to max</span>
+              </div>
+            </div>
+          </header>
+
+          {/* Ability scores double as class selectors */}
+          <div className="cs-abilities" role="tablist" aria-label="Skill classes">
+            {classes.map((c, idx) => {
+              const score = classScore(c);
+              const active = c.id === cls.id;
+              return (
+                <button
+                  key={c.id}
+                  id={`cs-tab-${c.id}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  aria-controls="cs-panel"
+                  tabIndex={active ? 0 : -1}
+                  className={`cs-ability ${active ? 'is-active' : ''}`}
+                  style={{ '--c': c.color }}
+                  onClick={() => setClassId(c.id)}
+                  onKeyDown={(e) => onTabKey(e, idx)}
+                >
+                  <span className="cs-ability-abbr">{c.abbr}</span>
+                  <span className="cs-ability-score">{score}</span>
+                  <span className="cs-ability-mod">{modifier(score)}</span>
+                  <span className="cs-ability-name">{c.class}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="cs-body" id="cs-panel" role="tabpanel" aria-labelledby={`cs-tab-${cls.id}`}>
+            {/* Talent tree */}
+            <div className="cs-tree">
+              <div className="cs-tree-head">
+                <span className="cs-sigil">
+                  <Sigil id={cls.id} />
+                </span>
+                <div>
+                  <div className="cs-tree-kicker">Talent tree</div>
+                  <h3 className="cs-tree-title">{cls.class}</h3>
                 </div>
-              </motion.button>
-            );
-          })}
+              </div>
 
-          {/* Skill nodes */}
-          <AnimatePresence>
-            {activeClass &&
-              (() => {
-                const classIndex = classes.findIndex((c) => c.id === activeClass.id);
-                const classPos = getClassPosition(classIndex, classes.length);
-                const arcCenter = getArcCenterAngleForClass(classPos, activeClass.skills.length);
+              <ol className="cs-talents">
+                {cls.skills.map((s, i) => {
+                  const selected = s.name === talent.name;
+                  return (
+                    <li key={`${cls.id}-${s.name}`}>
+                      <motion.button
+                        type="button"
+                        className={`cs-talent ${selected ? 'is-selected' : ''}`}
+                        onClick={() => setTalentName(s.name)}
+                        aria-pressed={selected}
+                        initial={{ opacity: 0, x: -14 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: i * 0.05 }}
+                      >
+                        <span className="cs-node" aria-hidden="true">
+                          <span>{ROMAN[s.level - 1]}</span>
+                        </span>
+                        <span className="cs-talent-main">
+                          <span className="cs-talent-name">{s.name}</span>
+                          <span className="cs-talent-rank">{RANK_TITLES[s.level - 1]}</span>
+                        </span>
+                        <RankBar level={s.level} color={cls.color} animateKey={cls.id} />
+                      </motion.button>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
 
-                return (
-                  <motion.div
-                    key={`skills-${activeClass.id}`}
-                    className="skill-node-layer"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                  >
-                    {activeClass.skills.map((skill, si) => {
-                      const sp = getSkillAbsolutePosition(si, activeClass.skills.length, arcCenter);
-                      const isSelected =
-                        selectedSkill?.name === skill.name && selectedSkill?.classId === activeClass.id;
+            {/* Talent detail */}
+              <motion.aside
+                key={`${cls.id}-${talent.name}`}
+                className="cs-detail"
+                aria-live="polite"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.22 }}
+              >
+                <div className="cs-detail-kicker">{cls.class}</div>
+                <h4 className="cs-detail-name">{talent.name}</h4>
+                <div className="cs-detail-rank">
+                  Rank {ROMAN[talent.level - 1]} <span className="cs-dot">◆</span> {RANK_TITLES[talent.level - 1]}
+                </div>
+                <RankBar level={talent.level} color={cls.color} size="lg" animateKey={`${cls.id}-${talent.name}`} />
+                <p className="cs-detail-desc">{talent.description}</p>
 
-                      return (
-                        <motion.button
-                          key={`${activeClass.id}-${skill.name}-${si}`}
-                          type="button"
-                          className={`skill-node ${isSelected ? 'selected' : ''}`}
-                          style={{
-                            '--skill-color': activeClass.color,
-                            left: '50%',
-                            top: '50%',
-                            marginLeft: -SKILL_HALF,
-                            marginTop: -SKILL_HALF,
-                            x: sp.x,
-                            y: sp.y,
-                          }}
-                          onClick={() => onSkillClick(skill, activeClass)}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.9 }}
-                          transition={{ duration: 0.35, type: 'spring', stiffness: 140, damping: 16 }}
-                          whileHover={{ scale: 1.06 }}
-                          whileTap={{ scale: 0.98 }}
-                          title={skill.description}
-                          aria-label={`${skill.name}: ${skill.description}`}
-                        >
-                          <div className="skill-node-name" style={getFittedLabelStyle(skill.name)}>
-                            {skill.name}
-                          </div>
-                        </motion.button>
-                      );
-                    })}
-                  </motion.div>
-                );
-              })()}
-          </AnimatePresence>
-        </div>
+                <div className="cs-quests">
+                  <div className="cs-quests-label">Earned in</div>
+                  {quests.length ? (
+                    <ul>
+                      {quests.map((p) => (
+                        <li key={p.id}>
+                          <Link to={p.route} className="cs-quest">
+                            <span className="cs-quest-mark" aria-hidden="true">✦</span>
+                            {p.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="cs-quests-none">Used in day-to-day work. Not featured in a portfolio project yet.</p>
+                  )}
+                </div>
+              </motion.aside>
+          </div>
+        </motion.div>
 
-        <div className="skill-tree-helper">
-          Tip: Click a class to expand. Click a skill to load details into the center HUD. Press ESC to reset.
-        </div>
+        <p className="cs-hint">Pick an ability to open its talent tree. Pick a talent to see where it was earned.</p>
       </div>
     </section>
   );
