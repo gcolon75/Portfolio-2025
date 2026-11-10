@@ -49,3 +49,11 @@ All commits are on `overhaul/main`, rebased onto `main` at 4601911.
 - Lighthouse, old vs new build on the same local server: mobile 19 to 50, desktop 55 to 90,
   layout shift 9.5 to 0.03 (mobile) and 2.2 to 0.002 (desktop), page weight 10.5 MB to 1.2 MB (desktop)
 - Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, home page, cards, and a lazy detail route checked in browser
+
+## Workstream: Card images (owner request, 2026-11-09: "do all projects have card images")
+- 0c3efc2 fix: all 9 projects now set cardImage. 8 new hand-cropped 224px square WebP thumbnails (4 to 17 KB)
+  replace first-screenshot fallbacks that cropped out logos. Cards render as 56px squares, so the 16:10
+  card standard from the overhaul kit does not apply to this layout. Detail hero prefers full-size images over cardImage.
+- Still open: Job Search Automation, ACE, Valine, Fate, and Tape and Wire have no project entries yet, so no cards.
+  Most projects have 1 detail image (target 2 to 4); Joint has 9 screenshots on disk but shows 1.
+- Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, all 9 card images load in browser, Axle detail hero unchanged
