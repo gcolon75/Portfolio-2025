@@ -87,10 +87,10 @@ export const projects = [
     title: 'Joint Theatrical Ventures',
     year: 2025,
     description:
-      'Co-founded and shipped a production-ready creative networking platform — PM + UX + full-stack delivery',
+      'Co-founded and shipped a production-ready creative networking platform: PM, UX, and full-stack delivery',
     tagline: 'Your work deserves a stage',
     fullSummary:
-      'Joint is an early-stage platform for entertainment professionals to showcase work, discover collaborators, and share media without the chaos of scattered links and DMs. I led the product end-to-end — market research to UX to implementation — and shipped the core experience to production.',
+      'Joint is an early-stage platform for entertainment professionals to showcase work, discover collaborators, and share media without the chaos of scattered links and DMs. I led the product end-to-end, from market research to UX to implementation, and shipped the core experience to production.',
     problem:
       'Creators need a single place to present their work professionally and connect with collaborators, but existing workflows are fragmented, inconsistent, and hard to manage.',
     approach:
@@ -109,7 +109,7 @@ export const projects = [
     ],
     impact: {
       statement:
-        'Demonstrated full-spectrum product execution — research, UX, engineering, and delivery — by shipping a real platform under startup constraints.',
+        'Demonstrated full-spectrum product execution (research, UX, engineering, and delivery) by shipping a real platform under startup constraints.',
       how:
         'Kept velocity high with a tight PM loop (clear tickets + acceptance criteria), while maintaining scalable UI patterns and deploy-ready infrastructure.'
     },
@@ -308,15 +308,15 @@ export const projects = [
   {
     id: 'amadeus',
     name: 'Amadeus',
-    title: 'Amadeus — Discord Bot Agent',
+    title: 'Amadeus: Discord Bot Agent',
     year: 2024,
     description:
       'Discord bot agent inspired by Steins;Gate’s “Amadeus” concept, built to support Joint development with server status, PR tracking, and lightweight analytics.',
     tagline: 'A dev-sidekick bot for Joint: status, PR flow, and signal over noise',
     fullSummary:
-      'Amadeus was my “agent-in-the-loop” Discord bot inspired by Steins;Gate’s Amadeus idea — not as a copy, but as a personal nod to the concept of a persistent digital assistant. I built it to live in our dev Discord during Joint’s build phase: monitoring server health, tracking PR status and merges, and posting simple analytics/rollups so the team always had a single source of truth without constantly checking dashboards.',
+      'Amadeus was my “agent-in-the-loop” Discord bot inspired by Steins;Gate’s Amadeus idea, not as a copy but as a personal nod to the concept of a persistent digital assistant. I built it to live in our dev Discord during Joint’s build phase: monitoring server health, tracking PR status and merges, and posting simple analytics/rollups so the team always had a single source of truth without constantly checking dashboards.',
     problem:
-      'During active development, teams lose time context-switching between GitHub, hosting dashboards, and status checks — and important signals (failed deploys, stuck PRs, unstable endpoints) get missed.',
+      'During active development, teams lose time context-switching between GitHub, hosting dashboards, and status checks, and important signals (failed deploys, stuck PRs, unstable endpoints) get missed.',
     approach:
       'Built a Discord bot agent that integrates with GitHub + deployment health checks, posts status summaries, and reports lightweight analytics with guardrails (dedupe, cooldowns, readable formatting) so updates stay useful instead of spammy.',
     result:
@@ -470,7 +470,7 @@ export const projects = [
     year: 2022,
     description:
       'Campus-based social app gamifying goal tracking and encouraging in-person interaction',
-    tagline: 'Leveling Up Together — One Goal at a Time',
+    tagline: 'Leveling Up Together, One Goal at a Time',
     fullSummary: 'A campus-based social app encouraging in-person interaction and events at UCSD.',
     problem:
       'Students face challenges with motivation and isolation in academic settings, lacking tools that promote both individual accountability and community connection.',
