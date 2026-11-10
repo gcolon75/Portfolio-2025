@@ -147,6 +147,86 @@ export const projects = [
     }
   },
 
+  /* --------------------------------------------------
+     JOB SEARCH AUTOMATION
+     Built entirely by Claude; Gabriel owned the workflow, rules, and rollout.
+     Visuals are generic diagrams plus the tracker UI on sample data.
+     No friend names, resumes, companies, or real applications.
+     [NEED: results to publish, e.g. roles surfaced, applications sent, interviews]
+     [NEED: public repo URL for assets.links]
+     -------------------------------------------------- */
+  {
+    id: 'job-search-automation',
+    name: 'Job Search Automation',
+    title: 'Automated Job Search: Built With Claude, Adopted by 5 Friends',
+    year: 2026,
+    description:
+      'Claude-run job search that finds roles, scores fit, tailors a resume, and fills the application, then hands Submit back to a person. Rolled out to 5 friends outside software.',
+    tagline: 'An AI job search that people outside tech actually use',
+    fullSummary:
+      'I designed an end-to-end job search workflow that runs on Claude. It searches job boards, scores every role against a resume and hard guardrails, builds a tailored resume for strong fits, tracks each lead in a live tracker, and fills the application form in Chrome, stopping at Submit. Claude wrote all of the code. My part was the product: the rules, the guardrails, the human checkpoint, and getting five friends with no software background to adopt it.',
+    problem:
+      'Job searching is slow and easy to do badly: scrolling boards, applying to roles that ask for five years, retyping the same form, losing track of what went out. AI can do most of that work, but people outside tech rarely get past setup.',
+    approach:
+      'Defined the workflow as Claude skills plus a live tracker, with the same guardrails written into both: commute zone, experience level, and a minimum fit score. Kept a person in the loop at the one step that matters, the Submit button. Then packaged it as an adoption zip, set each friend up with their own resume and region, and supported them by message and video screen share until they could run it alone.',
+    result:
+      'Five friends run their own searches with it: two lab workers, a senior project manager, a psychology graduate, and an electrical engineering master\'s graduate. None of them are software developers, and each search follows their own resume, region, and experience level.',
+    role: 'Product Owner, AI Workflow Designer, Adoption Lead',
+    whatISpecificallyDid: [
+      'Designed the five-stage pipeline: find, score, tailor, track, autofill',
+      'Wrote the guardrails: commute zone, entry-level experience filter, fit 6 minimum, fit 7+ for a tailored resume',
+      'Directed Claude to build every piece, then tested each stage against real postings',
+      'Put the human checkpoint at Submit so no application goes out unseen',
+      'Packaged the system as an adoption zip and personalized it per user resume and region',
+      'Onboarded 5 friends outside software, answering questions and screen sharing on video when they got stuck'
+    ],
+    impact: {
+      statement:
+        'Ran the full AI enablement loop: build a useful tool with AI, then get people outside tech to adopt it and keep using it.',
+      how:
+        'Guardrails made the output trustworthy, the Submit checkpoint kept each person in control, and hands-on onboarding removed the setup wall.'
+    },
+    designNotes: {
+      title: 'How the Pipeline Works',
+      subtitle: 'Claude does the work, a person makes the call',
+      caption: 'Tracker shown with sample data. No real users, companies, or applications are shown.',
+      bullets: [
+        'Find: search Greenhouse, Lever, Workday, and Ashby boards for matching roles',
+        'Score: rate fit 1 to 10 against the resume; below 6 goes to Trash with the reason kept',
+        'Guard: flag anything outside the commute zone or above the experience level in red',
+        'Tailor: build a resume variant for every lead at fit 7 or higher',
+        'Autofill: Claude fills the form in Chrome and stops; the person reviews and clicks Submit',
+        'Track: every lead moves through New, Applied, Interviewing, Rejected, or Trash'
+      ]
+    },
+    tech: ['Claude', 'Claude Skills', 'Claude in Chrome', 'Claude Artifacts', 'Prompt Design'],
+    skills: [
+      'AI Enablement',
+      'Workflow Design',
+      'Product Management',
+      'User Onboarding',
+      'Change Management',
+      'Prompt Engineering'
+    ],
+    concepts: ['Human in the Loop', 'Guardrails', 'AI Adoption', 'Personalization'],
+    status: 'In Progress',
+    date: '2026',
+    category: 'AI Automation',
+    route: '/projects/job-search-automation',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/job-search-automation.webp`,
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Job Search Automation/job-search-pipeline.svg`,
+    assets: {
+      images: [
+        `${process.env.PUBLIC_URL}/assets/projects/Job Search Automation/job-search-pipeline.svg`,
+        `${process.env.PUBLIC_URL}/assets/projects/Job Search Automation/tracker-sample-data.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Job Search Automation/job-search-adoption.svg`
+      ],
+      pdfs: [],
+      videos: [],
+      documents: [],
+      links: []
+    }
+  },
 
   /* --------------------------------------------------
      PCI PHARMA SERVICES: QA DATA MIGRATION AUTOMATION

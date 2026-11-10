@@ -25,6 +25,7 @@ const GoaleePage = lazy(() => import('./components/GoaleePage'));
 const TritonGoPlusPage = lazy(() => import('./components/TritonGoPlusPage'));
 const VolleyballPage = lazy(() => import('./components/VolleyballPage'));
 const PCIAutomationPage = lazy(() => import('./components/PCIAutomationPage'));
+const JobSearchAutomationPage = lazy(() => import('./components/JobSearchAutomationPage'));
 
 function HomePage() {
   return (
@@ -64,6 +65,7 @@ function App() {
                 <Route path="/projects/tritongoplus" element={<TritonGoPlusPage />} />
                 <Route path="/projects/volleyball" element={<VolleyballPage />} />
                 <Route path="/projects/pci-qa-automation" element={<PCIAutomationPage />} />
+                <Route path="/projects/job-search-automation" element={<JobSearchAutomationPage />} />
               </Routes>
             </Suspense>
           </main>

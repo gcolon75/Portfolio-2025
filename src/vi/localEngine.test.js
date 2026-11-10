@@ -32,7 +32,7 @@ test('PCI automation is answerable and stays generic', () => {
 });
 
 test('AI questions mention AI projects from the portfolio', () => {
-  expect(answerLocally('What AI automation has he built?')).toMatch(/Amadeus/);
+  expect(answerLocally('What AI automation has he built?')).toMatch(/Amadeus|Job Search Automation|PCI/);
 });
 
 test('answers never contain em dashes or bullet separators', () => {
