@@ -54,7 +54,7 @@ export const projects = [
     category: 'Game Design',
     route: '/projects/tower-of-greed',
     coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedCover.webp`,
-    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedThumb.webp`,
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/tower-of-greed.webp`,
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.webp`
@@ -126,6 +126,7 @@ export const projects = [
     date: '2025',
     category: 'Web Development',
     route: '/projects/joint-theatrical-ventures',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/joint-theatrical-ventures.webp`,
 
     coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/JointTitle.webp`,
 
@@ -248,7 +249,7 @@ export const projects = [
     date: '2024',
     category: 'AI Project',
     route: '/projects/amadeus',
-    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.webp`,
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/amadeus.webp`,
     coverImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.webp`,
     assets: {
       images: [`${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.webp`],
@@ -303,6 +304,7 @@ export const projects = [
     date: '2023',
     category: 'Game Design',
     route: '/projects/3kingdoms',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/3kingdoms.webp`,
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsTitleScreen.webp`,
@@ -354,6 +356,7 @@ export const projects = [
     date: '2023',
     category: 'UX/Product Design',
     route: '/projects/axle',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/axle.webp`,
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/Axle/axleImage.JPG`,
@@ -404,6 +407,7 @@ export const projects = [
     date: '2022',
     category: 'UX/Product Design',
     route: '/projects/goalee',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/goalee.webp`,
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeHomescreen.JPG`,
@@ -452,6 +456,7 @@ export const projects = [
     date: '2022',
     category: 'UX/Product Design',
     route: '/projects/tritongoplus',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/tritongoplus.webp`,
     assets: {
       images: [`${process.env.PUBLIC_URL}/assets/projects/Triton Go/TritonGoTitle.JPG`],
       pdfs: [],
@@ -502,6 +507,7 @@ export const projects = [
     date: '2022',
     category: 'UX/Product Design',
     route: '/projects/volleyball',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/volleyball.webp`,
     assets: {
       images: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballMobileTitle.JPG`],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/Volleyball Mobile.pdf`],

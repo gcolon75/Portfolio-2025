@@ -71,8 +71,8 @@ export default function ProjectDetailTemplate({ project }) {
     if (!project) return null;
     const candidate =
       safeStr(project.coverImage) ||
-      safeStr(project.cardImage) ||
       safeStr(project.assets?.images?.[0]) ||
+      safeStr(project.cardImage) ||
       null;
     return candidate ? toSafeUrl(candidate) : null;
   }, [project]);
