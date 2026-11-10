@@ -153,7 +153,7 @@ export const projects = [
      Visuals are generic diagrams plus the tracker UI on sample data.
      No friend names, resumes, companies, or real applications.
      [NEED: results to publish, e.g. roles surfaced, applications sent, interviews]
-     [NEED: public repo URL for assets.links]
+     Demo link is a separate artifact on sample data; the owner's real tracker stays private.
      -------------------------------------------------- */
   {
     id: 'job-search-automation',
@@ -224,7 +224,13 @@ export const projects = [
       pdfs: [],
       videos: [],
       documents: [],
-      links: []
+      links: [
+        {
+          url: 'https://claude.ai/artifact/5fJKX8gYt3DFoEqbJSBKpk',
+          title: 'Try the Tracker (demo, sample data)',
+          type: 'website'
+        }
+      ]
     }
   },
 
