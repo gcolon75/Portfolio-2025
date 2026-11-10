@@ -311,7 +311,7 @@ export const projects = [
     assets: {
       images: [
         `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsTitleScreen.webp`,
-        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsMap.JPG`
+        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsMap.webp`
       ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/Three Kingdoms.pdf`],
       videos: [],
@@ -362,10 +362,10 @@ export const projects = [
     cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/axle.webp`,
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Axle/axleImage.JPG`,
-        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-homepage.JPG`,
-        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-about.JPG`,
-        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-becomeMechanic.JPG`
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axleImage.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-homepage.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-about.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-becomeMechanic.webp`
       ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Axle/axle-slides.pdf`],
       videos: [],
@@ -413,9 +413,9 @@ export const projects = [
     cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/goalee.webp`,
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeHomescreen.JPG`,
+        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeHomescreen.webp`,
         `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleePoster.webp`,
-        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeTitle.JPG`
+        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeTitle.webp`
       ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeFigma.pdf`],
       videos: [],
@@ -461,7 +461,7 @@ export const projects = [
     route: '/projects/tritongoplus',
     cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/tritongoplus.webp`,
     assets: {
-      images: [`${process.env.PUBLIC_URL}/assets/projects/Triton Go/TritonGoTitle.JPG`],
+      images: [`${process.env.PUBLIC_URL}/assets/projects/Triton Go/TritonGoTitle.webp`],
       pdfs: [],
       videos: [],
       documents: [],
@@ -512,7 +512,7 @@ export const projects = [
     route: '/projects/volleyball',
     cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/volleyball.webp`,
     assets: {
-      images: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballMobileTitle.JPG`],
+      images: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballMobileTitle.webp`],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/Volleyball Mobile.pdf`],
       videos: [],
       documents: [],
