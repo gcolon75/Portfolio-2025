@@ -20,10 +20,17 @@ Details per commit in `CHANGELOG.md`.
    Joint Theatrical Ventures summaries.
 3. **Add PCI metrics if you can share them** (records reconciled, time saved, mismatches caught). Edit the `result` and `impact` fields of `pci-qa-automation` in `src/data/projects.js`. Check skill levels in `src/data/skills.js` too.
 4. **Optional:** set a real Formspree endpoint in `src/components/Contact.jsx` so the form sends directly.
+5. **Redeploy the VI worker** (`npx wrangler deploy` in `vi-worker`). Project data changed on 2026-11-09
+   (Job Search Automation added, copy edits), so Claude mode will not know about it until you do.
+6. **Add Job Search Automation results if you can share them** (roles surfaced, applications sent, interviews).
+   Edit `result` for `job-search-automation` in `src/data/projects.js`; the `[NEED]` comment above it lists what is missing.
+7. **Keep the real job tracker artifact private.** The project page links a separate demo on sample data.
 
 ## Not done (needs the full /overhaul audit and your approval)
 - Repo, content, site, and GitHub profile audits (`/overhaul` in Claude Code runs them).
-- Some existing project and writing copy still has em dashes and buzzwords (the VI strips em dashes from what it says).
+- Em dashes are gone from all site copy. Some older project copy still leans on buzzwords.
+- Projects from the owner's list with no page yet: ACE, Valine, Fate, Tape and Wire. Each needs a one-liner and visuals from Gabriel.
+- TritonGo+ and Amadeus have one image each; no other source images exist in the repo.
 - `npm audit` and dependency upgrades.
 - A live Claude call has not been tested: no API key was available.
 
