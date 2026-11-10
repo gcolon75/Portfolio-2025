@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Portfolio-2025/static/css/main.02ae687b.css",
-    "main.js": "/Portfolio-2025/static/js/main.77ad837a.js",
+    "main.css": "/Portfolio-2025/static/css/main.818c2708.css",
+    "main.js": "/Portfolio-2025/static/js/main.cc40bc29.js",
     "static/css/220.c33353ce.chunk.css": "/Portfolio-2025/static/css/220.c33353ce.chunk.css",
     "static/js/220.bcde4c1f.chunk.js": "/Portfolio-2025/static/js/220.bcde4c1f.chunk.js",
     "static/css/649.c33353ce.chunk.css": "/Portfolio-2025/static/css/649.c33353ce.chunk.css",
@@ -41,8 +41,8 @@
     "static/media/whova.jpg": "/Portfolio-2025/static/media/whova.0aca90468805b8ed54c8.jpg",
     "static/media/openAILogo.jpg": "/Portfolio-2025/static/media/openAILogo.2971546fde57f19accef.jpg",
     "index.html": "/Portfolio-2025/index.html",
-    "main.02ae687b.css.map": "/Portfolio-2025/static/css/main.02ae687b.css.map",
-    "main.77ad837a.js.map": "/Portfolio-2025/static/js/main.77ad837a.js.map",
+    "main.818c2708.css.map": "/Portfolio-2025/static/css/main.818c2708.css.map",
+    "main.cc40bc29.js.map": "/Portfolio-2025/static/js/main.cc40bc29.js.map",
     "220.c33353ce.chunk.css.map": "/Portfolio-2025/static/css/220.c33353ce.chunk.css.map",
     "220.bcde4c1f.chunk.js.map": "/Portfolio-2025/static/js/220.bcde4c1f.chunk.js.map",
     "649.c33353ce.chunk.css.map": "/Portfolio-2025/static/css/649.c33353ce.chunk.css.map",
@@ -74,7 +74,7 @@
     "395.5e5568d8.chunk.js.map": "/Portfolio-2025/static/js/395.5e5568d8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.02ae687b.css",
-    "static/js/main.77ad837a.js"
+    "static/css/main.818c2708.css",
+    "static/js/main.cc40bc29.js"
   ]
 }
