@@ -132,7 +132,10 @@ export const projects = [
 
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/HomePage.JPG`
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/HomePage.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Homepage2.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Dashboard.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Create.webp`
       ],
       pdfs: [],
       videos: [],
