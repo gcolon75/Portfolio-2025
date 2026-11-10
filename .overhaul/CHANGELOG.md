@@ -71,5 +71,7 @@ All commits are on `overhaul/main`, rebased onto `main` at 4601911.
   Pipeline and adoption diagrams (SVG), tracker screenshot on sample data, square card icon.
   Friends listed by background only. Copy states Claude wrote the code; Gabriel owned workflow, guardrails, rollout.
 - e48aa22 fix(vi): project Problem and Result sentences now end with a period in VI answers
-- Still open: [NEED] results to publish (roles surfaced, applications, interviews) and the public repo URL
+- 32029ce feat: page links a demo tracker artifact on sample data (https://claude.ai/artifact/5fJKX8gYt3DFoEqbJSBKpk).
+  Source in .overhaul/job-search-demo.html. Owner must share it publicly on claude.ai, and set the real tracker to private.
+- Still open: [NEED] results to publish (roles surfaced, applications, interviews)
 - Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, page and card checked in browser, no console errors
