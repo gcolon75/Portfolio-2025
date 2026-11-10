@@ -128,8 +128,8 @@ export function buildChunks() {
     const parts = [
       `${pr.name} (${pr.category}, ${pr.date}, ${pr.status}): ${clean(pr.description)}.`,
       pr.role && `Gabriel's role: ${clean(pr.role)}.`,
-      pr.problem && `Problem: ${clean(pr.problem)}`,
-      pr.result && `Result: ${clean(pr.result)}`,
+      pr.problem && `Problem: ${clean(pr.problem)}.`,
+      pr.result && `Result: ${clean(pr.result)}.`,
       pr.tech?.length && `Built with ${pr.tech.map(clean).join(', ')}.`
     ].filter(Boolean);
     chunks.push({

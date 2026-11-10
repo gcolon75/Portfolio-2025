@@ -1,7 +1,7 @@
 // src/data/writing.js
 
 // ✅ Thumbnails
-import aiGenZThumb from '../assets/writing/ai-gen-z/AI-GenZ-Cover.png';
+import aiGenZThumb from '../assets/writing/ai-gen-z/AI-GenZ-Cover.webp';
 import promptThumb from '../assets/writing/chatgpt research/openAILogo.jpg';
 import humanityThumb from '../assets/writing/Humanity in Media/HumanityArticleTitle.webp';
 import whovaThumb from '../assets/writing/Whova Competitive Analysis/whova.jpg';

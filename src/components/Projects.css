@@ -56,7 +56,6 @@
 
 .project-card {
   background: var(--card-bg);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(74, 158, 255, 0.2);
   border-radius: 20px;
   padding: 2rem;
@@ -83,6 +82,12 @@
   border: 2px solid rgba(74, 158, 255, 0.1);
   border-radius: 50%;
   animation: orbit 20s linear infinite;
+  animation-play-state: paused;
+}
+
+/* Spin the orbit only for the card being looked at, not every card all the time. */
+.project-card:hover .project-orbit {
+  animation-play-state: running;
 }
 
 @keyframes orbit {

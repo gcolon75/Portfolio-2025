@@ -184,3 +184,20 @@ section {
     padding: 0 var(--spacing-sm);
   }
 }
+
+/* Honor the OS "reduce motion" setting: no looping or long animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Holds the page height while a lazy route loads, so the footer does not jump. */
+.route-loading {
+  min-height: 100vh;
+}

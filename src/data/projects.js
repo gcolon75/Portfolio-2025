@@ -53,11 +53,14 @@ export const projects = [
     date: '2025',
     category: 'Game Design',
     route: '/projects/tower-of-greed',
-    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedThumb.png`,
-    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedThumb.png`,
+    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/TowerOfGreedCover.webp`,
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/tower-of-greed.webp`,
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.png`
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TownHub.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/ClassSelect.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/ContractSelect.webp`
       ],
       pdfs: [
         {
@@ -84,10 +87,10 @@ export const projects = [
     title: 'Joint Theatrical Ventures',
     year: 2025,
     description:
-      'Co-founded and shipped a production-ready creative networking platform — PM + UX + full-stack delivery',
+      'Co-founded and shipped a production-ready creative networking platform: PM, UX, and full-stack delivery',
     tagline: 'Your work deserves a stage',
     fullSummary:
-      'Joint is an early-stage platform for entertainment professionals to showcase work, discover collaborators, and share media without the chaos of scattered links and DMs. I led the product end-to-end — market research to UX to implementation — and shipped the core experience to production.',
+      'Joint is an early-stage platform for entertainment professionals to showcase work, discover collaborators, and share media without the chaos of scattered links and DMs. I led the product end-to-end, from market research to UX to implementation, and shipped the core experience to production.',
     problem:
       'Creators need a single place to present their work professionally and connect with collaborators, but existing workflows are fragmented, inconsistent, and hard to manage.',
     approach:
@@ -106,7 +109,7 @@ export const projects = [
     ],
     impact: {
       statement:
-        'Demonstrated full-spectrum product execution — research, UX, engineering, and delivery — by shipping a real platform under startup constraints.',
+        'Demonstrated full-spectrum product execution (research, UX, engineering, and delivery) by shipping a real platform under startup constraints.',
       how:
         'Kept velocity high with a tight PM loop (clear tickets + acceptance criteria), while maintaining scalable UI patterns and deploy-ready infrastructure.'
     },
@@ -126,12 +129,16 @@ export const projects = [
     date: '2025',
     category: 'Web Development',
     route: '/projects/joint-theatrical-ventures',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/joint-theatrical-ventures.webp`,
 
-    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/JointTitle.JPG`,
+    coverImage: `${process.env.PUBLIC_URL}/thumbnails/projects/JointTitle.webp`,
 
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/HomePage.JPG`
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/HomePage.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Homepage2.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Dashboard.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Joint Theatrical Ventures/Create.webp`
       ],
       pdfs: [],
       videos: [],
@@ -140,6 +147,92 @@ export const projects = [
     }
   },
 
+  /* --------------------------------------------------
+     JOB SEARCH AUTOMATION
+     Built entirely by Claude; Gabriel owned the workflow, rules, and rollout.
+     Visuals are generic diagrams plus the tracker UI on sample data.
+     No friend names, resumes, companies, or real applications.
+     [NEED: results to publish, e.g. roles surfaced, applications sent, interviews]
+     Demo link is a separate artifact on sample data; the owner's real tracker stays private.
+     -------------------------------------------------- */
+  {
+    id: 'job-search-automation',
+    name: 'Job Search Automation',
+    title: 'Automated Job Search: Built With Claude, Adopted by 5 Friends',
+    year: 2026,
+    description:
+      'Claude-run job search that finds roles, scores fit, tailors a resume, and fills the application, then hands Submit back to a person. Rolled out to 5 friends outside software.',
+    tagline: 'An AI job search that people outside tech actually use',
+    fullSummary:
+      'I designed an end-to-end job search workflow that runs on Claude. It searches job boards, scores every role against a resume and hard guardrails, builds a tailored resume for strong fits, tracks each lead in a live tracker, and fills the application form in Chrome, stopping at Submit. Claude wrote all of the code. My part was the product: the rules, the guardrails, the human checkpoint, and getting five friends with no software background to adopt it.',
+    problem:
+      'Job searching is slow and easy to do badly: scrolling boards, applying to roles that ask for five years, retyping the same form, losing track of what went out. AI can do most of that work, but people outside tech rarely get past setup.',
+    approach:
+      'Defined the workflow as Claude skills plus a live tracker, with the same guardrails written into both: commute zone, experience level, and a minimum fit score. Kept a person in the loop at the one step that matters, the Submit button. Then packaged it as an adoption zip, set each friend up with their own resume and region, and supported them by message and video screen share until they could run it alone.',
+    result:
+      'Five friends run their own searches with it: two lab workers, a senior project manager, a psychology graduate, and an electrical engineering master\'s graduate. None of them are software developers, and each search follows their own resume, region, and experience level.',
+    role: 'Product Owner, AI Workflow Designer, Adoption Lead',
+    whatISpecificallyDid: [
+      'Designed the five-stage pipeline: find, score, tailor, track, autofill',
+      'Wrote the guardrails: commute zone, entry-level experience filter, fit 6 minimum, fit 7+ for a tailored resume',
+      'Directed Claude to build every piece, then tested each stage against real postings',
+      'Put the human checkpoint at Submit so no application goes out unseen',
+      'Packaged the system as an adoption zip and personalized it per user resume and region',
+      'Onboarded 5 friends outside software, answering questions and screen sharing on video when they got stuck'
+    ],
+    impact: {
+      statement:
+        'Ran the full AI enablement loop: build a useful tool with AI, then get people outside tech to adopt it and keep using it.',
+      how:
+        'Guardrails made the output trustworthy, the Submit checkpoint kept each person in control, and hands-on onboarding removed the setup wall.'
+    },
+    designNotes: {
+      title: 'How the Pipeline Works',
+      subtitle: 'Claude does the work, a person makes the call',
+      caption: 'Tracker shown with sample data. No real users, companies, or applications are shown.',
+      bullets: [
+        'Find: search Greenhouse, Lever, Workday, and Ashby boards for matching roles',
+        'Score: rate fit 1 to 10 against the resume; below 6 goes to Trash with the reason kept',
+        'Guard: flag anything outside the commute zone or above the experience level in red',
+        'Tailor: build a resume variant for every lead at fit 7 or higher',
+        'Autofill: Claude fills the form in Chrome and stops; the person reviews and clicks Submit',
+        'Track: every lead moves through New, Applied, Interviewing, Rejected, or Trash'
+      ]
+    },
+    tech: ['Claude', 'Claude Skills', 'Claude in Chrome', 'Claude Artifacts', 'Prompt Design'],
+    skills: [
+      'AI Enablement',
+      'Workflow Design',
+      'Product Management',
+      'User Onboarding',
+      'Change Management',
+      'Prompt Engineering'
+    ],
+    concepts: ['Human in the Loop', 'Guardrails', 'AI Adoption', 'Personalization'],
+    status: 'In Progress',
+    date: '2026',
+    category: 'AI Automation',
+    route: '/projects/job-search-automation',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/job-search-automation.webp`,
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Job Search Automation/job-search-pipeline.svg`,
+    assets: {
+      images: [
+        `${process.env.PUBLIC_URL}/assets/projects/Job Search Automation/job-search-pipeline.svg`,
+        `${process.env.PUBLIC_URL}/assets/projects/Job Search Automation/tracker-sample-data.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Job Search Automation/job-search-adoption.svg`
+      ],
+      pdfs: [],
+      videos: [],
+      documents: [],
+      links: [
+        {
+          url: 'https://claude.ai/artifact/5fJKX8gYt3DFoEqbJSBKpk',
+          title: 'Try the Tracker (demo, sample data)',
+          type: 'website'
+        }
+      ]
+    }
+  },
 
   /* --------------------------------------------------
      PCI PHARMA SERVICES: QA DATA MIGRATION AUTOMATION
@@ -215,15 +308,15 @@ export const projects = [
   {
     id: 'amadeus',
     name: 'Amadeus',
-    title: 'Amadeus — Discord Bot Agent',
+    title: 'Amadeus: Discord Bot Agent',
     year: 2024,
     description:
       'Discord bot agent inspired by Steins;Gate’s “Amadeus” concept, built to support Joint development with server status, PR tracking, and lightweight analytics.',
     tagline: 'A dev-sidekick bot for Joint: status, PR flow, and signal over noise',
     fullSummary:
-      'Amadeus was my “agent-in-the-loop” Discord bot inspired by Steins;Gate’s Amadeus idea — not as a copy, but as a personal nod to the concept of a persistent digital assistant. I built it to live in our dev Discord during Joint’s build phase: monitoring server health, tracking PR status and merges, and posting simple analytics/rollups so the team always had a single source of truth without constantly checking dashboards.',
+      'Amadeus was my “agent-in-the-loop” Discord bot inspired by Steins;Gate’s Amadeus idea, not as a copy but as a personal nod to the concept of a persistent digital assistant. I built it to live in our dev Discord during Joint’s build phase: monitoring server health, tracking PR status and merges, and posting simple analytics/rollups so the team always had a single source of truth without constantly checking dashboards.',
     problem:
-      'During active development, teams lose time context-switching between GitHub, hosting dashboards, and status checks — and important signals (failed deploys, stuck PRs, unstable endpoints) get missed.',
+      'During active development, teams lose time context-switching between GitHub, hosting dashboards, and status checks, and important signals (failed deploys, stuck PRs, unstable endpoints) get missed.',
     approach:
       'Built a Discord bot agent that integrates with GitHub + deployment health checks, posts status summaries, and reports lightweight analytics with guardrails (dedupe, cooldowns, readable formatting) so updates stay useful instead of spammy.',
     result:
@@ -248,10 +341,10 @@ export const projects = [
     date: '2024',
     category: 'AI Project',
     route: '/projects/amadeus',
-    cardImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.png`,
-    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.png`,
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/amadeus.webp`,
+    coverImage: `${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.webp`,
     assets: {
-      images: [`${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.png`],
+      images: [`${process.env.PUBLIC_URL}/assets/projects/Amadeus/amadeus.webp`],
       pdfs: [],
       videos: [],
       documents: [],
@@ -303,10 +396,11 @@ export const projects = [
     date: '2023',
     category: 'Game Design',
     route: '/projects/3kingdoms',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/3kingdoms.webp`,
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsTitleScreen.png`,
-        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsMap.JPG`
+        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsTitleScreen.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/3KingdomsMap.webp`
       ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/3 Kingdoms/Three Kingdoms.pdf`],
       videos: [],
@@ -354,12 +448,13 @@ export const projects = [
     date: '2023',
     category: 'UX/Product Design',
     route: '/projects/axle',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/axle.webp`,
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Axle/axleImage.JPG`,
-        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-homepage.JPG`,
-        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-about.JPG`,
-        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-becomeMechanic.JPG`
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axleImage.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-homepage.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-about.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Axle/axle-becomeMechanic.webp`
       ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Axle/axle-slides.pdf`],
       videos: [],
@@ -375,7 +470,7 @@ export const projects = [
     year: 2022,
     description:
       'Campus-based social app gamifying goal tracking and encouraging in-person interaction',
-    tagline: 'Leveling Up Together — One Goal at a Time',
+    tagline: 'Leveling Up Together, One Goal at a Time',
     fullSummary: 'A campus-based social app encouraging in-person interaction and events at UCSD.',
     problem:
       'Students face challenges with motivation and isolation in academic settings, lacking tools that promote both individual accountability and community connection.',
@@ -404,11 +499,12 @@ export const projects = [
     date: '2022',
     category: 'UX/Product Design',
     route: '/projects/goalee',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/goalee.webp`,
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeHomescreen.JPG`,
-        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleePoster.jpg`,
-        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeTitle.JPG`
+        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeHomescreen.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleePoster.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeTitle.webp`
       ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Goalee/GoaleeFigma.pdf`],
       videos: [],
@@ -452,8 +548,9 @@ export const projects = [
     date: '2022',
     category: 'UX/Product Design',
     route: '/projects/tritongoplus',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/tritongoplus.webp`,
     assets: {
-      images: [`${process.env.PUBLIC_URL}/assets/projects/Triton Go/TritonGoTitle.JPG`],
+      images: [`${process.env.PUBLIC_URL}/assets/projects/Triton Go/TritonGoTitle.webp`],
       pdfs: [],
       videos: [],
       documents: [],
@@ -502,8 +599,14 @@ export const projects = [
     date: '2022',
     category: 'UX/Product Design',
     route: '/projects/volleyball',
+    cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/volleyball.webp`,
     assets: {
-      images: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballMobileTitle.JPG`],
+      images: [
+        `${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballMobileTitle.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballHome.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballCourts.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballLeaderboard.webp`
+      ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/Volleyball Mobile.pdf`],
       videos: [],
       documents: [],

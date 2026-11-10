@@ -71,8 +71,8 @@ export default function ProjectDetailTemplate({ project }) {
     if (!project) return null;
     const candidate =
       safeStr(project.coverImage) ||
-      safeStr(project.cardImage) ||
       safeStr(project.assets?.images?.[0]) ||
+      safeStr(project.cardImage) ||
       null;
     return candidate ? toSafeUrl(candidate) : null;
   }, [project]);
@@ -218,7 +218,7 @@ export default function ProjectDetailTemplate({ project }) {
                           aria-label="Open image"
                           type="button"
                         >
-                          <img src={safeSrc} alt={`${project.title} screenshot ${i + 1}`} />
+                          <img src={safeSrc} alt={`${project.title} screenshot ${i + 1}`} loading="lazy" decoding="async" />
                         </button>
                       );
                     })}
