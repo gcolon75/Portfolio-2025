@@ -75,3 +75,10 @@ All commits are on `overhaul/main`, rebased onto `main` at 4601911.
   Source in .overhaul/job-search-demo.html. Owner must share it publicly on claude.ai, and set the real tracker to private.
 - Still open: [NEED] results to publish (roles surfaced, applications, interviews)
 - Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, page and card checked in browser, no console errors
+
+## Workstream: Skill tree redesign (owner request, 2026-11-10: "way cooler, less clunky")
+- 50abfa8 feat(skills): skills link to the projects that show them (`quests`), plus class abbreviations
+- 2129325 feat(skills): radial bubbles replaced with an RPG character sheet: level and XP, ability scores as class tabs,
+  talent tree with rank nodes and segmented bars, detail card with "Earned in" project links, SVG emblems, Cinzel font
+- Verify: `npm test` 15/15 PASS, eslint PASS, `craco build` PASS, checked at desktop and 375px, no console errors
+- Live VI worker still needs `npx wrangler deploy` (blocked for Claude by a deploy permission check)
