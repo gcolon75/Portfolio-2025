@@ -57,7 +57,10 @@ export const projects = [
     cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/tower-of-greed.webp`,
     assets: {
       images: [
-        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.webp`
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/BloodMageCombat.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/TownHub.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/ClassSelect.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Tower of Greed/ContractSelect.webp`
       ],
       pdfs: [
         {
@@ -512,7 +515,12 @@ export const projects = [
     route: '/projects/volleyball',
     cardImage: `${process.env.PUBLIC_URL}/thumbnails/projects/cards/volleyball.webp`,
     assets: {
-      images: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballMobileTitle.webp`],
+      images: [
+        `${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballMobileTitle.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballHome.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballCourts.webp`,
+        `${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/VolleyballLeaderboard.webp`
+      ],
       pdfs: [`${process.env.PUBLIC_URL}/assets/projects/Volleyball Mobile/Volleyball Mobile.pdf`],
       videos: [],
       documents: [],
